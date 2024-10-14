@@ -38,10 +38,11 @@ https://www.figma.com/design/BRLB2bxOBLbJ1AI86V0Vo5/Untitled?node-id=1-512&t=uwV
 Git flow 適合較多人的專案，較為複雜，Github flow 和 (Trunk-Based Development) TBD 適合快速迭代的較小型專案，我們希望有完整的人工審查，因此選擇 Github flow。
 
 - trello (how to use this app to manage the project)
-![image](https://hackmd.io/_uploads/BJ87dH51Je.png)
-分成三個區塊 (To do, doing, done)，以區分各個任務的進行階段  
-
-
+![image](https://hackmd.io/_uploads/BJ87dH51Je.png)  
+1. 分成三個區塊 (To do, doing, done)，以區分各個任務的進行階段  
+2. 添加卡片，包含工作項目標題、詳細說明、截止日期，可以備註工作的優先級  
+3. 分配任務給各個組員
+4. 
 reference of trello:
 https://projectmanager.com.tw/%E5%B0%88%E6%A1%88%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/trello-%E5%B0%88%E6%A1%88%E7%AE%A1%E7%90%86/
 
