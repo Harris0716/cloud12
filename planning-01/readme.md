@@ -42,7 +42,7 @@ Git flow 適合較多人的專案，較為複雜，Github flow 和 (Trunk-Based 
 1. 分成三個區塊 (To do, doing, done)，以區分各個任務的進行階段  
 2. 添加卡片，包含工作項目標題、詳細說明、截止日期，可以備註工作的優先級  
 3. 分配任務給各個組員
-4. 
+
 reference of trello:
 https://projectmanager.com.tw/%E5%B0%88%E6%A1%88%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/trello-%E5%B0%88%E6%A1%88%E7%AE%A1%E7%90%86/
 
