@@ -57,7 +57,7 @@ https://trello.com/zh-Hant/guide/trello-101
 - [trello看版連結](
 https://trello.com/b/T7JRT0On/%E6%88%91%E7%9A%84-trello-%E7%9C%8B%E6%9D%BF)
 - 開會時間: 週六早上 10:00 ~ 12:00
-- 這次討論中遇到的問題，以及你們是怎麼解決的？都沒有遇到問題，也可以寫沒有。
+- 這次討論中遇到的問題，以及你們是怎麼解決的？都沒有遇到問題，也可以寫沒有。 Ans: 無
 - 制定我們的 commit message 規範
 ```
 <type>(optional scope): <description>
