@@ -4,7 +4,7 @@
 https://www.figma.com/design/BRLB2bxOBLbJ1AI86V0Vo5/Untitled?node-id=1-512&t=uwV8F5E5Uip877pd-1
 
 ## 核心功能、功能架構圖
-![](https://hackmd.io/_uploads/HkpcImqJ1e.png)
+![messageImage_1728916462373](https://hackmd.io/_uploads/H19D2jcJkx.jpg)
 ### USER
 - Search Working holiday (P0) (根據地點？根據熱門或推薦？) (我想到根據地點 然後先顯示最新)
 - View Working holiday detail page (P0)
