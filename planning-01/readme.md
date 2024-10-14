@@ -83,6 +83,6 @@ Docs: 更新 README 文件
 增加安裝步驟和示例。
 ```
 
-reference:   
+reference of commit message rule:   
 1. https://hackmd.io/@dh46tw/S1NPMsy5L
 2. https://www.conventionalcommits.org/en/v1.0.0/
