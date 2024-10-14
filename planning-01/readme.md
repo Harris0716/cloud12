@@ -2,7 +2,12 @@
 
 ## UI
 https://www.figma.com/design/BRLB2bxOBLbJ1AI86V0Vo5/Untitled?node-id=1-512&t=uwV8F5E5Uip877pd-1
-
+- Wishlist
+![image](https://hackmd.io/_uploads/H1Ek6ic1yx.png)
+- Detail page
+![image](https://hackmd.io/_uploads/Hyc22o9yJg.png)
+- User profile
+![image](https://hackmd.io/_uploads/rkaphj9k1e.png)
 ## 核心功能、功能架構圖
 ![messageImage_1728916462373](https://hackmd.io/_uploads/H19D2jcJkx.jpg)
 ### USER
