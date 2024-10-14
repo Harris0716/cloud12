@@ -51,9 +51,9 @@ Git flow 適合較多人的專案，較為複雜，Github flow 和 (Trunk-Based 
 3. 分配任務給各個組員
 
 reference of trello:
-https://projectmanager.com.tw/%E5%B0%88%E6%A1%88%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/trello-%E5%B0%88%E6%A1%88%E7%AE%A1%E7%90%86/
+1. https://projectmanager.com.tw/%E5%B0%88%E6%A1%88%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/trello-%E5%B0%88%E6%A1%88%E7%AE%A1%E7%90%86/
 
-https://trello.com/zh-Hant/guide/trello-101
+2. https://trello.com/zh-Hant/guide/trello-101
 - [trello看版連結](
 https://trello.com/b/T7JRT0On/%E6%88%91%E7%9A%84-trello-%E7%9C%8B%E6%9D%BF)
 - 開會時間: 週六早上 10:00 ~ 12:00
@@ -89,6 +89,8 @@ Feat(login): 新增用戶登入功能
 Docs: 更新 README 文件
 
 增加安裝步驟和示例。
+
+Refs: #123
 ```
 
 reference of commit message rule:   
