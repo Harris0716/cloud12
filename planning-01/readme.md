@@ -1,7 +1,8 @@
 # WorkTraveler
 
 ## UI
-https://www.figma.com/design/BRLB2bxOBLbJ1AI86V0Vo5/Untitled?node-id=1-512&t=uwV8F5E5Uip877pd-1
+![Figma連結](
+https://www.figma.com/design/BRLB2bxOBLbJ1AI86V0Vo5/Untitled?node-id=1-512&t=uwV8F5E5Uip877pd-1)
 - Wishlist
 ![image](https://hackmd.io/_uploads/H1Ek6ic1yx.png)
 - Detail page
@@ -30,13 +31,14 @@ https://www.figma.com/design/BRLB2bxOBLbJ1AI86V0Vo5/Untitled?node-id=1-512&t=uwV
 ## 技術
 
 - Backend
-  - node.js (version, why?) 目前選 node 18，因為是LTS版，也是比較新的版本，性能有所提升，這個版本足以應付此專案的問題。
+  - node.js (version, why?) 
       - Express.js
   - mysql
   - websocket
 - Frontend
   - JS (React + Vite)
-  
+
+目前選 node 18，因為是 LTS 版，也是比較新的版本，性能有所提升，這個版本足以應付此專案的問題。
 
 ## 團隊
 - Branching Model: Github flow, why?
