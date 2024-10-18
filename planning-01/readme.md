@@ -36,7 +36,7 @@ https://www.figma.com/design/BRLB2bxOBLbJ1AI86V0Vo5/Untitled?node-id=1-512&t=uwV
   - mysql
   - websocket
 - Frontend
-  - JS (React 8+ Vite)
+  - JS (React 18+ Vite)
 
 目前選 node 18，因為是 LTS 版，也是比較新的版本，性能有所提升，這個版本足以應付此專案的問題。
 
