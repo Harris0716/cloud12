@@ -12,19 +12,5 @@ app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-// 登入驗證的API
-app.post("/api/auth", (req, res) => {
-  var password = req.body.password;
-  var email = req.body.email;
-});
-
-//登出的API
-app.post("api/logout", (req, res) => {});
-
-// 註冊的API
-app.post("/api/register", (req, res) => {
-  var name = req.body.name;
-  var id = req.body.id;
-  var password = req.body.password;
-  var email = req.body.email;
-});
+const routes = require("./user/route");
+app.use(routes);
