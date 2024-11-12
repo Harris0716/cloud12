@@ -5,7 +5,7 @@ function register(req, res) {
 
   registerUser(username, password, email, user_id)
     .then((result) => {
-      res.json({ message: "Create user successfully!", result });
+      res.json({ message: "Create user successfully!" });
     })
     .catch((error) => {
       res.json({ message: "Error registering user", error });
