@@ -18,6 +18,9 @@ app.post("/api/auth", (req, res) => {
   var email = req.body.email;
 });
 
+//登出的API
+app.post("api/logout", (req, res) => {});
+
 // 註冊的API
 app.post("/api/register", (req, res) => {
   var name = req.body.name;
