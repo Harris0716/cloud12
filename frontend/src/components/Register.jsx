@@ -1,14 +1,35 @@
-
 import React from "react";
 import "./LogIn.css";
 
-function LogIn() {
+function Register() {
   return (
     <div className="container">
       <div className="login-box">
-        <h2 className="title">登入</h2>
+        <h2 className="title">註冊</h2>
         
         <form className="form">
+          <div className="input-group">
+            <label htmlFor="name">使用者名稱</label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              required
+              placeholder="Your Name"
+            />
+          </div>
+
+          <div className="input-group">
+            <label htmlFor="user_id">使用者id</label>
+            <input
+              id="user_id"
+              name="user_id"
+              type="text"
+              required
+              placeholder="Your User ID"
+            />
+          </div>
+
           <div className="input-group">
             <label htmlFor="email">電子郵件</label>
             <input
@@ -32,11 +53,11 @@ function LogIn() {
           </div>
 
           <button type="submit" className="submit-btn">
-            登入
+            註冊
           </button>
 
           <p className="register-link">
-            還沒有帳號？<a href="/register">立即註冊</a>
+            已經有帳號了？<a href="/login">立即登入</a>
           </p>
         </form>
       </div>
@@ -44,4 +65,4 @@ function LogIn() {
   );
 }
 
-export default LogIn;
+export default Register;
