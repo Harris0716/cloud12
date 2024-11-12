@@ -2,6 +2,7 @@
 import React,{useState}from "react";
 import { useNavigate } from "react-router-dom";
 import "./HomePage.css";
+import Menu from "./Menu";
 
 const listings = [
   {
@@ -46,7 +47,7 @@ function HomePage() {
       <div className="container">
         <div className="homepage">
           <div className="header">
-            <button className="login-button" onClick={() => navigate("/login")}>登入</button>
+            <Menu />
           </div>
           <br /><br /><br />
           <h1 className="title">熱門房源</h1>
