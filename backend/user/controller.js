@@ -17,7 +17,7 @@ function login(req, res) {
 
   loginUser(username, password)
     .then((user) => {
-      res.json({ message: "Login successful" });
+      res.json({ message: "Login success!" });
     })
     .catch((error) => {
       res.json({ message: "Invalid username or password", error });
