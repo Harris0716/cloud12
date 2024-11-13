@@ -23,8 +23,8 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/room" element={<RoomDetail />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
-      <Routes><Route path="/register" element={<Register />} /></Routes>
     </Router>
   );
 }

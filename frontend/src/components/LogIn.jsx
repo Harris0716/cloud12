@@ -35,9 +35,6 @@ function LogIn() {
             登入
           </button>
 
-          <p className="register-link">
-            還沒有帳號？<a href="/register">立即註冊</a>
-          </p>
         </form>
       </div>
     </div>
