@@ -1,6 +1,5 @@
 
 import React,{useState}from "react";
-import { useNavigate } from "react-router-dom";
 import "./HomePage.css";
 import Menu from "./Menu";
 
@@ -37,7 +36,6 @@ const listings = [
 
 function HomePage() {
     const [searchQuery, setSearchQuery] = useState("");
-    const navigate = useNavigate();
 
     const filteredListings = listings.filter((listing) =>
       listing.title.toLowerCase().includes(searchQuery.toLowerCase())
