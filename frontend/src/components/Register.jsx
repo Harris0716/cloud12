@@ -11,8 +11,6 @@ function Register() {
     const user_id = formData.get('user_id');
     const email = formData.get('email');
     const password = formData.get('password');
-    //console.log({username, user_id, email, password});
-    //console.log(JSON.stringify({username, user_id, email, password}));
     fetch("http://localhost:8000/api/register", {
       method: "POST",
       headers: {
@@ -22,7 +20,6 @@ function Register() {
     })
       .then((response) => response.json())
       .then((data) => {
-        //console.log(data);
         // Handle success or error based on the response
         if (data.message === "Create user successfully!") {
           alert(data.message);
