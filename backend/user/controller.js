@@ -1,4 +1,5 @@
 const { registerUser, loginUser } = require("./users");
+const jwt = require("jsonwebtoken");
 
 function register(req, res) {
   const { username, password, email, user_id } = req.body;
@@ -17,7 +18,11 @@ function login(req, res) {
 
   loginUser(username, password)
     .then((user) => {
-      res.json({ message: "Login success!" });
+      //console.log(user.user_id);
+      const token = jwt.sign({ user_id: user.user_id }, "secret", {
+        expiresIn: "24h",
+      });
+      res.json({ message: "Login success!", user, token });
     })
     .catch((error) => {
       res.json({ message: "Invalid username or password", error });
