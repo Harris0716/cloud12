@@ -1,4 +1,4 @@
-const { registerUser, loginUser } = require("./users");
+const { registerUser, loginUser } = require("./model");
 const jwt = require("jsonwebtoken");
 
 function register(req, res) {
