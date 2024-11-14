@@ -14,9 +14,9 @@ function register(req, res) {
 }
 
 function login(req, res) {
-  const { username, password } = req.body;
+  const { user_id, password } = req.body;
 
-  loginUser(username, password)
+  loginUser(user_id, password)
     .then((user) => {
       //console.log(user.user_id);
       const token = jwt.sign({ user_id: user.user_id }, "secret", {

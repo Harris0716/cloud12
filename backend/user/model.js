@@ -29,8 +29,8 @@ function registerUser(username, password, email, user_id) {
   });
 }
 
-function loginUser(username, password) {
-  const sql = "SELECT * FROM users WHERE username = ?";
+function loginUser(user_id, password) {
+  const sql = "SELECT * FROM users WHERE user_id = ?";
 
   return new Promise((resolve, reject) => {
     db.getConnection((err, connection) => {
@@ -39,7 +39,7 @@ function loginUser(username, password) {
         return;
       }
 
-      connection.query(sql, [username], (err, result) => {
+      connection.query(sql, [user_id], (err, result) => {
         connection.release(); // release the connection back to the pool
 
         if (err) {

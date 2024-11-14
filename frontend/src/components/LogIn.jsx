@@ -7,14 +7,14 @@ function LogIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const username = formData.get("username");
+    const user_id = formData.get("user_id");
     const password = formData.get("password");
     fetch("http://localhost:8000/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ user_id, password }),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -39,13 +39,13 @@ function LogIn() {
         
         <form className="form" onSubmit={handleSubmit}>
           <div className="input-group">
-            <label htmlFor="username">使用者</label>
+            <label htmlFor="username">使用者ID</label>
             <input
-              id="username"
-              name="username"
+              id="user_id"
+              name="user_id"
               type="text"
               required
-              placeholder="your username"
+              placeholder="your userid"
             />
           </div>
 
@@ -56,7 +56,7 @@ function LogIn() {
               name="password"
               type="password"
               required
-              placeholder="••••••••"
+              placeholder="your password"
             />
           </div>
 
