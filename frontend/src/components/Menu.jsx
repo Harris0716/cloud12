@@ -8,28 +8,32 @@ function Menu () {
   const hamburgerMenuURL="https://53.fs1.hubspotusercontent-na1.net/hub/53/hubfs/What%20is%20a%20Hamburger%20Button.png?width=225&name=What%20is%20a%20Hamburger%20Button.png";
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState("");
 
   const toggleDropdown = () => {
       setIsOpen(!isOpen);
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
+    if (localStorage.getItem("token")) {
       setIsLoggedIn(true);
+    }
+    if(localStorage.getItem("username")){
+      setUsername(localStorage.getItem("username"));
     }
   }, []);
   
   const logOut = () => {
-    localStorage.removeItem("token");
+    localStorage.clear();
     setIsLoggedIn(false);
   }
+
 
   return (
     <div className="menu">
       <button onClick={toggleDropdown} className="menu-button">
         <img src={hamburgerMenuURL} alt="Hamburger Menu" className="icon" />&nbsp;&nbsp;&nbsp;
-        <img src={userIconURL} alt="User Icon" className="icon" />
+        <img src={userIconURL} alt="User Icon" className="icon" /> {isLoggedIn && username}
       </button>
       {isOpen && !isLoggedIn &&(
         <ul className="dropdown-menu">

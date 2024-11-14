@@ -24,6 +24,7 @@ function LogIn() {
         }else{
           alert(data.message);
           localStorage.setItem("token", data.token);
+          localStorage.setItem("username",data.user.username);
           navigate("/");
         }
       })
