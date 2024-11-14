@@ -33,13 +33,14 @@ function Menu () {
     <div className="menu">
       <button onClick={toggleDropdown} className="menu-button">
         <img src={hamburgerMenuURL} alt="Hamburger Menu" className="icon" />&nbsp;&nbsp;&nbsp;
-        <img src={userIconURL} alt="User Icon" className="icon" /> {isLoggedIn && username}
+        <img src={userIconURL} alt="User Icon" className="icon" /> 
+        {isLoggedIn && username}
       </button>
       {isOpen && !isLoggedIn &&(
         <ul className="dropdown-menu">
             <li className="dropdown-item"><a href="/login">登入</a></li>
             <li className="dropdown-item"><a href="/register">註冊</a></li>
-      </ul>
+        </ul>
       )}
       {
         isOpen && isLoggedIn && (

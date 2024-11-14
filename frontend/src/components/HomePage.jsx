@@ -50,15 +50,15 @@ function HomePage() {
           <br /><br /><br />
           <h1 className="title">熱門房源</h1>
           {/* 搜尋欄位 */}
-        <div className="search-bar">
-          <input
-            type="text"
-            placeholder="搜尋房源..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="search-input"
-          />
-        </div>
+          <div className="search-bar">
+            <input
+              type="text"
+              placeholder="搜尋房源..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="search-input"
+            />
+          </div>
         </div>
         {/* 房源列表 */}
         <div className="listing-grid">
