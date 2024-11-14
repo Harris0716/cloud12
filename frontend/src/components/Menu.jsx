@@ -33,7 +33,7 @@ function Menu () {
     <div className="menu">
       <button onClick={toggleDropdown} className="menu-button">
         <img src={hamburgerMenuURL} alt="Hamburger Menu" className="icon" />&nbsp;&nbsp;&nbsp;
-        <img src={userIconURL} alt="User Icon" className="icon" /> 
+        <img src={userIconURL} alt="User Icon" className="icon" /> &nbsp;&nbsp;
         {isLoggedIn && username}
       </button>
       {
