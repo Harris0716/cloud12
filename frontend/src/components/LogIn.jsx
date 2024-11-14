@@ -1,24 +1,30 @@
-
-import React from "react";
+import React from 'react';
+import { useNavigate } from "react-router-dom";
 import "./LogIn.css";
 
 function LogIn() {
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
+    event.preventDefault();
     const formData = new FormData(event.target);
-    const email = formData.get("email");
+    const username = formData.get("username");
     const password = formData.get("password");
     fetch("http://localhost:8000/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ username, password }),
     })
       .then((response) => response.json())
       .then((data) => {
         // Handle success or error based on the response
         if (data.message != "Login success!") {
           alert(data.message);
+        }else{
+          alert(data.message);
+          localStorage.setItem("token", data.token);
+          navigate("/");
         }
       })
       .catch((error) => {
@@ -32,13 +38,13 @@ function LogIn() {
         
         <form className="form" onSubmit={handleSubmit}>
           <div className="input-group">
-            <label htmlFor="email">電子郵件</label>
+            <label htmlFor="username">使用者</label>
             <input
-              id="email"
-              name="email"
-              type="email"
+              id="username"
+              name="username"
+              type="text"
               required
-              placeholder="example@domain.com"
+              placeholder="your username"
             />
           </div>
 
