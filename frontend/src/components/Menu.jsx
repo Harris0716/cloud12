@@ -36,7 +36,8 @@ function Menu () {
         <img src={userIconURL} alt="User Icon" className="icon" /> 
         {isLoggedIn && username}
       </button>
-      {isOpen && !isLoggedIn &&(
+      {
+        isOpen && !isLoggedIn &&(
         <ul className="dropdown-menu">
             <li className="dropdown-item"><a href="/login">登入</a></li>
             <li className="dropdown-item"><a href="/register">註冊</a></li>
