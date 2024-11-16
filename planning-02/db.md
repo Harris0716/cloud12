@@ -24,7 +24,7 @@ DB
 欄位：wishlist_id (pk)、user_id (fk)、jobInfo_id (fk)
 說明：此表儲存每位用戶收藏的打工換宿資訊。user_id 是外鍵，連結到 User 表，表示收藏者的身份；jobInfo_id 是外鍵，連結到 JobInfo 表，表示收藏的工作資訊。wishlist_id 是主鍵，用於唯一識別每筆收藏。
 
-![image](https://hackmd.io/_uploads/SJx9GjlzJl.png)
+![image](https://hackmd.io/_uploads/BJUiKFSfyl.png)
 
 
 Mysql Engine version：8.0.39
