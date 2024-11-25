@@ -1,6 +1,7 @@
 
 import React,{useState}from "react";
 import "./HomePage.css";
+import Menu from "./Menu";
 
 const listings = [
   {
@@ -42,19 +43,24 @@ function HomePage() {
   
     return (
       <div className="container">
-        <h1 className="title">熱門房源</h1>
-        
-        {/* 搜尋欄位 */}
-        <div className="search-bar">
-          <input
-            type="text"
-            placeholder="搜尋房源..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="search-input"
-          />
+        <div className="homepage">
+          <div className="header">
+            <Menu />
+          </div>
+          <br /><br /><br />
+          <h1 className="title">熱門房源</h1>
+          {/* 搜尋欄位 */}
+          <div className="search-bar">
+            <input
+              type="text"
+              placeholder="搜尋房源..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="search-input"
+            />
+          </div>
         </div>
-  
+        {/* 房源列表 */}
         <div className="listing-grid">
           {filteredListings.map((listing) => (
             <div key={listing.id} className="listing-card">
