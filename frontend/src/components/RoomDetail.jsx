@@ -1,6 +1,8 @@
 // src/pages/RoomDetail.jsx
 import React from "react";
+import { useParams } from "react-router-dom";
 import "./RoomDetail.css";
+// import { listings } from './HomePage';
 
 function RoomDetail() {
   const room = {

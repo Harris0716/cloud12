@@ -1,9 +1,11 @@
 
-import React,{useState}from "react";
+import React,{useState} from "react";
 import "./HomePage.css";
 import Menu from "./Menu";
+import { Link } from "react-router-dom";
 
-const listings = [
+
+export const listings = [
   {
     id: 1,
     title: "舒適的公寓 - 市中心",
@@ -63,14 +65,14 @@ function HomePage() {
         {/* 房源列表 */}
         <div className="listing-grid">
           {filteredListings.map((listing) => (
-            <div key={listing.id} className="listing-card">
+            <Link to={`/room/${listing.id}`} key={listing.id} className="listing-card">
               <img src={listing.image} alt={listing.title} className="listing-image" />
               <div className="listing-info">
                 <h2 className="listing-title">{listing.title}</h2>
                 <p className="listing-location">{listing.location}</p>
                 <p className="listing-price">{listing.price}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
