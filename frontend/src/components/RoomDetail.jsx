@@ -33,12 +33,13 @@ function RoomDetail() {
         "Experience the city like never before in this modern loft with breathtaking views. Perfect for small families or business travelers.",
       price: "$350 / hour",
       images: [
-        "https://unsplash.com/photos/mockup-white-wall-in-loft-style-house-with-sofa-and-accessories-in-the-room3d-rendering-I1boZwONVbM",
+        "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
         "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+        "https://images.unsplash.com/photo-1541698444083-023c97d3f4b6?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3"
       ],
       host: {
         name: "Jane Smith",
-        image: "https://images.unsplash.com/photo-1502767089025-6572583495e4?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+        image: "https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
         rating: 4.9,
       },
       amenities: ["Gym", "Pool", "Wi-Fi", "Elevator"],
@@ -50,7 +51,7 @@ function RoomDetail() {
         "Escape the hustle and bustle with this charming rustic cabin surrounded by nature. Ideal for a peaceful retreat or an adventurous getaway.",
       price: "$150 / hour",
       images: [
-        "https://images.unsplash.com/photo-1610878180933-0665d956771d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+        "https://images.unsplash.com/photo-1494173853739-c21f58b16055?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
         "https://images.unsplash.com/photo-1541233349642-6e425fe6190e?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
       ],
       host: {
@@ -66,13 +67,13 @@ function RoomDetail() {
         "Experience ultimate luxury in this beachfront villa, offering stunning ocean views and modern amenities. Perfect for families or group getaways.",
       price: "$500 / hour",
       images: [
-        "https://images.unsplash.com/photo-1579785360543-34a5058fa168?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-        "https://images.unsplash.com/photo-1542822973-09fd57126b33?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
-        "https://images.unsplash.com/photo-1506748686214-0a56d8cfe776?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+        "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+        "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+        "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
       ],
       host: {
         name: "Sophia Johnson",
-        image: "https://unsplash.com/photos/man-standing-near-white-wall-d1UPkiFd04A",
+        image: "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
         rating: 4.9,
       },
       amenities: ["Pool", "Hot Tub", "Wi-Fi", "Beach Access", "Air Conditioning"],
