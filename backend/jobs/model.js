@@ -2,7 +2,7 @@ const db = require("../db");
 
 function listJobs() {
   const sql =
-    "SELECT positions, jobInfo_id, address FROM JobInfo where people_needed > 0";
+    "SELECT positions, jobInfo_id, address, people_needed FROM JobInfo where people_needed > 0";
 
   return new Promise((resolve, reject) => {
     db.getConnection((err, connection) => {
