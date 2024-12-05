@@ -58,7 +58,7 @@ function HomePage() {
                 <div className="listing-info">
                   <h2 className="listing-title">{job.positions}</h2>
                   <p className="listing-location">{job.address}</p>
-                  <p className="listing-price">{job.people_needed}</p>
+                  <p className="listing-price">所需人數:{job.people_needed}</p>
                 </div>
               </Link>
             </div>
