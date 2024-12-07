@@ -1,25 +1,29 @@
 const db = require("../db");
 
 function listJobs() {
-  const sql =
-    "SELECT positions, jobInfo_id, address, people_needed FROM JobInfo where people_needed > 0";
+  const sql = `
+    SELECT 
+      jobInfo_id,
+      address,
+      room_type,
+      dates,
+      job_description,
+      positions,
+      people_needed,
+      image_url
+    FROM JobInfo 
+    WHERE people_needed > 0
+    ORDER BY created_at DESC`;
 
   return new Promise((resolve, reject) => {
-    db.getConnection((err, connection) => {
+    db.query(sql, (err, result) => { 
       if (err) {
+        console.error('查詢錯誤:', err);
         reject(err);
-        return;
+      } else {
+        console.log('查詢結果:', result);
+        resolve(result);
       }
-
-      connection.query(sql, (err, result) => {
-        connection.release(); // release the connection back to the pool
-
-        if (err) {
-          reject(err);
-        } else {
-          resolve(result);
-        }
-      });
     });
   });
 }
