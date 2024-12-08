@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
-
+f
 const userRoutes = require("./user/route");
 app.use(userRoutes);
 

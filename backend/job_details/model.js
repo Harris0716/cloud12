@@ -14,6 +14,8 @@ function getJobDetail(jobInfo_id) {
       j.detail_images,
       j.benefits,
       l.name as landlord_name,
+      l.email as landlord_email,
+      l.phone as landlord_phone,
       l.image as landlord_image,
       l.rating as landlord_rating
     FROM JobInfo j
@@ -21,14 +23,20 @@ function getJobDetail(jobInfo_id) {
     WHERE j.jobInfo_id = ?`;
 
   return new Promise((resolve, reject) => {
-    db.query(sql, [jobInfo_id], (err, result) => {
+    db.query(sql, [jobInfo_id], (err, results) => {
       if (err) {
-        console.error('查詢錯誤:', err);
+        console.error('資料庫查詢錯誤:', err);
         reject(err);
-      } else {
-        console.log('查詢結果:', result);
-        resolve(result[0]);
+        return;
       }
+      
+      if (!results || results.length === 0) {
+        resolve(null);
+        return;
+      }
+
+      const result = results[0];
+      resolve(result);
     });
   });
 }
