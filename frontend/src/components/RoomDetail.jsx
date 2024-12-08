@@ -1,12 +1,12 @@
 // src/pages/RoomDetail.jsx
 import React from "react";
 import { useParams } from "react-router-dom";
-import "./RoomDetail.css";
+import "./roomDetail.css";
 
-function RoomDetail() {
+function JobDetail() {
   const { roomId } = useParams();
 
-  // 房源數據
+  // 換宿數據
   const rooms = [
     {
       id: "1",
