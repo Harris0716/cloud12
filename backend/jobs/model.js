@@ -12,8 +12,9 @@ function listJobs() {
       people_needed,
       cover_image,
       detail_images
-    FROM JobInfo 
-    WHERE people_needed > 0`;
+    FROM JobInfo
+    WHERE people_needed > 0
+    ORDER BY created_at DESC`;
 
   return new Promise((resolve, reject) => {
     db.query(sql, (err, result) => { 
@@ -28,4 +29,6 @@ function listJobs() {
   });
 }
 
+
 module.exports = { listJobs };
+

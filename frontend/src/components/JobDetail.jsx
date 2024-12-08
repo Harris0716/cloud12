@@ -1,147 +1,79 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./jobDetail.css";
 
 function JobDetail() {
   const { jobInfo_id } = useParams();
+  const [job, setJob] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // 打工換宿數據
-  const jobs = [
-    {
-      id: "1",
-      title: "台北大安區民宿清潔人員",
-      location: "台北市大安區溫州街",
-      roomType: "單人套房",
-      period: "2024-01-01 至 2024-03-31",
-      description: `1. 每週工作5天，每天4小時
-2. 協助打掃環境及整理房間
-3. 接待客人入住與退房手續
-4. 提供旅遊諮詢服務`,
-      position: "民宿清潔人員",
-      peopleNeeded: 2,
-      images: [
-        "https://fakeimg.pl/800x600/",
-        "https://fakeimg.pl/800x600/",
-        "https://fakeimg.pl/800x600/"
-      ],
-      host: {
-        name: "王小明",
-        image: "https://fakeimg.pl/300/",
-        rating: 4.8,
-      },
-      benefits: [
-        "免費住宿",
-        "提供早餐",
-        "網路",
-        "洗衣機",
-        "公共廚房"
-      ],
-    },
-    {
-      id: "2",
-      title: "礁溪溫泉旅館櫃檯人員",
-      location: "宜蘭縣礁溪鄉溫泉路",
-      roomType: "雙人和室",
-      period: "2024-02-01 至 2024-07-31",
-      description: `1. 每週工作5天，每天6小時
-2. 協助溫泉旅館前台接待服務
-3. 處理訂房事宜及回覆客人訊息
-4. 環境清潔維護`,
-      position: "溫泉旅館櫃檯人員",
-      peopleNeeded: 1,
-      images: [
-        "https://fakeimg.pl/800x600/",
-        "https://fakeimg.pl/800x600/"
-      ],
-      host: {
-        name: "陳老闆",
-        image: "https://fakeimg.pl/300/",
-        rating: 4.9,
-      },
-      benefits: [
-        "免費住宿",
-        "三餐供應",
-        "免費泡湯",
-        "員工折扣",
-        "交通補助"
-      ],
-    },
-    {
-      id: "3",
-      title: "花蓮背包客棧餐飲人員",
-      location: "花蓮縣花蓮市中華路",
-      roomType: "背包床位",
-      period: "2024-01-15 至 2024-06-30",
-      description: `1. 每週工作4天，每天5小時
-2. 協助早餐製作及餐飲服務
-3. 咖啡吧台飲品製作
-4. 接待外國旅客（需基本英文溝通）`,
-      position: "背包客棧餐飲人員",
-      peopleNeeded: 2,
-      images: [
-        "https://fakeimg.pl/800x600/",
-        "https://fakeimg.pl/800x600/",
-        "https://fakeimg.pl/800x600/"
-      ],
-      host: {
-        name: "Lisa Chen",
-        image: "https://fakeimg.pl/300/",
-        rating: 4.7,
-      },
-      benefits: [
-        "免費住宿",
-        "員工餐點",
-        "咖啡師培訓",
-        "英語環境",
-        "週末遊程"
-      ],
-    }
-  ];
+  useEffect(() => {
+    const fetchJobDetail = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(`http://localhost:8000/api/job_details/${jobInfo_id}`);
+        if (!response.ok) {
+          throw new Error('工作資訊獲取失敗');
+        }
+        const data = await response.json();
+        setJob(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const job = jobs.find((job) => job.id === String(jobInfo_id));
+    fetchJobDetail();
+  }, [jobInfo_id]);
 
-  if (!job) {
-    return <div>工作機會不存在</div>;
-  }
+  if (loading) return <div>載入中...</div>;
+  if (error) return <div>錯誤: {error}</div>;
+  if (!job) return <div>工作機會不存在</div>;
+
+  // 解析 JSON 字串
+  const detailImages = JSON.parse(job.detail_images);
+  const benefits = JSON.parse(job.benefits);
 
   return (
     <div className="job-detail">
       <div className="job-images">
-        {job.images.map((image, index) => (
+        {detailImages.map((image, index) => (
           <img key={index} src={image} alt={`工作環境 ${index + 1}`} />
         ))}
       </div>
       <div className="job-info-container">
         <div className="job-info">
-          <h1 className="job-title">{job.title}</h1>
+          <h1 className="job-title">{job.positions}</h1>
           <div className="job-location">
-            <i className="location-icon">📍</i> {job.location}
+            <i className="location-icon">📍</i> {job.address}
           </div>
           <div className="job-basics">
-            <div className="room-type">住宿類型: {job.roomType}</div>
-            <div className="period">工作期間: {job.period}</div>
-            <div className="positions">需求人數: {job.peopleNeeded}人</div>
+            <div className="room-type">住宿類型: {job.room_type}</div>
+            <div className="period">工作期間: {job.dates}</div>
+            <div className="positions">需求人數: {job.people_needed}人</div>
           </div>
           
           <div className="job-description">
             <h3>工作內容</h3>
-            <pre className="description-text">{job.description}</pre>
+            <pre className="description-text">{job.job_description}</pre>
           </div>
 
           <div className="host-info">
             <div className="host-avatar">
-              <img src={job.host.image} alt="主管照片" />
+              <img src={job.landlord_image} alt="主管照片" />
             </div>
             <div className="host-details">
-              <h3>負責人: {job.host.name}</h3>
-              <div className="host-rating">評分: {job.host.rating} ★</div>
+              <h3>負責人: {job.landlord_name}</h3>
+              <div className="host-rating">評分: {job.landlord_rating} ★</div>
             </div>
           </div>
 
           <div className="job-benefits">
             <h3>提供福利</h3>
             <ul>
-              {job.benefits.map((benefit, index) => (
+              {benefits.map((benefit, index) => (
                 <li key={index}>{benefit}</li>
               ))}
             </ul>
