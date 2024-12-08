@@ -63,7 +63,7 @@ function HomePage() {
             <div key={job.jobInfo_id} className="listing-card">
               <Link to={`/job/${job.jobInfo_id}`}>
                 <img 
-                  src={job.image_url} 
+                  src={job.cover_image} 
                   alt={job.positions} 
                   className="listing-image"
                   onError={(e) => {

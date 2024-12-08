@@ -10,10 +10,10 @@ function listJobs() {
       job_description,
       positions,
       people_needed,
-      image_url
+      cover_image,
+      detail_images
     FROM JobInfo 
-    WHERE people_needed > 0
-    ORDER BY created_at DESC`;
+    WHERE people_needed > 0`;
 
   return new Promise((resolve, reject) => {
     db.query(sql, (err, result) => { 
