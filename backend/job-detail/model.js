@@ -1,40 +1,63 @@
-import mysql from 'mysql2/promise';
+const db = require("../db");
 
-const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'your_username',
-  password: 'your_password',
-  database: 'WORKTRAVELER',
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0
-});
+function getJobById(jobInfo_id) {
+  const sql = `
+    SELECT 
+      j.jobInfo_id,
+      j.address as location,
+      j.room_type as roomType,
+      j.dates as period,
+      j.job_description as description,
+      j.positions as title,
+      j.people_needed as peopleNeeded,
+      j.cover_image,
+      j.detail_images as images,
+      j.benefits,
+      l.name as 'host.name',
+      l.image as 'host.image',
+      l.rating as 'host.rating'
+    FROM JobInfo j
+    JOIN Landlord l ON j.landlord_id = l.landlord_id
+    WHERE j.jobInfo_id = ?`;
 
-export const getJobById = async (jobId) => {
-  try {
-    const [rows] = await pool.execute(`
-      SELECT 
-        j.*,
-        l.name as host_name,
-        l.image as host_image,
-        l.rating as host_rating
-      FROM JobInfo j
-      JOIN Landlord l ON j.landlord_id = l.landlord_id
-      WHERE j.jobInfo_id = ?
-    `, [jobId]);
-    
-    if (rows.length === 0) {
-      return null;
-    }
+  return new Promise((resolve, reject) => {
+    db.query(sql, [jobInfo_id], (err, result) => {
+      if (err) {
+        console.error('查詢錯誤:', err);
+        reject(err);
+      } else {
+        if (result.length === 0) {
+          resolve(null);
+          return;
+        }
 
-    // 將 JSON 字串轉換為 JavaScript 物件
-    const job = rows[0];
-    job.detail_images = JSON.parse(job.detail_images);
-    job.benefits = JSON.parse(job.benefits);
+        // 處理 JSON 字串轉換
+        try {
+          const job = result[0];
+          job.images = JSON.parse(job.images || '[]');
+          job.benefits = JSON.parse(job.benefits || '[]');
+          
+          // 整理 host 資訊
+          job.host = {
+            name: job['host.name'],
+            image: job['host.image'],
+            rating: job['host.rating']
+          };
+          
+          // 刪除重複的 host 屬性
+          delete job['host.name'];
+          delete job['host.image'];
+          delete job['host.rating'];
 
-    return job;
-  } catch (error) {
-    console.error('Database error:', error);
-    throw error;
-  }
-};
+          console.log('查詢結果:', job);
+          resolve(job);
+        } catch (parseError) {
+          console.error('JSON 解析錯誤:', parseError);
+          reject(parseError);
+        }
+      }
+    });
+  });
+}
+
+module.exports = { getJobById };
