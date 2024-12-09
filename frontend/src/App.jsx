@@ -4,20 +4,14 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LogIn from './components/LogIn';
 import HomePage from './components/HomePage';
 import RoomDetail from './components/RoomDetail';
+
 import WishlistPage from './components/wishlist/Wishlist';
 import Resume from './components/UserInfo/Resume';
+import Register from './components/Register';
 import "./App.css";
 
 
 function App() {
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    fetch('http://localhost:3000/api')
-      .then((response) => response.json())
-      .then((data) => setMessage(data.message));
-  }, []);
-
   return (
     <Router>
       <Routes>
@@ -26,6 +20,8 @@ function App() {
         <Route path="/room" element={<RoomDetail />} />
         <Route path="/wishlist" element={<WishlistPage />} />
         <Route path="/resume" element={<Resume />} />
+        <Route path="/job/:jobInfo_id" element={<RoomDetail />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </Router>
   );
