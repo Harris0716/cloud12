@@ -7,6 +7,7 @@ function JobDetail() {
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [dateError, setDateError] = useState("");
 
   useEffect(() => {
     const fetchJobDetail = async () => {
@@ -23,7 +24,7 @@ function JobDetail() {
         }
 
         const data = await response.json();
-        console.log("獲取的資料:", data); // 檢查獲取的資料
+        console.log("獲取的資料:", data);
         setJob(data);
       } catch (err) {
         console.error("錯誤:", err);
@@ -37,6 +38,21 @@ function JobDetail() {
       fetchJobDetail();
     }
   }, [jobInfo_id]);
+
+  // 日期驗證處理函數
+  const handleDateChange = (e) => {
+    const startDate = document.getElementById('start-date').value;
+    const endDate = document.getElementById('end-date').value;
+
+    if (startDate && endDate) {
+      if (new Date(endDate) <= new Date(startDate)) {
+        setDateError("結束時間必須晚於開始時間");
+        document.getElementById('end-date').value = '';
+      } else {
+        setDateError("");
+      }
+    }
+  };
 
   if (loading) {
     return <div>載入中...</div>;
@@ -53,7 +69,7 @@ function JobDetail() {
   return (
     <div className="job-detail">
       <div className="job-images">
-        {console.log("圖片資料:", job.images)} {/* 調試用 */}
+        {console.log("圖片資料:", job.images)}
         {Array.isArray(job.images) && job.images.length > 0 ? (
           job.images.map((image, index) => (
             <img
@@ -127,19 +143,28 @@ function JobDetail() {
           <form>
             <label>姓名</label>
             <input type="text" id="applier-name" name="applier-name" required />
+            
             <label>email</label>
             <input type="email" id="email" name="email" required />
+            
             <label htmlFor="start-date">預計開始日期</label>
-            <input type="date" id="start-date" name="start-date" required />
+            <input 
+              type="date" 
+              id="start-date" 
+              name="start-date" 
+              onChange={handleDateChange}
+              required 
+            />
 
-            <label htmlFor="duration">預計工作時長</label>
-            <select id="duration" name="duration" required>
-              <option value="">請選擇</option>
-              <option value="1">1個月</option>
-              <option value="2">2個月</option>
-              <option value="3">3個月</option>
-              <option value="6">6個月</option>
-            </select>
+            <label htmlFor="end-date">結束時間</label>
+            <input 
+              type="date" 
+              id="end-date" 
+              name="end-date" 
+              onChange={handleDateChange}
+              required 
+            />
+            {dateError && <div className="error-message" style={{ color: 'red', fontSize: '0.8em', marginTop: '0.2em' }}>{dateError}</div>}
 
             <label htmlFor="message">自我介紹與申請動機</label>
             <textarea
