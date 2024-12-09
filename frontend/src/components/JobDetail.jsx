@@ -12,19 +12,21 @@ function JobDetail() {
     const fetchJobDetail = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`http://localhost:8000/api/job/${jobInfo_id}`);
-        
+        const response = await fetch(
+          `http://localhost:8000/api/job/${jobInfo_id}`
+        );
+
         if (!response.ok) {
           throw new Error(
-            response.status === 404 ? '工作機會不存在' : '載入失敗'
+            response.status === 404 ? "工作機會不存在" : "載入失敗"
           );
         }
-        
+
         const data = await response.json();
-        console.log('獲取的資料:', data); // 檢查獲取的資料
+        console.log("獲取的資料:", data); // 檢查獲取的資料
         setJob(data);
       } catch (err) {
-        console.error('錯誤:', err);
+        console.error("錯誤:", err);
         setError(err.message);
       } finally {
         setLoading(false);
@@ -51,9 +53,28 @@ function JobDetail() {
   return (
     <div className="job-detail">
       <div className="job-images">
-        {Array.isArray(job.images) && job.images.map((image, index) => (
-          <img key={index} src={image} alt={`工作環境 ${index + 1}`} />
-        ))}
+        {console.log("圖片資料:", job.images)} {/* 調試用 */}
+        {Array.isArray(job.images) && job.images.length > 0 ? (
+          job.images.map((image, index) => (
+            <img
+              key={index}
+              src={image || "https://fakeimg.pl/800x600?text=No+Image"}
+              alt={`工作環境 ${index + 1}`}
+              onError={(e) => {
+                console.log("圖片載入失敗:", image);
+                e.target.src = "https://fakeimg.pl/800x600?text=No+Image";
+                e.target.onerror = null;
+              }}
+            />
+          ))
+        ) : (
+          <div className="no-images">
+            <img
+              src="https://fakeimg.pl/800x600?text=No+Images+Available"
+              alt="無可用圖片"
+            />
+          </div>
+        )}
       </div>
       <div className="job-info-container">
         <div className="job-info">
@@ -62,22 +83,25 @@ function JobDetail() {
             <i className="location-icon">📍</i> {job.location || job.address}
           </div>
           <div className="job-basics">
-            <div className="room-type">住宿類型: {job.roomType || job.room_type}</div>
+            <div className="room-type">
+              住宿類型: {job.roomType || job.room_type}
+            </div>
             <div className="period">工作期間: {job.period || job.dates}</div>
-            <div className="positions">需求人數: {job.peopleNeeded || job.people_needed}人</div>
+            <div className="positions">
+              需求人數: {job.peopleNeeded || job.people_needed}人
+            </div>
           </div>
-          
+
           <div className="job-description">
             <h3>工作內容</h3>
-            <pre className="description-text">{job.description || job.job_description}</pre>
+            <pre className="description-text">
+              {job.description || job.job_description}
+            </pre>
           </div>
 
           <div className="host-info">
             <div className="host-avatar">
-              <img 
-                src={job.host?.image || job.host_image} 
-                alt="主管照片" 
-              />
+              <img src={job.host?.image || job.host_image} alt="主管照片" />
             </div>
             <div className="host-details">
               <h3>負責人: {job.host?.name || job.host_name}</h3>
@@ -90,13 +114,14 @@ function JobDetail() {
           <div className="job-benefits">
             <h3>提供福利</h3>
             <ul>
-              {Array.isArray(job.benefits) && job.benefits.map((benefit, index) => (
-                <li key={index}>{benefit}</li>
-              ))}
+              {Array.isArray(job.benefits) &&
+                job.benefits.map((benefit, index) => (
+                  <li key={index}>{benefit}</li>
+                ))}
             </ul>
           </div>
         </div>
-        
+
         <div className="application-form">
           <h3>申請職缺</h3>
           <form>
@@ -113,9 +138,9 @@ function JobDetail() {
             </select>
 
             <label htmlFor="message">自我介紹與申請動機</label>
-            <textarea 
-              id="message" 
-              name="message" 
+            <textarea
+              id="message"
+              name="message"
               rows="4"
               placeholder="請簡短描述您的經驗和申請這份工作的原因"
               required
