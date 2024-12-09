@@ -125,6 +125,10 @@ function JobDetail() {
         <div className="application-form">
           <h3>申請職缺</h3>
           <form>
+            <label>姓名</label>
+            <input type="text" id="applier-name" name="applier-name" required />
+            <label>email</label>
+            <input type="email" id="email" name="email" required />
             <label htmlFor="start-date">預計開始日期</label>
             <input type="date" id="start-date" name="start-date" required />
 
