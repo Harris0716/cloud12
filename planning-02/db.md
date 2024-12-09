@@ -10,7 +10,7 @@ DB
 
 3. JobInfo (打工換宿介紹)
    欄位：jobInfo_id (pk)、landlord_id (fk)、address、room_type、start_date、end_date、job_description、positions、people_needed
-   說明：此表描述每個房東的打工換宿資訊，包含地址、房型、日期、工作內容、職缺名稱、所需人數等。landlord_id 是外鍵，連結到 User 表，表示該工作資訊由哪位房東提供。jobInfo_id 是主鍵，用於唯一識別每項打工換宿資訊。
+   說明：此表描述每個房東的打工換宿資訊，包含地址、房型、日期、工作內容、職缺名稱、所需人數等。landlord_id 是外鍵，連結到 User 表，表示該工作資訊由哪位房東提供。jobInfo_id 是主鍵，用於唯一識別每項打工換宿資訊。start_date 是房東創立打工換宿需要的時間，end_date 由房東自行定義決定不再提供此打工換宿的時間
 
 4. Application (申請)
    欄位：application_id (pk)、landlord_id (fk)、applier_id (fk)、status
