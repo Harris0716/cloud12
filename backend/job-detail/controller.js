@@ -2,8 +2,8 @@ import { getJobById } from './model.js';
 
 export const getJobDetail = async (req, res) => {
   try {
-    const jobId = req.params.id;
-    const job = await getJobById(jobId);
+    const jobInfo_id = req.params.id;
+    const job = await getJobById(jobInfo_id);
     
     if (!job) {
       return res.status(404).json({ message: '工作機會不存在' });

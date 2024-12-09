@@ -3,6 +3,6 @@ import { getJobDetail } from './controllers.js';
 
 const router = express.Router();
 
-router.get('/jobs/:id', getJobDetail);
+router.get('/jobs/:jobInfo_id', getJobDetail);
 
 export default router;
