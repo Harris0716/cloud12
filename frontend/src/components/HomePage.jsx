@@ -1,5 +1,6 @@
 import React,{useState, useEffect}from "react";
 import "./HomePage.css";
+import Notification from "./Notification";
 import Menu from "./Menu";
 import { Link } from "react-router-dom";
 
@@ -32,6 +33,7 @@ function HomePage() {
       <div className="container">
         <div className="homepage">
           <div className="header">
+            <Notification />
             <Menu />
           </div>
           <br /><br /><br />
