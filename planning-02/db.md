@@ -14,7 +14,7 @@ DB
 
 4. Application (申請)
    欄位：application_id (pk)、owner_id (fk)、applier_id (fk)、status
-   說明：此表儲存用戶對房東提供的打工機會的申請資訊。applier_id 是申請人的 user_id，為 foreign key，連結到 User 表，表示申請人是誰；landlord_id 是外鍵，連結到 Landlord 表，表示申請的對象。status 欄位紀錄申請狀態，例如「待審核」、「已批准」、「已拒絕」等。application_id 是主鍵，用於唯一識別每筆申請。
+   說明：此表儲存用戶對房東提供的打工機會的申請資訊。applier_id 是申請人的 user_id，為 foreign key，連結到 User 表，表示申請人是誰；owner_id 是外鍵，連結到 User 表，表示申請擁有人(也就是房東)。status 欄位紀錄申請狀態，例如「待審核」、「已批准」、「已拒絕」等。application_id 是主鍵，用於唯一識別每筆申請。
 
 5. Wishlist (使用者的 Wishlist)
    欄位：wishlist_id (pk)、user_id (fk)、jobInfo_id (fk)
