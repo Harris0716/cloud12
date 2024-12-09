@@ -1,3 +1,65 @@
+CREATE TABLE
+    User (
+        user_id VARCHAR(36) PRIMARY KEY,
+        email VARCHAR(100) NOT NULL,
+        username VARCHAR(50) NOT NULL,
+        password VARCHAR(100) NOT NULL
+    );
+
+CREATE TABLE
+    Resume (
+        resume_id INT AUTO_INCREMENT PRIMARY KEY,
+        user_id VARCHAR(36),
+        name VARCHAR(50) NOT NULL,
+        birthdate DATE,
+        education VARCHAR(100),
+        residence VARCHAR(100),
+        license VARCHAR(100),
+        introduction TEXT,
+        FOREIGN KEY (user_id) REFERENCES User (user_id)
+    );
+
+CREATE TABLE
+    Landlord (
+        landlord_id INT AUTO_INCREMENT PRIMARY KEY,
+        email VARCHAR(100) NOT NULL,
+        username VARCHAR(50) NOT NULL,
+        password VARCHAR(100) NOT NULL,
+        phone VARCHAR(15)
+    );
+
+CREATE TABLE
+    JobInfo (
+        jobInfo_id INT AUTO_INCREMENT PRIMARY KEY,
+        landlord_id INT,
+        address VARCHAR(150),
+        room_type VARCHAR(50),
+        dates VARCHAR(100),
+        job_description TEXT,
+        positions VARCHAR(50),
+        people_needed INT,
+        FOREIGN KEY (landlord_id) REFERENCES Landlord (landlord_id)
+    );
+
+CREATE TABLE
+    Application (
+        application_id INT AUTO_INCREMENT PRIMARY KEY,
+        user_id VARCHAR(36),
+        landlord_id INT,
+        status VARCHAR(20),
+        FOREIGN KEY (user_id) REFERENCES User (user_id),
+        FOREIGN KEY (landlord_id) REFERENCES Landlord (landlord_id)
+    );
+
+CREATE TABLE
+    Wishlist (
+        wishlist_id INT AUTO_INCREMENT PRIMARY KEY,
+        user_id VARCHAR(36),
+        jobInfo_id INT,
+        FOREIGN KEY (user_id) REFERENCES User (user_id),
+        FOREIGN KEY (jobInfo_id) REFERENCES JobInfo (jobInfo_id)
+    );
+
 -- User 假資料
 INSERT INTO
     User (user_id, email, username, password)
