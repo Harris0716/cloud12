@@ -54,6 +54,39 @@ function JobDetail() {
     }
   };
 
+  // 處理表單提交
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    const formData = {
+      name: e.target["applier-name"].value,
+      email: e.target.email.value,
+      startDate: e.target["start-date"].value,
+      endDate: e.target["end-date"].value,
+      message: e.target.message.value,
+      jobId: jobInfo_id
+    };
+
+    try {
+      const response = await fetch('http://localhost:8000/api/applications', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (!response.ok) {
+        throw new Error('申請失敗');
+      }
+
+      alert('申請成功！');
+      e.target.reset();
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
   if (loading) {
     return <div>載入中...</div>;
   }
@@ -140,7 +173,8 @@ function JobDetail() {
 
         <div className="application-form">
           <h3>申請職缺</h3>
-          <form>
+          <br/>
+          <form onSubmit={handleSubmit}>
             <label>姓名</label>
             <input type="text" id="applier-name" name="applier-name" required />
             
@@ -156,7 +190,7 @@ function JobDetail() {
               required 
             />
 
-            <label htmlFor="end-date">結束時間</label>
+            <label htmlFor="end-date">預計結束時間</label>
             <input 
               type="date" 
               id="end-date" 
