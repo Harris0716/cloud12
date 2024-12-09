@@ -135,7 +135,7 @@ function JobDetail() {
             <div className="room-type">
               住宿類型: {job.roomType || job.room_type}
             </div>
-            <div className="period">工作期間: {job.period || job.dates}</div>
+            <div className="period">公告期間: {job.start_date} ~ {job.end_date}</div>
             <div className="positions">
               需求人數: {job.peopleNeeded || job.people_needed}人
             </div>
