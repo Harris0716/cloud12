@@ -127,35 +127,35 @@ function JobDetail() {
       </div>
       <div className="job-info-container">
         <div className="job-info">
-          <h1 className="job-title">{job.title || job.positions}</h1>
+          <h1 className="job-title">{job.positions}</h1>
           <div className="job-location">
-            <i className="location-icon">📍</i> {job.location || job.address}
+            <i className="location-icon">📍</i> {job.address}
           </div>
           <div className="job-basics">
             <div className="room-type">
-              住宿類型: {job.roomType || job.room_type}
+              住宿類型: {job.room_type}
             </div>
             <div className="period">{job.start_date} ~ {job.end_date}</div>
             <div className="positions">
-              需求人數: {job.peopleNeeded || job.people_needed}人
+              需求人數: {job.people_needed}人
             </div>
           </div>
 
           <div className="job-description">
             <h3>工作內容</h3>
             <pre className="description-text">
-              {job.description || job.job_description}
+              {job.job_description}
             </pre>
           </div>
 
           <div className="host-info">
             <div className="host-avatar">
-              <img src={job.host?.image || job.host_image} alt="主管照片" />
+              <img src={job.host.image} alt="主管照片" />
             </div>
             <div className="host-details">
-              <h3>負責人: {job.host?.name || job.host_name}</h3>
+              <h3>負責人: {job.host.name}</h3>
               <div className="host-rating">
-                評分: {job.host?.rating || job.host_rating} ★
+                評分: {job.host.rating} ★
               </div>
             </div>
           </div>

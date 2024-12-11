@@ -63,7 +63,7 @@ function getJobById(jobInfo_id) {
 
         try {
           const job = result[0];
-          
+
           let parsedImages;
           try {
             parsedImages = typeof job.detail_images === 'string' 
@@ -78,13 +78,14 @@ function getJobById(jobInfo_id) {
 
           const formattedJob = {
             jobInfo_id: job.jobInfo_id,
-            title: job.positions,
-            location: job.address,
-            roomType: job.room_type,
+            positions: job.positions,
+            address: job.address,
+            room_type: job.room_type,
             start_date: job.start_date,
             end_date: job.end_date,
-            description: job.job_description,
-            peopleNeeded: job.people_needed,
+            job_description: job.job_description,
+            people_needed: job.people_needed,
+            cover_image: job.cover_image,
             images: formattedImages,
             benefits: Array.isArray(job.benefits) 
               ? job.benefits 
