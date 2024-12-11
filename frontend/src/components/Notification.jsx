@@ -13,9 +13,9 @@ function Notification() {
   useEffect(() => {
     // 模擬通知數據，實際應從後端 API 獲取
     setNotifications([
-      { id: 1, message: "您的訂單已成功送達" },
-      { id: 2, message: "新的活動即將開始，快來參加吧！" },
-      { id: 3, message: "您有一則新的訊息" },
+      { id: 1, message: "王小明已申請蘭嶼打工換宿" },
+      { id: 2, message: "林小美已申請蘭嶼打工換宿" },
+      { id: 3, message: "陳小華已申請蘭嶼打工換宿" },
     ]);
   }, []);
 
