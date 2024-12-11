@@ -2,8 +2,8 @@ const  {getWihslist, addWihslist, deleteWihslist} = require("./model");
 
 // 獲取所有心願清單項目
 function get_info(req, res){
-    const  user_id = req.params.user_id;
-    
+    const user_id = req.user.user_id; // 從 JWT 中提取 user_id
+    console.log("hi")
     getWihslist(user_id).then((results)=>{
         res.json({message:"Get wishlist successfully!",data: results})
         
@@ -12,6 +12,7 @@ function get_info(req, res){
         res.json({message:"Error: Get wishlist",error})
     })
 }
+
 function add_info(req, res){
     const  {user_id, jobinfo_id} = req.body;
     addWihslist( user_id, jobinfo_id).then((result)=>{

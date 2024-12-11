@@ -22,23 +22,24 @@ const PhotoGrid = ({isEditing}) => {
   return (
     <div className="photo-grid">
       {/* 上傳圖片按鈕 */}
+      {isEditing ? 
       <div className="photo-item">
-        {isEditing ? (
-            <>
-                <label htmlFor="photo-upload" className="upload-label">
-                    + 上傳圖片
-                </label>
-                <input
-                    id="photo-upload"
-                    type="file"
-                    multiple
-                    accept="image/*"
-                    style={{ display: "none" }}
-                    onChange={handlePhotoUpload}
-                />
-            </>
-        ):(<></>)}
-      </div>
+        <>
+            <label htmlFor="photo-upload" className="upload-label">
+                + 上傳圖片
+            </label>
+            <input
+                id="photo-upload"
+                type="file"
+                multiple
+                accept="image/*"
+                style={{ display: "none" }}
+                onChange={handlePhotoUpload}
+            />
+        </>
+      </div>:
+      <></>}
+      
 
       {/* 顯示已上傳的圖片 */}
       {photos.map((photo, index) => (

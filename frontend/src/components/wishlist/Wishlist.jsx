@@ -37,10 +37,26 @@ import { useNavigate } from 'react-router-dom';
 function Wishlist() {
     const [listings,setListings] = useState([]);
     const navigate = useNavigate();
+    
 
     useEffect(() => {
-      fetch("http://localhost:8000/api/wishlist/1")  // 這裏來 綁定  user 的 id
-        .then((response) => {
+      const JwtToken = localStorage.getItem("token"); 
+      const user = localStorage.getItem("username")
+      console.log(user,JwtToken)
+
+      if (!JwtToken || !user) {
+        console.error("JWT Token or Username is missing. Please log in.");
+        navigate("/login");  // 如果沒有 token，重定向至登入頁
+        return;
+      }
+
+      fetch("http://localhost:8000/api/wishlist", {
+        method: "GET",
+        headers: {
+          "Authorization": `Bearer ${JwtToken}`, // 確保這裡有正確的 JWT Token
+          "Content-Type": "application/json"
+        }
+      }).then((response) => {
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
           }

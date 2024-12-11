@@ -16,7 +16,7 @@ connection.getConnection((err, conn) => {
   }
 
   // 可以開始使用 conn 來進行 SQL 查詢
-  conn.query("SELECT * FROM users", (err, results) => {
+  conn.query("SELECT * FROM user", (err, results) => {
     if (err) {
       console.error("Query failed:", err);
     } else {
