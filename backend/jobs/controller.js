@@ -1,4 +1,4 @@
-const { listJobs } = require("./model");
+const { listJobs, getJobById } = require("./model");
 
 function list(req, res) {
   listJobs()
@@ -6,8 +6,25 @@ function list(req, res) {
       res.json(result);
     })
     .catch((error) => {
-      res.json({ message: "Error listing rooms", error });
+      res.status(500).json({ message: "Error listing jobs", error });
     });
 }
 
-module.exports = { list };
+const getJobDetail = async (req, res) => {
+  try {
+    const { jobInfo_id } = req.params;
+
+    const job = await getJobById(jobInfo_id);
+    
+    if (!job) {
+      return res.status(404).json({ message: "工作機會不存在" });
+    }
+
+    res.json(job);
+  } catch (error) {
+    console.error('Controller error:', error);
+    res.status(500).json({ message: "伺服器錯誤" });
+  }
+};
+
+module.exports = { list, getJobDetail };
