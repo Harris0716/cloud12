@@ -76,7 +76,7 @@ function HomePage() {
                   <div className="job-details">
                     <p><i className="fas fa-map-marker"></i> {job.address}</p>
                     <p><i className="fas fa-home"></i> 房型: {job.room_type}</p>
-                    <p><i className="fas fa-calendar"></i>公告期間: {job.start_date} ~ {job.end_date}</p>
+                    <p><i className="fas fa-calendar"></i>{job.start_date} ~ {job.end_date}</p>
                     <p><i className="fas fa-users"></i> 所需人數: {job.people_needed}</p>
                   </div>
                 </div>

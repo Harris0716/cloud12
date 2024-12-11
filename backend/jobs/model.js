@@ -42,11 +42,12 @@ function getJobById(jobInfo_id) {
       j.people_needed,
       j.detail_images,  
       j.benefits,
-      l.name as host_name,
-      l.image as host_image,
-      l.rating as host_rating
+      j.cover_image,
+      u.username as host_name,
+      u.image as host_image,
+      u.rating as host_rating
     FROM JobInfo j
-    JOIN Landlord l ON j.landlord_id = l.landlord_id
+    JOIN User u ON j.landlord_id = u.user_id
     WHERE j.jobInfo_id = ?`;
 
   return new Promise((resolve, reject) => {
@@ -63,7 +64,6 @@ function getJobById(jobInfo_id) {
         try {
           const job = result[0];
           
-          // 解析 detail_images
           let parsedImages;
           try {
             parsedImages = typeof job.detail_images === 'string' 
@@ -74,7 +74,6 @@ function getJobById(jobInfo_id) {
             parsedImages = [];
           }
 
-          // 確保它是一個陣列
           const formattedImages = Array.isArray(parsedImages) ? parsedImages : [];
 
           const formattedJob = {
