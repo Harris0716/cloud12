@@ -22,11 +22,11 @@ function HomePage() {
           return response.json();
         })
         .then((data) => {
-          console.log('收到的資料:', data);
+          //console.log('收到的資料:', data);
           setJobListings(Array.isArray(data) ? data : []);
         })
         .catch((error) => {
-          console.error("Error:", error);
+          //console.error("Error:", error);
           setError(error.message);
         });
     }, []);
