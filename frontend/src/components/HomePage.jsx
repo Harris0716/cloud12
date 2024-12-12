@@ -75,10 +75,10 @@ function HomePage() {
                 <div className="listing-info">
                   <h2 className="listing-title">{job.positions}</h2>
                   <div className="job-details">
-                    <p><i className="fas fa-map-marker"></i> {job.address}</p>
-                    <p><i className="fas fa-home"></i> 房型: {job.room_type}</p>
-                    <p><i className="fas fa-calendar"></i>{job.start_date} ~ {job.end_date}</p>
-                    <p><i className="fas fa-users"></i> 所需人數: {job.people_needed}</p>
+                    <p className="listing-content"> {job.address}</p>
+                    <p className="listing-content"> 房型: {job.room_type}</p>
+                    <p className="listing-content"> {job.start_date} ~ {job.end_date}</p>
+                    <p className="listing-people"> 所需人數: {job.people_needed}</p>
                   </div>
                 </div>
               </Link>
