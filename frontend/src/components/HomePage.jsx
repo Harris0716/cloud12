@@ -48,10 +48,11 @@ function HomePage() {
           </div>
           <br /><br /><br />
           <h1 className="title">所有換宿</h1>
+          {/* 搜尋欄位 */}
           <div className="search-bar">
             <input
               type="text"
-              placeholder="搜尋職位或地點..."
+              placeholder="搜尋換宿..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="search-input"

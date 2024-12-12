@@ -1,11 +1,13 @@
 const { listJobs, getJobById } = require("./model");
 
+
 function list(req, res) {
   listJobs()
     .then((result) => {
       res.json(result);
     })
     .catch((error) => {
+
       res.status(500).json({ message: "Error listing jobs", error });
     });
 }

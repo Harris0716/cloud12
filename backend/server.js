@@ -20,10 +20,6 @@ app.use(userRoutes);
 const jobsRoutes = require("./jobs/route");
 app.use(jobsRoutes);
 
-
-// const jobDetailRoutes = require("./job-detail/route");
-// app.use('/api/job', jobDetailRoutes);
-
 app.use((err, req, res, next) => {
   console.error('Error:', err);
   res.status(500).json({ message: '伺服器錯誤' });
