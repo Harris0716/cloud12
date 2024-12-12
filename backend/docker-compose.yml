@@ -13,9 +13,9 @@ services:
       - db
     environment:
       - HOST=db
-      - USERNAME=root
+      - USERNAME=cloud12
       - PASSWORD=password
-      - DATABASE=worktravel
+      - DATABASE=WORKTRAVELER
       - DB_PORT=3306
     networks:
       - work-travel-network
@@ -28,9 +28,12 @@ services:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_USER: cloud12
       MYSQL_PASSWORD: password
-      MYSQL_DATABASE: worktravel
+      MYSQL_DATABASE: WORKTRAVELER
     ports:
       - "3307:3306"
+    volumes:
+      - ~/Desktop/db-init:/docker-entrypoint-initdb.d #for mac user
+      # - C:/Users/your_user/Desktop/db-init:/docker-entrypoint-initdb.d #for windows user
     networks:
       - work-travel-network
   
