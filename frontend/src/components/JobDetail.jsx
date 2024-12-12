@@ -24,10 +24,10 @@ function JobDetail() {
         }
 
         const data = await response.json();
-        console.log("獲取的資料:", data);
+        //console.log("獲取的資料:", data);
         setJob(data);
       } catch (err) {
-        console.error("錯誤:", err);
+        //console.error("錯誤:", err);
         setError(err.message);
       } finally {
         setLoading(false);
@@ -154,9 +154,7 @@ function JobDetail() {
             </div>
             <div className="host-details">
               <h3>負責人: {job.host.name}</h3>
-              <div className="host-rating">
-                評分: {job.host.rating} ★
-              </div>
+              
             </div>
           </div>
 
