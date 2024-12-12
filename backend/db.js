@@ -8,14 +8,15 @@ const connection = mysql.createPool({
   database: process.env.DATABASE,
 });
 
-// test
-connection.getConnection((err, conn) => {
-  if (err) {
-    console.error('資料庫連線錯誤:', err);
-  } else {
+// test DB connection
+connection.promise().query('SELECT 1')
+  .then(() => {
     console.log('資料庫連線成功！');
-    conn.release();
-  }
-});
+  })
+  .catch(err => {
+    console.error('資料庫連線失敗:', err);
+    process.exit(1);
+  });
+
 
 module.exports = connection;
