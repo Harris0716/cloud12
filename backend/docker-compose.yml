@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  #define a service called backend
+  backend:
+    build:
+      context: . # Path to the directory containing the Dockerfile
+      dockerfile: Dockerfile
+    container_name: work_travel_backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - HOST=db
+      - USERNAME=root
+      - PASSWORD=password
+      - DATABASE=worktravel
+      - DB_PORT=3306
+    networks:
+      - work-travel-network
+
+  #define a service called db
+  db:
+    image: mysql:8.0
+    container_name: work_travel_db
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: cloud12
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: worktravel
+    ports:
+      - "3307:3306"
+    networks:
+      - work-travel-network
+  
+networks:
+  work-travel-network:
+    driver: bridge
