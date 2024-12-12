@@ -50,6 +50,7 @@ function Menu () {
             <li className="dropdown-item">個人履歷</li>
             <li className="dropdown-item">管理房源</li>
             <li className="dropdown-item">申請紀錄</li> 
+            <li className="dropdown-item">心願清單</li>
             <li className="dropdown-item"onClick={logOut}>登出</li>
           </ul>
         )
