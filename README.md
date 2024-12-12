@@ -66,3 +66,17 @@ node server.js
 ```
 
 This will start the Vite development server, and you can access the application at http://localhost:8000/
+
+# Initialize backend server and database with docker compose
+
+1. **Ensure you install docker in your computer**
+
+2. Go to the directory
+
+```bash
+cd backend
+```
+
+3. Create a directory called db-init under your desktop and place your sql file name "init.sql" under "db-init" directory. (In the init.sql file, you can write sql like create table...)
+
+4. Type `docker compose up` in your terminal and you will see both mysql container and backend service container run.
