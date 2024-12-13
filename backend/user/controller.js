@@ -6,10 +6,10 @@ function register(req, res) {
 
   registerUser(username, password, email, user_id)
     .then((result) => {
-      res.json({ message: "Create user successfully!" });
+      res.json({ message: "註冊成功!" });
     })
     .catch((error) => {
-      res.json({ message: "Error registering user", error });
+      res.json({ message: "註冊失敗", error });
     });
 }
 
@@ -22,10 +22,10 @@ function login(req, res) {
       const token = jwt.sign({ user_id: user.user_id }, "secret", {
         expiresIn: "24h",
       });
-      res.json({ message: "Login success!", user, token });
+      res.json({ message: "登入成功!", user, token });
     })
     .catch((error) => {
-      res.json({ message: "Invalid username or password", error });
+      res.json({ message: "登入失敗", error });
     });
 }
 
