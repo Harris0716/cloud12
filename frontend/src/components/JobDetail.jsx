@@ -102,7 +102,6 @@ function JobDetail() {
   return (
     <div className="job-detail">
       <div className="job-images">
-        {console.log("圖片資料:", job.images)}
         {Array.isArray(job.images) && job.images.length > 0 ? (
           job.images.map((image, index) => (
             <img
@@ -110,7 +109,7 @@ function JobDetail() {
               src={image || "https://fakeimg.pl/800x600?text=No+Image"}
               alt={`工作環境 ${index + 1}`}
               onError={(e) => {
-                console.log("圖片載入失敗:", image);
+                // console.log("圖片載入失敗:", image);
                 e.target.src = "https://fakeimg.pl/800x600?text=No+Image";
                 e.target.onerror = null;
               }}
@@ -149,9 +148,7 @@ function JobDetail() {
           </div>
 
           <div className="host-info">
-            <div className="host-avatar">
-              <img src={job.host.image} alt="主管照片" />
-            </div>
+            
             <div className="host-details">
               <h3>負責人: {job.host.name}</h3>
               

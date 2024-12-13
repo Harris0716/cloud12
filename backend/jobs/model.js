@@ -20,7 +20,7 @@ function listJobs() {
   return new Promise((resolve, reject) => {
     db.query(sql, (err, result) => {
       if (err) {
-        console.error("查詢錯誤:", err);
+        // console.error("查詢錯誤:", err);
         reject(err);
       } else {
         resolve(result);
@@ -52,7 +52,7 @@ function getJobById(jobInfo_id) {
   return new Promise((resolve, reject) => {
     db.query(sql, [jobInfo_id], (err, result) => {
       if (err) {
-        console.error("查詢錯誤:", err);
+        // console.error("查詢錯誤:", err);
         reject(err);
       } else {
         if (!result || result.length === 0) {
@@ -101,7 +101,7 @@ function getJobById(jobInfo_id) {
 
           resolve(formattedJob);
         } catch (parseError) {
-          console.error("資料處理錯誤:", parseError);
+          // console.error("資料處理錯誤:", parseError);
           reject(parseError);
         }
       }
