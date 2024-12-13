@@ -21,6 +21,8 @@ app.use(userRoutes);
 const jobsRoutes = require("./jobs/route");
 app.use(jobsRoutes);
 
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+

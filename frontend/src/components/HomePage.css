@@ -72,12 +72,12 @@
     margin-bottom: 0.5rem;
   }
   
-  .listing-location {
+  .listing-content{
     font-size: 0.9rem;
     color: #666;
   }
   
-  .listing-price {
+  .listing-people {
     font-size: 1rem;
     color: #ff5a5f;
     font-weight: bold;
