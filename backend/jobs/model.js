@@ -95,7 +95,6 @@ function getJobById(jobInfo_id) {
             host: {
               name: job.host_name,
               image: job.host_image,
-              rating: job.host_rating,
             },
           };
 
