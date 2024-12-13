@@ -2,10 +2,12 @@ import { useState ,useEffect} from "react";
 import "./Resume.css";
 import {DateTime } from "luxon";
 import PhotoGrid from "./photo";
+import { useNavigate } from 'react-router-dom';
 
 const Resume = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [userInfo, setUserInfo] = useState({});
+  const navigate = useNavigate();
 
   // 切換編輯模式
   const toggleEdit = () => {
@@ -21,10 +23,12 @@ const Resume = () => {
   };
 
   const handleSave = async () => {
+    const JwtToken = localStorage.getItem("token"); 
     try {
       const response = await fetch("http://localhost:8000/api/resume", {
         method: "PUT",
         headers: {
+          "Authorization": `Bearer ${JwtToken}`, // 確保這裡有正確的 JWT Token
           "Content-Type": "application/json",
         },
         body: JSON.stringify(userInfo), // 傳送 userInfo
@@ -33,10 +37,7 @@ const Resume = () => {
       if (!response.ok) {
         throw new Error("更新失敗");
       }
-  
-      const data = await response.json();
-      console.log("更新成功:", data);
-      alert("資料更新成功！"); // 提示用戶更新成功
+      alert("資料更新成功！"); 
     } catch (error) {
       console.error("儲存資料時發生錯誤:", error);
       alert("儲存失敗，請稍後再試！");
@@ -44,7 +45,21 @@ const Resume = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/resume/1")  // 這裏來 綁定  user 的 id
+    const JwtToken = localStorage.getItem("token"); 
+    const user = localStorage.getItem("username")
+
+    if (!JwtToken || !user) {
+      navigate("/login");  // 如果沒有 token，重定向至登入頁
+      return;
+    }
+
+    fetch("http://localhost:8000/api/resume",{
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${JwtToken}`, // 確保這裡有正確的 JWT Token
+        "Content-Type": "application/json"
+      }
+    })  // 這裏來 綁定  user 的 id
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -52,19 +67,31 @@ const Resume = () => {
         return response.json();
       })
       .then((data) => {
-        const userInfo = data.data[0];
-        const localDate = DateTime.fromISO(userInfo.birthdate, { zone: 'utc' }).setZone('Asia/Taipei').toISODate();
-        setUserInfo({
-          user_id: userInfo.user_id,
-          username: userInfo.username,
-          birthdate: localDate,
-          education: userInfo.education,
-          residence: userInfo.residence,
-          license: userInfo.license,
-          phone: userInfo.phone,
-          introduction: userInfo.introduction,
-        });
-        console.log(userInfo) 
+        if(data.data[0] == undefined){
+          setUserInfo({
+            user_id: localStorage.getItem("userid"),
+            username: localStorage.getItem("username"),
+            birthdate: "未填寫",
+            education: "未填寫",
+            residence: "未填寫",
+            license: "未填寫",
+            introduction: "未填寫",
+          })
+          return;
+        }
+        else{
+          const userInfo = data.data[0];
+          const localDate = DateTime.fromISO(userInfo.birthdate, { zone: 'utc' }).setZone('Asia/Taipei').toISODate();
+          setUserInfo({
+            user_id: userInfo.user_id,
+            username: userInfo.name,
+            birthdate: localDate,
+            education: userInfo.education,
+            residence: userInfo.residence,
+            license: userInfo.license,
+            introduction: userInfo.introduction,
+          });
+        }
       })
       .catch((error) => {
         console.error("獲取數據失敗:", error);
@@ -100,7 +127,7 @@ const Resume = () => {
       </div>
       <div className="photo-upload">
         <h2>生活圖片</h2>
-        <PhotoGrid isEditing={isEditing} />
+        <PhotoGrid isEditing={isEditing ? true : false} />
       </div>
       {/* 右下角編輯按鈕 */}
       <button className="edit-button" onClick={() => { toggleEdit(); {isEditing ? handleSave() : ""} }}>

@@ -13,9 +13,9 @@ function getWihslist(user_id){
             j.salary,
             j.url
         FROM 
-            wishlist w
+            Wishlist w
         INNER JOIN 
-            jobinfo j
+            Jobinfo j
         ON 
             w.jobinfo_id = j.jobinfo_id
         WHERE 

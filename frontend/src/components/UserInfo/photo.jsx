@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Photo.css"; // 可用來定義樣式
 import { useEffect } from "react";
+import PropTypes from 'prop-types';
 
 const PhotoGrid = ({isEditing}) => {
   const [photos, setPhotos] = useState([]); // 儲存上傳的圖片
@@ -14,10 +15,6 @@ const PhotoGrid = ({isEditing}) => {
       setPhotos((prev) => [...prev, ...uploadedPhotos]);
     }
   };
-
-  useEffect(()=>{
-    console.log(isEditing)
-  },[isEditing])
 
   return (
     <div className="photo-grid">
@@ -49,6 +46,11 @@ const PhotoGrid = ({isEditing}) => {
       ))}
     </div>
   );
+};
+
+PhotoGrid.propTypes = {
+  isEditing: PropTypes.bool.isRequired,
+  userInfo: PropTypes.object.isRequired,
 };
 
 export default PhotoGrid;
