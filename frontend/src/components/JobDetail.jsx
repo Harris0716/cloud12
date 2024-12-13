@@ -150,8 +150,7 @@ function JobDetail() {
           <div className="host-info">
             
             <div className="host-details">
-              <h3>負責人: {job.host.name}</h3>
-              
+              <h3>負責人: {job.host_name}</h3>
             </div>
           </div>
 

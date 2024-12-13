@@ -43,8 +43,7 @@ function getJobById(jobInfo_id) {
       j.detail_images,  
       j.benefits,
       j.cover_image,
-      u.username as host_name,
-      u.image as host_image
+      u.username as host_name
     FROM JobInfo j
     JOIN User u ON j.landlord_id = u.user_id
     WHERE j.jobInfo_id = ?`;
@@ -92,10 +91,7 @@ function getJobById(jobInfo_id) {
             benefits: Array.isArray(job.benefits)
               ? job.benefits
               : JSON.parse(job.benefits || "[]"),
-            host: {
-              name: job.host_name,
-              image: job.host_image,
-            },
+            host_name: job.host_name,
           };
 
           resolve(formattedJob);
