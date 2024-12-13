@@ -10,13 +10,10 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-
-const wishlistRoutes = require("./wishlist/route")
+const wishlistRoutes = require("./wishlist/route");
 app.use(wishlistRoutes);
-const resumeRoutes = require("./resume/route")
+const resumeRoutes = require("./resume/route");
 app.use(resumeRoutes);
-
-
 
 const userRoutes = require("./user/route");
 app.use(userRoutes);
