@@ -9,10 +9,10 @@ function post_application(req, res) {
   const { jobId, startDate, endDate, message } = req.body;
   createApplication(jobId, applier_id, startDate, endDate, message)
     .then((result) => {
-      res.json({ message: "Create application successfully!", result });
+      res.json({ message: "申請成功", result });
     })
     .catch((error) => {
-      res.json({ message: "Error: POST application", error });
+      res.json({ message: "申請失敗", error });
     });
 }
 

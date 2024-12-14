@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./ApplicationForm.css";
 
 function ApplicationForm({ jobInfo_id }) {
     const [dateError, setDateError] = useState("");
+    const navigate = useNavigate();
     // 日期驗證處理函數
     const handleDateChange = (e) => {
         const startDate = document.getElementById("start-date").value;
@@ -23,32 +25,40 @@ function ApplicationForm({ jobInfo_id }) {
         e.preventDefault();
 
         const JwtToken = localStorage.getItem("token");
-        const formData = {
-        startDate: e.target["start-date"].value,
-        endDate: e.target["end-date"].value,
-        message: e.target.message.value,
-        jobId: jobInfo_id,
-        };
-
-        try {
-        const response = await fetch("http://localhost:8000/api/applications", {
-            method: "POST",
-            headers: {
-            "Authorization": `Bearer ${JwtToken}`,
-            "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-        });
-
-        if (!response.ok) {
-            throw new Error("申請失敗");
+        if (!JwtToken) {
+            alert("請先登入");
+            navigate("/login");
         }
-
-        alert("申請成功！");
-        e.target.reset();
-        } catch (err) {
-        alert(err.message);
+        else {
+            const formData = {
+                startDate: e.target["start-date"].value,
+                endDate: e.target["end-date"].value,
+                message: e.target.message.value,
+                jobId: jobInfo_id,
+            };
+            try {
+                const response = await fetch("http://localhost:8000/api/applications", {
+                    method: "POST",
+                    headers: {
+                    "Authorization": `Bearer ${JwtToken}`,
+                    "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(formData),
+                })
+        
+                if (!response.ok) {
+                    throw new Error("申請失敗");
+                } 
+                alert("申請成功");
+                e.target.reset();
+            } 
+            catch (err) {
+                alert(err.message);
+            }
         }
+        
+
+        
     };
 
     return (
@@ -91,7 +101,6 @@ function ApplicationForm({ jobInfo_id }) {
                     name="message"
                     rows="4"
                     placeholder="請簡短描述您的經驗和申請這份工作的原因"
-                    required
                 ></textarea>
 
                 <button type="submit">立即申請</button>
