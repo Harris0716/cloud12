@@ -1,9 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./LogIn.css";
 
 function Register() {
   const navigate = useNavigate();
+  const handleSqlInit = async (user_id, username) => {
+
+    const userInfo = {
+      user_id: user_id,
+      username: username,
+      birthdate:  null,
+      education: "未填寫",
+      residence: "未填寫",
+      license: "未填寫",
+      introduction: "未填寫",
+    }
+    
+    try {
+      const response = await fetch("http://localhost:8000/api/resume", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userInfo), // 傳送 userInfo
+      });
+  
+      if (!response.ok) {
+        throw new Error("初始新增用戶資料失敗");
+      }
+      alert("初始新增用戶資料成功！"); 
+    } catch (error) {
+      console.error("初始新增用戶資料發生錯誤:", error);
+      alert("儲存失敗，請稍後再試！");
+    }
+  }
   const handleSubmit = (event) => {
     event.preventDefault()
     const formData = new FormData(event.target)
@@ -22,6 +52,7 @@ function Register() {
       .then((data) => {
         // Handle success or error based on the response
         if (data.message === "註冊成功!") {
+          handleSqlInit(user_id, username)
           alert(data.message);
           navigate("/login");
         }
