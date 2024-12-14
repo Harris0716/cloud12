@@ -118,7 +118,7 @@ function JobDetail() {
           </div>
         </div>
 
-        <ApplicationForm/>
+        <ApplicationForm jobInfo_id={jobInfo_id} />
       </div>
     </div>
   );

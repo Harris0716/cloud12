@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ApplicationForm.css";
 
-function ApplicationForm() {
+function ApplicationForm({ jobInfo_id }) {
     const [dateError, setDateError] = useState("");
     // 日期驗證處理函數
     const handleDateChange = (e) => {
@@ -22,9 +22,8 @@ function ApplicationForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const JwtToken = localStorage.getItem("token");
         const formData = {
-        name: e.target["applier-name"].value,
-        email: e.target.email.value,
         startDate: e.target["start-date"].value,
         endDate: e.target["end-date"].value,
         message: e.target.message.value,
@@ -35,6 +34,7 @@ function ApplicationForm() {
         const response = await fetch("http://localhost:8000/api/applications", {
             method: "POST",
             headers: {
+            "Authorization": `Bearer ${JwtToken}`,
             "Content-Type": "application/json",
             },
             body: JSON.stringify(formData),
@@ -56,11 +56,6 @@ function ApplicationForm() {
             <h3>申請職缺</h3>
             <br />
             <form onSubmit={handleSubmit}>
-                <label>姓名</label>
-                <input type="text" id="applier-name" name="applier-name" required />
-
-                <label>email</label>
-                <input type="email" id="email" name="email" required />
 
                 <label htmlFor="start-date">預計開始日期</label>
                 <input
