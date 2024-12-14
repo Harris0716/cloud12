@@ -21,12 +21,12 @@ function Register() {
       .then((response) => response.json())
       .then((data) => {
         // Handle success or error based on the response
-        if (data.message === "Create user successfully!") {
+        if (data.message === "註冊成功!") {
           alert(data.message);
           navigate("/login");
         }
         else{
-          alert(data.error.sqlMessage);
+          alert(`${data.message}:${data.error.sqlMessage}`);
         }
       })
       .catch((error) => {
