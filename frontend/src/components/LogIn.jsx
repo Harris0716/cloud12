@@ -19,12 +19,13 @@ function LogIn() {
       .then((response) => response.json())
       .then((data) => {
         // Handle success or error based on the response
-        if (data.message != "Login success!") {
+        if (data.message != "登入成功!") {
           alert(data.message);
         }else{
           alert(data.message);
           localStorage.setItem("token", data.token);
           localStorage.setItem("username",data.user.username);
+          localStorage.setItem("userid",data.user.user_id);
           navigate("/");
         }
       })

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import './Menu.css';
 
 
@@ -9,7 +10,7 @@ function Menu () {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
-
+  const navigete = useNavigate()
   const toggleDropdown = () => {
       setIsOpen(!isOpen);
   };
@@ -26,6 +27,14 @@ function Menu () {
   const logOut = () => {
     localStorage.clear();
     setIsLoggedIn(false);
+  }
+
+  const wishList = () => {
+    navigete("/wishlist")
+  }
+
+  const resume = () => {
+    navigete("/resume")
   }
 
 
@@ -47,10 +56,10 @@ function Menu () {
         isOpen && isLoggedIn && (
           <ul className="dropdown-menu">
             {/* 可以根據不同的功能再更改或新增 */}
-            <li className="dropdown-item">個人履歷</li>
+            <li className="dropdown-item"onClick={resume}>個人履歷</li>
             <li className="dropdown-item">管理房源</li>
             <li className="dropdown-item">申請紀錄</li> 
-            <li className="dropdown-item">心願清單</li>
+            <li className="dropdown-item"onClick={wishList}>心願清單</li>
             <li className="dropdown-item"onClick={logOut}>登出</li>
           </ul>
         )
