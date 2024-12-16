@@ -9,26 +9,31 @@ function UserApplications() {
   const [landlordApplications, setLandlordApplications] = useState([]);
   const [error, setError] = useState(null);
   const username = localStorage.getItem("username");
+  const currentTime = new Date().getTime();
 
-  const handleButtonClick = (application_id) => {
-    fetch(`http://localhost:8000/api/delete-application/${application_id}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.message === "成功刪除申請") {
-        alert("刪除成功");
-        window.location.reload();
-      }else{
-        alert("刪除失敗");
-      }
-    })
-    .catch((error) => {
-        setError(error.message);
-    });
+  const handleButtonClick = (application_id, status, end_date) => {
+    if (status !== "同意" || currentTime > end_date) {
+      fetch(`http://localhost:8000/api/delete-application/${application_id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.message === "成功刪除申請") {
+          alert("刪除成功");
+          window.location.reload();
+        }else{
+          alert("刪除失敗");
+        }
+      })
+      .catch((error) => {
+          setError(error.message);
+      });
+    }else{
+      alert("已經同意的申請或結束截止日期比今天晚的無法刪除");
+    }
   };
 
   useEffect(() => {
@@ -60,7 +65,7 @@ function UserApplications() {
   }, []);
 
   useEffect(() => {
-    if (activeTab === '審核名單') {
+    if (activeTab === '未審核名單') {
       const fetchLandlordApplications = () => {
         const JwtToken = localStorage.getItem("token");
 
@@ -97,8 +102,8 @@ function UserApplications() {
         <button className={activeTab === '申請名單' ? 'active' : ''} onClick={() => setActiveTab('申請名單')}>
           申請名單
         </button>
-        <button className={activeTab === '審核名單' ? 'active' : ''} onClick={() => setActiveTab('審核名單')}>
-          審核名單
+        <button className={activeTab === '未審核名單' ? 'active' : ''} onClick={() => setActiveTab('未審核名單')}>
+          未審核名單
         </button>
       </div>
       <div className="application-container">
@@ -108,7 +113,7 @@ function UserApplications() {
               <img src={application.cover_image} alt="Cover" />
               <h2>{application.positions}</h2>
             </Link>
-            <button className="button-custom" onClick={() => handleButtonClick(application.application_id)}>刪除</button>
+            <button className="button-custom" onClick={() => handleButtonClick(application.application_id, application.status, application.end_date)}>刪除</button>
           </div>
         ))}
         {activeTab === '審核名單' && landlordApplications.map((application) => (

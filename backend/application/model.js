@@ -41,7 +41,7 @@ function createApplication(
 function getApplierApplications(applier_id) {
   const params = [applier_id];
   const sql =
-    "SELECT a.status, a.job_id, j.cover_image, j.positions, a.application_id FROM Application as a, JobInfo as j WHERE a.applier_id = ? and j.jobInfo_id = a.job_id";
+    "SELECT a.status, a.job_id, a.end_date, j.cover_image, j.positions, a.application_id FROM Application as a, JobInfo as j WHERE a.applier_id = ? and j.jobInfo_id = a.job_id";
   return new Promise((resolve, reject) => {
     db.getConnection((err, connection) => {
       if (err) {
