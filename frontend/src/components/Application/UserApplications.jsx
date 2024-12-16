@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./UserApplications.css";
-import Menu from "./Menu";
+import Menu from "../Menu";
 import { useNavigate } from "react-router-dom";
 
 function UserApplications() {

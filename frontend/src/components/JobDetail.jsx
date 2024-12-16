@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import ApplicationForm from "./ApplicationForm";
+import ApplicationForm from "./Application/ApplicationForm";
 import "./jobDetail.css";
 
 function JobDetail() {
