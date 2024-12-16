@@ -10,7 +10,7 @@ function Menu () {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
-  const navigete = useNavigate()
+  const navigate = useNavigate()
   const toggleDropdown = () => {
       setIsOpen(!isOpen);
   };
@@ -25,20 +25,21 @@ function Menu () {
   }, []);
   
   const logOut = () => {
+    navigate("/");
     localStorage.clear();
     setIsLoggedIn(false);
   }
 
   const wishList = () => {
-    navigete("/wishlist")
+    navigate("/wishlist")
   }
 
   const resume = () => {
-    navigete("/resume")
+    navigate("/resume")
   }
 
   const application = () => {
-    navigete("/my-applications")
+    navigate("/my-applications")
   }
 
 

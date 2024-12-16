@@ -17,8 +17,8 @@ function createApplication(
     jobInfo_id,
   ];
   const sql = `
-      INSERT INTO Application (applier_id, landlord_id, start_date, end_date, message, status)
-      SELECT ?, landlord_id, ?, ?, ?, ? FROM JobInfo WHERE jobInfo_id = ?
+      INSERT INTO Application (applier_id, landlord_id, start_date, end_date, message, status, job_id)
+      SELECT ?, landlord_id, ?, ?, ?, ?, jobInfo_id FROM JobInfo WHERE jobInfo_id = ?
     `;
   return new Promise((resolve, reject) => {
     db.getConnection((err, connection) => {
@@ -40,7 +40,8 @@ function createApplication(
 
 function getApplierApplications(applier_id) {
   const params = [applier_id];
-  const sql = "SELECT * FROM Application WHERE applier_id = ?";
+  const sql =
+    "SELECT a.status, a.job_id, j.cover_image, j.positions FROM Application as a, JobInfo as j WHERE a.applier_id = ? and j.jobInfo_id = a.job_id";
   return new Promise((resolve, reject) => {
     db.getConnection((err, connection) => {
       if (err) {
