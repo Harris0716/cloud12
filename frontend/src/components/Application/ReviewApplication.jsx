@@ -3,15 +3,13 @@ import { useParams } from 'react-router-dom';
 import "./ApplicationDetail.css";
 
 
-function ApplicationDetail() {
+function ReviewApplication() {
   const { application_id } = useParams();
   const [application, setApplication] = useState(null);
   const [error, setError] = useState(null);
-  const statusMapping = {
-    '審核中': 'pending',
-    '已核准': 'approved', 
-    '已拒絕': 'rejected'
-  };
+  const statusOptions = ['審核中', '已核准', '已拒絕'];
+  const [status, setStatus] = useState('審核中');
+
 
   useEffect(() => {
     const fetchApplicationDetail = async () => {
@@ -36,6 +34,11 @@ function ApplicationDetail() {
   if (error) return <div>Error: {error}</div>;
   if (!application) return <div>No application found</div>;
 
+  const handleSubmit = () => {
+    // Handle the submit logic here
+    console.log('Submitted status:', status);
+    // You can add more logic to handle the form submission, such as making an API call
+  };
 
   return (
     application.map((application) => (
@@ -66,16 +69,19 @@ function ApplicationDetail() {
           <span className="detail-label">申請原因:</span>
           <div className="detail-value">{application.message}</div>
         </div>
-  
-        <div className="detail-row">
-          <span className="detail-label">狀態:</span>
-          <span className={`status-badge status-${statusMapping[application.status] || 'pending'}`}>
-            {application.status}
-          </span>
-        </div>
+
+        <select value={status} onChange={(e) => setStatus(e.target.value)} className="status-dropdown">
+            {statusOptions.map((option) => (
+                <option key={option} value={option}>
+                {option}
+                </option>
+            ))}
+        </select>
+
+        <button onClick={handleSubmit} className="submit-button">Submit</button>
       </div>
     ))
   );
 }
 
-export default ApplicationDetail;
+export default ReviewApplication;

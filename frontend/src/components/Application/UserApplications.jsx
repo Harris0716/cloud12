@@ -91,7 +91,7 @@ function UserApplications() {
         ))}
         {activeTab === '審核名單' && landlordApplications.map((application) => (
           <div className="application" key={application.application_id}>
-            <Link to={`/application/${application.application_id}`} >
+            <Link to={`/review-application/${application.application_id}`} >
               <img src={application.cover_image} alt="Cover" />
               <h2>{application.positions}</h2>
             </Link>
