@@ -1,6 +1,8 @@
 const {
   createApplication,
   getApplierApplications,
+  getLandlordApplications,
+  getApplicationDetail,
   updateApplicationStatus,
 } = require("./model");
 
@@ -26,4 +28,32 @@ function get_applier_application(req, res) {
       res.json({ message: "取得申請失敗", error });
     });
 }
-module.exports = { post_application, get_applier_application };
+
+function get_landlord_application(req, res) {
+  const landlord_id = req.user.user_id;
+  getLandlordApplications(landlord_id)
+    .then((result) => {
+      res.json({ message: "成功取得申請", result });
+    })
+    .catch((error) => {
+      res.json({ message: "取得申請失敗", error });
+    });
+}
+
+function get_application_detail(req, res) {
+  const application_id = req.params.application_id;
+  getApplicationDetail(application_id)
+    .then((result) => {
+      res.json({ message: "成功取得申請", result });
+    })
+    .catch((error) => {
+      res.json({ message: "取得申請失敗", error });
+    });
+}
+
+module.exports = {
+  post_application,
+  get_applier_application,
+  get_landlord_application,
+  get_application_detail,
+};

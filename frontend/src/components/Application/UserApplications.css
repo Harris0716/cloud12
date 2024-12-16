@@ -65,8 +65,15 @@
   object-fit: cover;
 }
 
-.application p {
-  font-size: 1rem;
-  color: #666;
-  margin-top: 1rem;
+.application a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.application a:visited {
+  color: inherit;
+}
+
+.application a:hover {
+  color: inherit;
 }

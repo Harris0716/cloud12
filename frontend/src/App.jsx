@@ -7,6 +7,7 @@ import WishlistPage from './components/wishlist/Wishlist';
 import Resume from './components/UserInfo/Resume';
 import Register from './components/Register';
 import UserApplications from './components/Application/UserApplications';
+import ApplicationDetail from './components/Application/ApplicationDetail';
 import "./App.css";
 
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/job/:jobInfo_id" element={<JobDetail />} />
         <Route path="/register" element={<Register />} />
         <Route path="/my-applications" element={<UserApplications />} />
+        <Route path="/application/:application_id" element={<ApplicationDetail />} />
       </Routes>
     </Router>
   );

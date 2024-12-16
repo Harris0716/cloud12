@@ -41,7 +41,55 @@ function createApplication(
 function getApplierApplications(applier_id) {
   const params = [applier_id];
   const sql =
-    "SELECT a.status, a.job_id, j.cover_image, j.positions FROM Application as a, JobInfo as j WHERE a.applier_id = ? and j.jobInfo_id = a.job_id";
+    "SELECT a.status, a.job_id, j.cover_image, j.positions, a.application_id FROM Application as a, JobInfo as j WHERE a.applier_id = ? and j.jobInfo_id = a.job_id";
+  return new Promise((resolve, reject) => {
+    db.getConnection((err, connection) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      connection.query(sql, params, (err, results) => {
+        connection.release();
+        if (err) {
+          reject(err);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+  });
+}
+
+function getLandlordApplications(landlord_id) {
+  const params = [landlord_id];
+  const sql = `
+    SELECT a.application_id, a.message, j.cover_image, j.positions, u.username
+    FROM Application as a, JobInfo as j, User as u 
+    WHERE a.landlord_id = ? and j.jobInfo_id = a.job_id and u.user_id = a.applier_id`;
+  return new Promise((resolve, reject) => {
+    db.getConnection((err, connection) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      connection.query(sql, params, (err, results) => {
+        connection.release();
+        if (err) {
+          reject(err);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+  });
+}
+
+function getApplicationDetail(application_id) {
+  const params = [application_id];
+  const sql = `
+    SELECT a.*, j.detail_images, j.positions, u.username
+    FROM Application as a, JobInfo as j, User as u 
+    WHERE a.application_id = ? and j.jobInfo_id = a.job_id and u.user_id = a.applier_id`;
   return new Promise((resolve, reject) => {
     db.getConnection((err, connection) => {
       if (err) {
@@ -84,5 +132,7 @@ function updateApplicationStatus(application_id, status) {
 module.exports = {
   createApplication,
   getApplierApplications,
+  getLandlordApplications,
+  getApplicationDetail,
   updateApplicationStatus,
 };
