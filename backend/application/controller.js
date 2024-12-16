@@ -4,6 +4,7 @@ const {
   getLandlordApplications,
   getApplicationDetail,
   updateApplicationStatus,
+  deleteApplication,
 } = require("./model");
 
 function post_application(req, res) {
@@ -63,10 +64,22 @@ function update_application_status(req, res) {
     });
 }
 
+function delete_application(req, res) {
+  const application_id = req.params.application_id;
+  deleteApplication(application_id)
+    .then((result) => {
+      res.json({ message: "成功刪除申請", result });
+    })
+    .catch((error) => {
+      res.json({ message: "刪除申請失敗", error });
+    });
+}
+
 module.exports = {
   post_application,
   get_applier_application,
   get_landlord_application,
   get_application_detail,
   update_application_status,
+  delete_application,
 };

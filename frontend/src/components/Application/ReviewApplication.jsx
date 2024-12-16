@@ -7,8 +7,8 @@ function ReviewApplication() {
   const { application_id } = useParams();
   const [application, setApplication] = useState(null);
   const [error, setError] = useState(null);
-  const statusOptions = ['審核中', '同意', '拒絕'];
-  const [status, setStatus] = useState('審核中');
+  const statusOptions = ['同意', '拒絕'];
+  const [status, setStatus] = useState('同意');
   const navigate = useNavigate();
 
   useEffect(() => {

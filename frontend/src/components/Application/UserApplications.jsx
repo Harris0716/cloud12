@@ -10,6 +10,27 @@ function UserApplications() {
   const [error, setError] = useState(null);
   const username = localStorage.getItem("username");
 
+  const handleButtonClick = (application_id) => {
+    fetch(`http://localhost:8000/api/delete-application/${application_id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.message === "成功刪除申請") {
+        alert("刪除成功");
+        window.location.reload();
+      }else{
+        alert("刪除失敗");
+      }
+    })
+    .catch((error) => {
+        setError(error.message);
+    });
+  };
+
   useEffect(() => {
     const fetchApplications = () => {
       const JwtToken = localStorage.getItem("token");
@@ -87,6 +108,7 @@ function UserApplications() {
               <img src={application.cover_image} alt="Cover" />
               <h2>{application.positions}</h2>
             </Link>
+            <button className="button-custom" onClick={() => handleButtonClick(application.application_id)}>刪除</button>
           </div>
         ))}
         {activeTab === '審核名單' && landlordApplications.map((application) => (
