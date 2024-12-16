@@ -4,6 +4,7 @@ const {
   get_applier_application,
   get_landlord_application,
   get_application_detail,
+  update_application_status,
 } = require("./controller");
 const authenticateToken = require("../user/authMiddleware");
 
@@ -15,5 +16,9 @@ router.get(
   get_landlord_application
 );
 router.get("/api/application-detail/:application_id", get_application_detail);
+router.post(
+  "/api/application-status/:application_id",
+  update_application_status
+);
 
 module.exports = router;

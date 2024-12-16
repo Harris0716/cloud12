@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import "./ApplicationDetail.css";
-
 
 function ReviewApplication() {
   const { application_id } = useParams();
   const [application, setApplication] = useState(null);
   const [error, setError] = useState(null);
-  const statusOptions = ['審核中', '已核准', '已拒絕'];
+  const statusOptions = ['審核中', '同意', '拒絕'];
   const [status, setStatus] = useState('審核中');
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchApplicationDetail = async () => {
@@ -20,24 +20,37 @@ function ReviewApplication() {
         }
         const data = await response.json();
         setApplication(data.result);
-
       } catch (err) {
         setError(err.message);
-
       }
     };
 
     fetchApplicationDetail();
   }, [application_id]);
 
-
   if (error) return <div>Error: {error}</div>;
   if (!application) return <div>No application found</div>;
 
-  const handleSubmit = () => {
-    // Handle the submit logic here
-    console.log('Submitted status:', status);
-    // You can add more logic to handle the form submission, such as making an API call
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch(`http://localhost:8000/api/application-status/${application_id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status }),
+      });
+
+      if (!response.ok) {
+        throw new Error('無法更新資料');
+      }
+
+      const data = await response.json();
+      alert('審核完畢');
+      navigate('/my-applications');
+    } catch (err) {
+      alert(`Error: ${err.message}`);
+    }
   };
 
   return (

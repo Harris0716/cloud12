@@ -9,8 +9,8 @@ function ApplicationDetail() {
   const [error, setError] = useState(null);
   const statusMapping = {
     '審核中': 'pending',
-    '已核准': 'approved', 
-    '已拒絕': 'rejected'
+    '同意': 'approved', 
+    '拒絕': 'rejected'
   };
 
   useEffect(() => {

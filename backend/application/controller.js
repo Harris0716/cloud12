@@ -51,9 +51,22 @@ function get_application_detail(req, res) {
     });
 }
 
+function update_application_status(req, res) {
+  const application_id = req.params.application_id;
+  const { status } = req.body;
+  updateApplicationStatus(application_id, status)
+    .then((result) => {
+      res.json({ message: "成功更新申請", result });
+    })
+    .catch((error) => {
+      res.json({ message: "更新申請失敗", error });
+    });
+}
+
 module.exports = {
   post_application,
   get_applier_application,
   get_landlord_application,
   get_application_detail,
+  update_application_status,
 };
