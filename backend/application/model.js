@@ -65,7 +65,7 @@ function getLandlordApplications(landlord_id) {
   const sql = `
     SELECT a.application_id, a.message, j.cover_image, j.positions, u.username
     FROM Application as a, JobInfo as j, User as u 
-    WHERE a.landlord_id = ? and j.jobInfo_id = a.job_id and u.user_id = a.applier_id and a.status = '審核中'`;
+    WHERE a.landlord_id = ? and j.jobInfo_id = a.job_id and u.user_id = a.applier_id`;
   return new Promise((resolve, reject) => {
     db.getConnection((err, connection) => {
       if (err) {

@@ -65,7 +65,7 @@ function UserApplications() {
   }, []);
 
   useEffect(() => {
-    if (activeTab === '未審核名單') {
+    if (activeTab === '未審核名單' || activeTab === '已審核名單') {
       const fetchLandlordApplications = () => {
         const JwtToken = localStorage.getItem("token");
 
@@ -105,6 +105,9 @@ function UserApplications() {
         <button className={activeTab === '未審核名單' ? 'active' : ''} onClick={() => setActiveTab('未審核名單')}>
           未審核名單
         </button>
+        <button className={activeTab === '已審核名單' ? 'active' : ''} onClick={() => setActiveTab('已審核名單')}>
+            已審核名單
+        </button>
       </div>
       <div className="application-container">
         {activeTab === '已申請名單' && applications.map((application) => (
@@ -116,9 +119,17 @@ function UserApplications() {
             <button className="button-custom" onClick={() => handleButtonClick(application.application_id, application.status, application.end_date)}>刪除</button>
           </div>
         ))}
-        {activeTab === '未審核名單' && landlordApplications.map((application) => (
+        {activeTab === '未審核名單' && landlordApplications.filter(application => application.status === '審核中').map((application) => (
           <div className="application" key={application.application_id}>
             <Link to={`/review-application/${application.application_id}`} >
+              <img src={application.cover_image} alt="Cover" />
+              <h2>{application.positions}</h2>
+            </Link>
+          </div>
+        ))}
+        {activeTab === '已審核名單' && landlordApplications.filter(application => application.status !== '審核中').map((application) => (
+          <div className="application" key={application.application_id}>
+            <Link to={`/application/${application.application_id}`} >
               <img src={application.cover_image} alt="Cover" />
               <h2>{application.positions}</h2>
             </Link>
