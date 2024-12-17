@@ -4,7 +4,7 @@ import "./UserApplications.css";
 import Menu from "../Menu";
 
 function UserApplications() {
-  const [activeTab, setActiveTab] = useState('申請名單');
+  const [activeTab, setActiveTab] = useState('已申請名單');
   const [applications, setApplications] = useState([]);
   const [landlordApplications, setLandlordApplications] = useState([]);
   const [error, setError] = useState(null);
@@ -99,8 +99,8 @@ function UserApplications() {
       <div className="header"><Menu /></div>
       <div className="top-banner">{username}的申請列表</div>
       <div className="tabs">
-        <button className={activeTab === '申請名單' ? 'active' : ''} onClick={() => setActiveTab('申請名單')}>
-          申請名單
+        <button className={activeTab === '已申請名單' ? 'active' : ''} onClick={() => setActiveTab('已申請名單')}>
+          已申請名單
         </button>
         <button className={activeTab === '未審核名單' ? 'active' : ''} onClick={() => setActiveTab('未審核名單')}>
           未審核名單
