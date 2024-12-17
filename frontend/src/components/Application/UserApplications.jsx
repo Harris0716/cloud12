@@ -116,7 +116,7 @@ function UserApplications() {
             <button className="button-custom" onClick={() => handleButtonClick(application.application_id, application.status, application.end_date)}>刪除</button>
           </div>
         ))}
-        {activeTab === '審核名單' && landlordApplications.map((application) => (
+        {activeTab === '未審核名單' && landlordApplications.map((application) => (
           <div className="application" key={application.application_id}>
             <Link to={`/review-application/${application.application_id}`} >
               <img src={application.cover_image} alt="Cover" />
