@@ -107,7 +107,7 @@ function UserApplications() {
         </button>
       </div>
       <div className="application-container">
-        {activeTab === '申請名單' && applications.map((application) => (
+        {activeTab === '已申請名單' && applications.map((application) => (
           <div className="application" key={application.application_id}>
             <Link to={`/application/${application.application_id}`} >
               <img src={application.cover_image} alt="Cover" />
