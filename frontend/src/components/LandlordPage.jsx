@@ -8,12 +8,12 @@ const LandlordPage = () => {
   const [jobs, setJobs] = useState([
     {
       id: 1,
-      address: "台北市大安區和平東路一段",
-      roomType: "背包客房",
-      startDate: "2024-04-01",
-      endDate: "2024-09-30",
+      address: "台北市大安區溫州街",
+      roomType: "單人套房",
+      start_date: "2024-04-01",
+      end_date: "2024-09-30",
       jobDescription: "負責房間清潔、櫃台接待、簡單維護工作",
-      positions: "清潔人員",
+      positions: "民宿清潔人員",
       peopleNeeded: 2,
       workHours: 20,
       benefits: ["免費住宿", "供餐", "網路"],
@@ -25,8 +25,8 @@ const LandlordPage = () => {
       id: 2,
       address: "南投縣魚池鄉日月村",
       roomType: "單人房",
-      startDate: "2024-05-01",
-      endDate: "2024-08-31",
+      start_date: "2024-05-01",
+      end_date: "2024-08-31",
       jobDescription: "園藝維護、房務清潔",
       positions: "園藝人員",
       peopleNeeded: 1,
@@ -41,8 +41,8 @@ const LandlordPage = () => {
   const [newJob, setNewJob] = useState({
     address: "",
     roomType: "",
-    startDate: "",
-    endDate: "",
+    start_date: "",
+    end_date: "",
     jobDescription: "",
     positions: "",
     peopleNeeded: "",
@@ -70,8 +70,8 @@ const LandlordPage = () => {
     if (
       !newJob.address ||
       !newJob.roomType ||
-      !newJob.startDate ||
-      !newJob.endDate ||
+      !newJob.start_date ||
+      !newJob.end_date ||
       !newJob.jobDescription ||
       !newJob.positions ||
       !newJob.peopleNeeded ||
@@ -87,8 +87,8 @@ const LandlordPage = () => {
     setNewJob({
       address: "",
       roomType: "",
-      startDate: "",
-      endDate: "",
+      start_date: "",
+      end_date: "",
       jobDescription: "",
       positions: "",
       peopleNeeded: "",
@@ -140,25 +140,10 @@ const LandlordPage = () => {
             <div className="room-card__info">
               <div className="room-card__stat">
                 <p className="room-card__label">工作期間</p>
-                {/* 日期格式調整 */}
-                <p className="room-card__value">
-                  {new Date(job.startDate)
-                    .toLocaleDateString("zh-TW", {
-                      formatMatcher: "basic",
-                      year: "numeric",
-                      month: "2-digit",
-                      day: "2-digit",
-                    })
-                    .replace(/\//g, " / ")}{" "}
-                  -
-                  {new Date(job.endDate)
-                    .toLocaleDateString("zh-TW", {
-                      formatMatcher: "basic",
-                      year: "numeric",
-                      month: "2-digit",
-                      day: "2-digit",
-                    })
-                    .replace(/\//g, " / ")}
+                {/* format datae */}
+                <p className="card__value-content">
+                  {new Date(job.start_date).toLocaleDateString("zh-TW")} ~{" "}
+                  {new Date(job.end_date).toLocaleDateString("zh-TW")}
                 </p>
               </div>
               <div className="room-card__stat">
@@ -231,9 +216,9 @@ const LandlordPage = () => {
                   <label className="form-field__label">開始日期</label>
                   <input
                     type="date"
-                    value={newJob.startDate}
+                    value={newJob.start_date}
                     onChange={(e) =>
-                      setNewJob({ ...newJob, startDate: e.target.value })
+                      setNewJob({ ...newJob, start_date: e.target.value })
                     }
                     className="form-field__input"
                   />
@@ -243,9 +228,9 @@ const LandlordPage = () => {
                   <label className="form-field__label">結束日期</label>
                   <input
                     type="date"
-                    value={newJob.endDate}
+                    value={newJob.end_date}
                     onChange={(e) =>
-                      setNewJob({ ...newJob, endDate: e.target.value })
+                      setNewJob({ ...newJob, end_date: e.target.value })
                     }
                     className="form-field__input"
                   />
