@@ -6,6 +6,9 @@ import JobDetail from './components/JobDetail';
 import WishlistPage from './components/wishlist/Wishlist';
 import Resume from './components/UserInfo/Resume';
 import Register from './components/Register';
+import UserApplications from './components/Application/UserApplications';
+import ApplicationDetail from './components/Application/ApplicationDetail';
+import ReviewApplication from './components/Application/ReviewApplication';
 import "./App.css";
 
 
@@ -19,6 +22,9 @@ function App() {
         <Route path="/resume" element={<Resume />} />
         <Route path="/job/:jobInfo_id" element={<JobDetail />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/my-applications" element={<UserApplications />} />
+        <Route path="/application/:application_id" element={<ApplicationDetail />} />
+        <Route path="/review-application/:application_id" element={<ReviewApplication />} />
       </Routes>
     </Router>
   );
