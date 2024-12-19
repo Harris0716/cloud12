@@ -6,6 +6,7 @@ import JobDetail from './components/JobDetail';
 import WishlistPage from './components/wishlist/Wishlist';
 import Resume from './components/UserInfo/Resume';
 import Register from './components/Register';
+import LandlordPage from './components/LandlordPage'
 import "./App.css";
 
 

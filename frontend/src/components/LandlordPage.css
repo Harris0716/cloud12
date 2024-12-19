@@ -1,0 +1,239 @@
+.room-management {
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .room-management__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  
+  .room-management__title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .room-management__add-btn {
+    display: flex;
+    align-items: center;
+    background-color: #2563eb;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .room-management__add-btn:hover {
+    background-color: #1d4ed8;
+  }
+  
+  .room-management__add-btn span {
+    margin-right: 8px;
+  }
+  
+  .room-management__list {
+    display: grid;
+    gap: 24px;
+  }
+  
+  /* 房源卡片樣式 */
+  .room-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+  }
+  
+  .room-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .room-card__title {
+    display: flex;
+    align-items: center;
+  }
+  
+  .room-card__icon {
+    margin-right: 8px;
+    color: #2563eb;
+  }
+  
+  .room-card__title h2 {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  
+  .room-card__address {
+    color: #6b7280;
+    margin-top: 8px;
+  }
+  
+  .room-card__actions {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .room-card__action-btn {
+    padding: 8px;
+    background: none;
+    border: none;
+    color: #6b7280;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  
+  .room-card__action-btn:hover {
+    color: #2563eb;
+  }
+  
+  .room-card__action-btn[title="刪除"]:hover {
+    color: #dc2626;
+  }
+  
+  .room-card__info {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  
+  .room-card__label {
+    font-size: 14px;
+    color: #6b7280;
+  }
+  
+  .room-card__value {
+    font-weight: 600;
+    margin-top: 4px;
+  }
+  
+  .room-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  
+  .room-card__tag {
+    background-color: #dbeafe;
+    color: #1e40af;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+  
+  /* Modal 樣式 */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal {
+    background-color: white;
+    border-radius: 8px;
+    padding: 24px;
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .modal__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .modal__title {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .modal__close {
+    background: none;
+    border: none;
+    color: #6b7280;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 4px;
+  }
+  
+  .modal__close:hover {
+    color: #374151;
+  }
+  
+  .modal__content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .form-field__label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+  }
+  
+  .form-field__input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+  
+  .form-field__input:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 1px #2563eb;
+  }
+  
+  .modal__footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  
+  .modal__btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .modal__btn--cancel {
+    background: none;
+    border: none;
+    color: #6b7280;
+  }
+  
+  .modal__btn--cancel:hover {
+    color: #374151;
+  }
+  
+  .modal__btn--confirm {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+  }
+  
+  .modal__btn--confirm:hover {
+    background-color: #1d4ed8;
+  }
