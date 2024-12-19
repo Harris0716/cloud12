@@ -19,6 +19,7 @@ function App() {
         <Route path="/resume" element={<Resume />} />
         <Route path="/job/:jobInfo_id" element={<JobDetail />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/landlordPage" element={<LandlordPage />} />
       </Routes>
     </Router>
   );
