@@ -3,92 +3,122 @@ import './LandlordPage.css';
 
 const LandlordPage = () => {
   const [showAddModal, setShowAddModal] = useState(false);
-  const [editingRoom, setEditingRoom] = useState(null);
+  const [editingJob, setEditingJob] = useState(null);
   
-  const [rooms, setRooms] = useState([
+  const [jobs, setJobs] = useState([
     {
       id: 1,
-      name: '陽光背包客棧',
       address: '台北市大安區和平東路一段',
+      roomType: '背包客房',
+      startDate: '2024-04-01',
+      endDate: '2024-09-30',
+      jobDescription: '負責房間清潔、櫃台接待、簡單維護工作',
+      positions: '清潔人員',
+      peopleNeeded: 2,
       workHours: 20,
-      rooms: {
-        total: 5,
-        available: 3
-      },
-      workTypes: ['清潔工作', '櫃檯接待', '簡單維護'],
+      benefits: ['免費住宿', '供餐', '網路'],
+      coverImage: '',
+      detailImages: [],
       status: 'active'
     },
     {
       id: 2,
-      name: '山中小屋',
       address: '南投縣魚池鄉日月村',
+      roomType: '單人房',
+      startDate: '2024-05-01',
+      endDate: '2024-08-31',
+      jobDescription: '園藝維護、房務清潔',
+      positions: '園藝人員',
+      peopleNeeded: 1,
       workHours: 25,
-      rooms: {
-        total: 3,
-        available: 1
-      },
-      workTypes: ['園藝整理', '房務清潔'],
+      benefits: ['免費住宿', '供早晚餐', '交通補助'],
+      coverImage: '',
+      detailImages: [],
       status: 'active'
     }
   ]);
 
-  const [newRoom, setNewRoom] = useState({
-    name: '',
+  const [newJob, setNewJob] = useState({
     address: '',
+    roomType: '',
+    startDate: '',
+    endDate: '',
+    jobDescription: '',
+    positions: '',
+    peopleNeeded: '',
     workHours: '',
-    totalRooms: '',
-    workTypes: [],
+    benefits: ['免費住宿'],
+    coverImage: '',
+    detailImages: []
   });
 
-  const handleAddRoom = () => {
-    const roomToAdd = {
-      ...newRoom,
-      id: rooms.length + 1,
-      rooms: {
-        total: parseInt(newRoom.totalRooms),
-        available: parseInt(newRoom.totalRooms)
-      },
+  const handleAddJob = () => {
+    if (!validateForm()) return;
+
+    const jobToAdd = {
+      ...newJob,
+      id: Date.now(),
       status: 'active'
     };
     
-    setRooms([...rooms, roomToAdd]);
+    setJobs([...jobs, jobToAdd]);
     setShowAddModal(false);
-    setNewRoom({
-      name: '',
+    resetForm();
+  };
+
+  const validateForm = () => {
+    if (!newJob.address || !newJob.roomType || !newJob.startDate || 
+        !newJob.endDate || !newJob.jobDescription || !newJob.positions || 
+        !newJob.peopleNeeded || !newJob.workHours) {
+      alert('請填寫所有必填欄位');
+      return false;
+    }
+    return true;
+  };
+
+  const resetForm = () => {
+    setNewJob({
       address: '',
+      roomType: '',
+      startDate: '',
+      endDate: '',
+      jobDescription: '',
+      positions: '',
+      peopleNeeded: '',
       workHours: '',
-      totalRooms: '',
-      workTypes: [],
+      benefits: ['免費住宿'],
+      coverImage: '',
+      detailImages: []
     });
   };
 
   return (
     <div className="room-management">
       <div className="room-management__header">
-        <h1 className="room-management__title">房源管理</h1>
+        <h1 className="room-management__title">打工換宿管理</h1>
         <button
           onClick={() => setShowAddModal(true)}
           className="room-management__add-btn"
         >
           <span>＋</span>
-          新增房源
+          新增職缺
         </button>
       </div>
 
       <div className="room-management__list">
-        {rooms.map(room => (
-          <div key={room.id} className="room-card">
+        {jobs.map(job => (
+          <div key={job.id} className="room-card">
             <div className="room-card__header">
               <div>
                 <div className="room-card__title">
                   <span className="room-card__icon">🏠</span>
-                  <h2>{room.name}</h2>
+                  <h2>{job.positions}</h2>
                 </div>
-                <p className="room-card__address">{room.address}</p>
+                <p className="room-card__address">{job.address}</p>
               </div>
               <div className="room-card__actions">
                 <button
-                  onClick={() => setEditingRoom(room)}
+                  onClick={() => setEditingJob(job)}
                   className="room-card__action-btn"
                   title="編輯"
                 >
@@ -105,24 +135,30 @@ const LandlordPage = () => {
 
             <div className="room-card__info">
               <div className="room-card__stat">
-                <p className="room-card__label">每週工作時數</p>
-                <p className="room-card__value">{room.workHours} 小時</p>
-              </div>
-              <div className="room-card__stat">
-                <p className="room-card__label">房間狀態</p>
+                <p className="room-card__label">工作期間</p>
                 <p className="room-card__value">
-                  可用 {room.rooms.available} / 總共 {room.rooms.total}
+                  {new Date(job.startDate).toLocaleDateString()} - 
+                  {new Date(job.endDate).toLocaleDateString()}
                 </p>
               </div>
               <div className="room-card__stat">
-                <p className="room-card__label">工作類型</p>
+                <p className="room-card__label">工作內容</p>
+                <p className="room-card__value">{job.jobDescription}</p>
+              </div>
+              <div className="room-card__stat">
+                <p className="room-card__label">需求人數</p>
+                <p className="room-card__value">{job.peopleNeeded} 人</p>
+              </div>
+              <div className="room-card__stat">
+                <p className="room-card__label">每週工時</p>
+                <p className="room-card__value">{job.workHours} 小時</p>
+              </div>
+              <div className="room-card__stat">
+                <p className="room-card__label">福利</p>
                 <div className="room-card__tags">
-                  {room.workTypes.map((type, index) => (
-                    <span
-                      key={index}
-                      className="room-card__tag"
-                    >
-                      {type}
+                  {job.benefits.map((benefit, index) => (
+                    <span key={index} className="room-card__tag">
+                      {benefit}
                     </span>
                   ))}
                 </div>
@@ -136,7 +172,7 @@ const LandlordPage = () => {
         <div className="modal-overlay">
           <div className="modal">
             <div className="modal__header">
-              <h2 className="modal__title">新增房源</h2>
+              <h2 className="modal__title">新增職缺</h2>
               <button 
                 onClick={() => setShowAddModal(false)}
                 className="modal__close"
@@ -147,43 +183,89 @@ const LandlordPage = () => {
             
             <div className="modal__content">
               <div className="form-field">
-                <label className="form-field__label">房源名稱</label>
-                <input
-                  type="text"
-                  value={newRoom.name}
-                  onChange={(e) => setNewRoom({...newRoom, name: e.target.value})}
-                  className="form-field__input"
-                />
-              </div>
-
-              <div className="form-field">
                 <label className="form-field__label">地址</label>
                 <input
                   type="text"
-                  value={newRoom.address}
-                  onChange={(e) => setNewRoom({...newRoom, address: e.target.value})}
+                  value={newJob.address}
+                  onChange={(e) => setNewJob({...newJob, address: e.target.value})}
                   className="form-field__input"
                 />
               </div>
 
               <div className="form-field">
-                <label className="form-field__label">每週工作時數</label>
+                <label className="form-field__label">房型</label>
                 <input
-                  type="number"
-                  value={newRoom.workHours}
-                  onChange={(e) => setNewRoom({...newRoom, workHours: e.target.value})}
+                  type="text"
+                  value={newJob.roomType}
+                  onChange={(e) => setNewJob({...newJob, roomType: e.target.value})}
                   className="form-field__input"
                 />
               </div>
 
+              <div className="form-grid">
+                <div className="form-field">
+                  <label className="form-field__label">開始日期</label>
+                  <input
+                    type="date"
+                    value={newJob.startDate}
+                    onChange={(e) => setNewJob({...newJob, startDate: e.target.value})}
+                    className="form-field__input"
+                  />
+                </div>
+
+                <div className="form-field">
+                  <label className="form-field__label">結束日期</label>
+                  <input
+                    type="date"
+                    value={newJob.endDate}
+                    onChange={(e) => setNewJob({...newJob, endDate: e.target.value})}
+                    className="form-field__input"
+                  />
+                </div>
+              </div>
+
               <div className="form-field">
-                <label className="form-field__label">房間數量</label>
+                <label className="form-field__label">工作內容</label>
+                <textarea
+                  value={newJob.jobDescription}
+                  onChange={(e) => setNewJob({...newJob, jobDescription: e.target.value})}
+                  className="form-field__input form-field__input--textarea"
+                  rows="3"
+                />
+              </div>
+
+              <div className="form-field">
+                <label className="form-field__label">職位名稱</label>
                 <input
-                  type="number"
-                  value={newRoom.totalRooms}
-                  onChange={(e) => setNewRoom({...newRoom, totalRooms: e.target.value})}
+                  type="text"
+                  value={newJob.positions}
+                  onChange={(e) => setNewJob({...newJob, positions: e.target.value})}
                   className="form-field__input"
                 />
+              </div>
+
+              <div className="form-grid">
+                <div className="form-field">
+                  <label className="form-field__label">需求人數</label>
+                  <input
+                    type="number"
+                    value={newJob.peopleNeeded}
+                    onChange={(e) => setNewJob({...newJob, peopleNeeded: e.target.value})}
+                    className="form-field__input"
+                    min="1"
+                  />
+                </div>
+
+                <div className="form-field">
+                  <label className="form-field__label">每週工時</label>
+                  <input
+                    type="number"
+                    value={newJob.workHours}
+                    onChange={(e) => setNewJob({...newJob, workHours: e.target.value})}
+                    className="form-field__input"
+                    min="1"
+                  />
+                </div>
               </div>
             </div>
 
@@ -195,7 +277,7 @@ const LandlordPage = () => {
                 取消
               </button>
               <button
-                onClick={handleAddRoom}
+                onClick={handleAddJob}
                 className="modal__btn modal__btn--confirm"
               >
                 新增
