@@ -292,12 +292,6 @@ const LandlordPage = () => {
 
             <div className="modal__footer">
               <button
-                onClick={() => setShowAddModal(false)}
-                className="modal__btn modal__btn--cancel"
-              >
-                取消
-              </button>
-              <button
                 onClick={handleAddJob}
                 className="modal__btn modal__btn--confirm"
               >

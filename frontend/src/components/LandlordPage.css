@@ -131,8 +131,8 @@
   padding: 4px 8px;
   border-radius: 4px;
 }
+/* Modal Style */
 
-/* Modal 樣式 */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -143,38 +143,150 @@
   z-index: 50;
 }
 
+/* 彈出視窗容器 */
 .modal {
   background-color: white;
-  border-radius: 8px;
+  border-radius: 12px;
   padding: 24px;
   width: 100%;
   max-width: 600px;
   max-height: 90vh;
   overflow-y: auto;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
+/* 彈出視窗標題區 */
 .modal__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .modal__title {
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 600;
+  color: #111827;
 }
 
 .modal__close {
   background: none;
   border: none;
-  color: #6b7280;
-  font-size: 24px;
   padding: 4px;
-  cursor: pointer; 
-  transition: opacity 0.2s;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
 .modal__close:hover {
-  transform: scale(1.3);
+  transform: scale(1.1);
+}
+
+/* 表單區域 */
+.modal__content {
+  padding: 16px 0;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.form-field {
+  margin-bottom: 16px;
+}
+
+.form-field__label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.form-field__input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-field__input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-field__input--textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* 按鈕區域 */
+.modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.modal__btn {
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.modal__btn--cancel {
+  background-color: #f3f4f6;
+  color: #4b5563;
+  border: 1px solid #e5e7eb;
+}
+
+.modal__btn--cancel:hover {
+  background-color: #e5e7eb;
+}
+
+.modal__btn--confirm {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+}
+
+.modal__btn--confirm:hover {
+  background-color: #1d4ed8;
+}
+
+/* 輸入框特殊類型樣式 */
+input[type="date"].form-field__input {
+  padding-right: 8px;
+}
+
+input[type="number"].form-field__input {
+  padding-right: 8px;
+}
+
+/* 新增動畫效果 */
+.modal {
+  animation: modalShow 0.3s ease;
+}
+
+@keyframes modalShow {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
