@@ -132,7 +132,7 @@ const LandlordPage = () => {
                   ✎
                 </button>
                 <button className="room-card__action-btn" title="刪除">
-                  ×
+                ❌
                 </button>
               </div>
             </div>
@@ -182,7 +182,7 @@ const LandlordPage = () => {
                 onClick={() => setShowAddModal(false)}
                 className="modal__close"
               >
-                ×
+                ❌
               </button>
             </div>
 
