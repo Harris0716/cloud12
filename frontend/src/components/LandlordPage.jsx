@@ -1,55 +1,55 @@
-import React, { useState } from 'react';
-import './LandlordPage.css';
+import React, { useState } from "react";
+import "./LandlordPage.css";
 
 const LandlordPage = () => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [editingJob, setEditingJob] = useState(null);
-  
+
   const [jobs, setJobs] = useState([
     {
       id: 1,
-      address: '台北市大安區和平東路一段',
-      roomType: '背包客房',
-      startDate: '2024-04-01',
-      endDate: '2024-09-30',
-      jobDescription: '負責房間清潔、櫃台接待、簡單維護工作',
-      positions: '清潔人員',
+      address: "台北市大安區和平東路一段",
+      roomType: "背包客房",
+      startDate: "2024-04-01",
+      endDate: "2024-09-30",
+      jobDescription: "負責房間清潔、櫃台接待、簡單維護工作",
+      positions: "清潔人員",
       peopleNeeded: 2,
       workHours: 20,
-      benefits: ['免費住宿', '供餐', '網路'],
-      coverImage: '',
+      benefits: ["免費住宿", "供餐", "網路"],
+      coverImage: "",
       detailImages: [],
-      status: 'active'
+      status: "active",
     },
     {
       id: 2,
-      address: '南投縣魚池鄉日月村',
-      roomType: '單人房',
-      startDate: '2024-05-01',
-      endDate: '2024-08-31',
-      jobDescription: '園藝維護、房務清潔',
-      positions: '園藝人員',
+      address: "南投縣魚池鄉日月村",
+      roomType: "單人房",
+      startDate: "2024-05-01",
+      endDate: "2024-08-31",
+      jobDescription: "園藝維護、房務清潔",
+      positions: "園藝人員",
       peopleNeeded: 1,
       workHours: 25,
-      benefits: ['免費住宿', '供早晚餐', '交通補助'],
-      coverImage: '',
+      benefits: ["免費住宿", "供早晚餐", "交通補助"],
+      coverImage: "",
       detailImages: [],
-      status: 'active'
-    }
+      status: "active",
+    },
   ]);
 
   const [newJob, setNewJob] = useState({
-    address: '',
-    roomType: '',
-    startDate: '',
-    endDate: '',
-    jobDescription: '',
-    positions: '',
-    peopleNeeded: '',
-    workHours: '',
-    benefits: ['免費住宿'],
-    coverImage: '',
-    detailImages: []
+    address: "",
+    roomType: "",
+    startDate: "",
+    endDate: "",
+    jobDescription: "",
+    positions: "",
+    peopleNeeded: "",
+    workHours: "",
+    benefits: ["免費住宿"],
+    coverImage: "",
+    detailImages: [],
   });
 
   const handleAddJob = () => {
@@ -58,19 +58,26 @@ const LandlordPage = () => {
     const jobToAdd = {
       ...newJob,
       id: Date.now(),
-      status: 'active'
+      status: "active",
     };
-    
+
     setJobs([...jobs, jobToAdd]);
     setShowAddModal(false);
     resetForm();
   };
 
   const validateForm = () => {
-    if (!newJob.address || !newJob.roomType || !newJob.startDate || 
-        !newJob.endDate || !newJob.jobDescription || !newJob.positions || 
-        !newJob.peopleNeeded || !newJob.workHours) {
-      alert('請填寫所有必填欄位');
+    if (
+      !newJob.address ||
+      !newJob.roomType ||
+      !newJob.startDate ||
+      !newJob.endDate ||
+      !newJob.jobDescription ||
+      !newJob.positions ||
+      !newJob.peopleNeeded ||
+      !newJob.workHours
+    ) {
+      alert("請填寫所有必填欄位");
       return false;
     }
     return true;
@@ -78,17 +85,17 @@ const LandlordPage = () => {
 
   const resetForm = () => {
     setNewJob({
-      address: '',
-      roomType: '',
-      startDate: '',
-      endDate: '',
-      jobDescription: '',
-      positions: '',
-      peopleNeeded: '',
-      workHours: '',
-      benefits: ['免費住宿'],
-      coverImage: '',
-      detailImages: []
+      address: "",
+      roomType: "",
+      startDate: "",
+      endDate: "",
+      jobDescription: "",
+      positions: "",
+      peopleNeeded: "",
+      workHours: "",
+      benefits: ["免費住宿"],
+      coverImage: "",
+      detailImages: [],
     });
   };
 
@@ -106,7 +113,7 @@ const LandlordPage = () => {
       </div>
 
       <div className="room-management__list">
-        {jobs.map(job => (
+        {jobs.map((job) => (
           <div key={job.id} className="room-card">
             <div className="room-card__header">
               <div>
@@ -124,10 +131,7 @@ const LandlordPage = () => {
                 >
                   ✎
                 </button>
-                <button 
-                  className="room-card__action-btn"
-                  title="刪除"
-                >
+                <button className="room-card__action-btn" title="刪除">
                   ×
                 </button>
               </div>
@@ -136,9 +140,25 @@ const LandlordPage = () => {
             <div className="room-card__info">
               <div className="room-card__stat">
                 <p className="room-card__label">工作期間</p>
+                {/* 日期格式調整 */}
                 <p className="room-card__value">
-                  {new Date(job.startDate).toLocaleDateString()} - 
-                  {new Date(job.endDate).toLocaleDateString()}
+                  {new Date(job.startDate)
+                    .toLocaleDateString("zh-TW", {
+                      formatMatcher: "basic",
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                    })
+                    .replace(/\//g, " / ")}{" "}
+                  -
+                  {new Date(job.endDate)
+                    .toLocaleDateString("zh-TW", {
+                      formatMatcher: "basic",
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                    })
+                    .replace(/\//g, " / ")}
                 </p>
               </div>
               <div className="room-card__stat">
@@ -173,21 +193,23 @@ const LandlordPage = () => {
           <div className="modal">
             <div className="modal__header">
               <h2 className="modal__title">新增職缺</h2>
-              <button 
+              <button
                 onClick={() => setShowAddModal(false)}
                 className="modal__close"
               >
                 ×
               </button>
             </div>
-            
+
             <div className="modal__content">
               <div className="form-field">
                 <label className="form-field__label">地址</label>
                 <input
                   type="text"
                   value={newJob.address}
-                  onChange={(e) => setNewJob({...newJob, address: e.target.value})}
+                  onChange={(e) =>
+                    setNewJob({ ...newJob, address: e.target.value })
+                  }
                   className="form-field__input"
                 />
               </div>
@@ -197,7 +219,9 @@ const LandlordPage = () => {
                 <input
                   type="text"
                   value={newJob.roomType}
-                  onChange={(e) => setNewJob({...newJob, roomType: e.target.value})}
+                  onChange={(e) =>
+                    setNewJob({ ...newJob, roomType: e.target.value })
+                  }
                   className="form-field__input"
                 />
               </div>
@@ -208,7 +232,9 @@ const LandlordPage = () => {
                   <input
                     type="date"
                     value={newJob.startDate}
-                    onChange={(e) => setNewJob({...newJob, startDate: e.target.value})}
+                    onChange={(e) =>
+                      setNewJob({ ...newJob, startDate: e.target.value })
+                    }
                     className="form-field__input"
                   />
                 </div>
@@ -218,7 +244,9 @@ const LandlordPage = () => {
                   <input
                     type="date"
                     value={newJob.endDate}
-                    onChange={(e) => setNewJob({...newJob, endDate: e.target.value})}
+                    onChange={(e) =>
+                      setNewJob({ ...newJob, endDate: e.target.value })
+                    }
                     className="form-field__input"
                   />
                 </div>
@@ -228,7 +256,9 @@ const LandlordPage = () => {
                 <label className="form-field__label">工作內容</label>
                 <textarea
                   value={newJob.jobDescription}
-                  onChange={(e) => setNewJob({...newJob, jobDescription: e.target.value})}
+                  onChange={(e) =>
+                    setNewJob({ ...newJob, jobDescription: e.target.value })
+                  }
                   className="form-field__input form-field__input--textarea"
                   rows="3"
                 />
@@ -239,7 +269,9 @@ const LandlordPage = () => {
                 <input
                   type="text"
                   value={newJob.positions}
-                  onChange={(e) => setNewJob({...newJob, positions: e.target.value})}
+                  onChange={(e) =>
+                    setNewJob({ ...newJob, positions: e.target.value })
+                  }
                   className="form-field__input"
                 />
               </div>
@@ -250,7 +282,9 @@ const LandlordPage = () => {
                   <input
                     type="number"
                     value={newJob.peopleNeeded}
-                    onChange={(e) => setNewJob({...newJob, peopleNeeded: e.target.value})}
+                    onChange={(e) =>
+                      setNewJob({ ...newJob, peopleNeeded: e.target.value })
+                    }
                     className="form-field__input"
                     min="1"
                   />
@@ -261,7 +295,9 @@ const LandlordPage = () => {
                   <input
                     type="number"
                     value={newJob.workHours}
-                    onChange={(e) => setNewJob({...newJob, workHours: e.target.value})}
+                    onChange={(e) =>
+                      setNewJob({ ...newJob, workHours: e.target.value })
+                    }
                     className="form-field__input"
                     min="1"
                   />
