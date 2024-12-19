@@ -10,7 +10,7 @@ function Menu () {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
-  const navigete = useNavigate()
+  const navigate = useNavigate()
   const toggleDropdown = () => {
       setIsOpen(!isOpen);
   };
@@ -30,15 +30,15 @@ function Menu () {
   }
 
   const wishList = () => {
-    navigete("/wishlist")
+    navigate("/wishlist")
   }
 
   const resume = () => {
-    navigete("/resume")
+    navigate("/resume")
   }
 
   const landlordPage = () => {
-    navigete("/landlordPage")
+    navigate("/landlordPage")
   }
 
 
