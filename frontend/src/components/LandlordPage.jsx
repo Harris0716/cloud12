@@ -180,7 +180,7 @@ const LandlordPage = () => {
               <h2 className="modal__title">新增職缺</h2>
               <button
                 onClick={() => setShowAddModal(false)}
-                className="modal__close"
+                className="modal__close" title="刪除"
               >
                 ❌
               </button>

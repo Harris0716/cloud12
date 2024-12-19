@@ -91,10 +91,12 @@
 
 .room-card__action-btn:hover {
   color: #2563eb;
+  transform: scale(1.3);
 }
 
 .room-card__action-btn[title="刪除"]:hover {
   color: #dc2626;
+  transform: scale(1.3);
 }
 
 .room-card__info {
@@ -174,5 +176,5 @@
 }
 
 .modal__close:hover {
-  opacity: 0.7;
+  transform: scale(1.3);
 }
