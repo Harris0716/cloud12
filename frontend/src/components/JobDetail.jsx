@@ -87,7 +87,7 @@ function JobDetail() {
             <div className="room-type">
               住宿類型: {job.room_type}
             </div>
-            <div className="period">{job.start_date} ~ {job.end_date}</div>
+            <div className="period">{new Date(job.start_date).toLocaleDateString()} ~ {new Date(job.end_date).toLocaleDateString()}</div>
             <div className="positions">
               需求人數: {job.people_needed}人
             </div>
