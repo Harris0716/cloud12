@@ -10,7 +10,8 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       - HOST=db
       - USERNAME=cloud12
@@ -34,6 +35,11 @@ services:
     volumes:
       - ~/Desktop/db-init:/docker-entrypoint-initdb.d #for mac user
       # - C:/Users/your_user/Desktop/db-init:/docker-entrypoint-initdb.d #for windows user
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "cloud12", "--password=password"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     networks:
       - work-travel-network
   
