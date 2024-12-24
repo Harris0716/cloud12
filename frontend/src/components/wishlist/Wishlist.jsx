@@ -1,8 +1,8 @@
 
-import React,{useEffect, useState}from "react";
-import "./Wishlist.css";
-import { useNavigate } from 'react-router-dom';
+import React,{useEffect, useState} from "react";
+import { useNavigate, Link } from 'react-router-dom';
 import Menu from "../Menu";
+import "./Wishlist.css";
 import HomeButton from "../HomeButton";
 
 
@@ -39,12 +39,34 @@ function Wishlist() {
           console.error("wishlist 獲取數據失敗:", error);
         });
     }, []);
-    
 
-    const handleClick = (jobId) => {
-      // 當點擊工作時，導航到對應的工作詳細頁面
-      navigate(`/job/${jobId}`);
-    };
+    const deleteClick = (jobId) => {
+      const JwtToken = localStorage.getItem("token");
+      fetch("http://localhost:8000/api/wishlist", {
+        method: "DELETE", 
+        headers: {
+          "Authorization": `Bearer ${JwtToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          jobinfo_id: jobId
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if(data.message === "Delete wishlist successfully!"){
+          alert("已成功從心願清單移除"); 
+          window.location.reload();
+        }else{
+          alert("移除失敗，請稍後再試");
+        }
+      })
+      .catch(error => {
+        // Error case
+        alert("移除失敗，請稍後再試");
+        console.error("Error:", error);
+      });
+    }
   
     return (
       <div className="container">
@@ -54,13 +76,15 @@ function Wishlist() {
         <div className="listing-grid">
           {Array.isArray(listings) &&
           listings.map((listing) => (
-            <div key={listing.wishlist_id} className="listing-card" onClick={() => handleClick(listing.jobinfo_id)}>
-              <img src={listing.url} alt={listing.job_title} className="listing-image"/>
-              <div className="listing-info">
-                <h2 className="listing-title">{listing.job_title}</h2>
-                <p className="listing-location">{listing.job_address}</p>
-                <p className="listing-price">{listing.salary} 元</p>
-              </div>
+            <div key={listing.jobinfo_id} className="listing-card">
+              <Link to={`/job/${listing.jobinfo_id}`} >
+                <img src={listing.cover_image} alt={listing.positions} className="listing-image"/>
+                <div className="listing-info">
+                  <h2 className="listing-title">{listing.positions}</h2>
+                  <p className="listing-location">{listing.address}</p>
+                </div>
+              </Link>
+              <button className="wishlist-btn" onClick={()=>deleteClick(listing.jobinfo_id)}>刪除</button>
             </div>
           ))}
         </div>

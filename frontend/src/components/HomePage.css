@@ -97,3 +97,19 @@
   a {
     text-decoration: none;
   }
+
+  .wishlist-btn {
+    background-color: #ff5a5f;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+  }
+  
+  .wishlist-btn:hover {
+    background-color: #ff4448;
+  }
