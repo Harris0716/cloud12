@@ -40,6 +40,34 @@ function HomePage() {
       return <div>Error: {error}</div>;
     }
 
+    const handleOnclick = (jobInfo_id) => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("請先登入");
+        return;
+      }
+      fetch("http://localhost:8000/api/wishlist", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          jobinfo_id: jobInfo_id
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.message === "Add wishlist successfully!") {
+          alert("成功加入願望清單");
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        alert("加入願望清單失敗");
+      });
+    }
+
     return (
       <div className="container">
         <div className="homepage">
@@ -82,6 +110,7 @@ function HomePage() {
                   </div>
                 </div>
               </Link>
+              <button className="wishlist-btn" onClick={()=>handleOnclick(job.jobInfo_id)}>♡ 加入心願清單</button>
             </div>
           ))}
         </div>
