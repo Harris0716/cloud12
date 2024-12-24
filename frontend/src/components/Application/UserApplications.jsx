@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import "./UserApplications.css";
 import Menu from "../Menu";
+import HomeButton from "../HomeButton";
 
 function UserApplications() {
   const [activeTab, setActiveTab] = useState('已申請名單');
@@ -96,6 +97,7 @@ function UserApplications() {
 
   return (
     <div>
+      <HomeButton />
       <div className="header"><Menu /></div>
       <div className="top-banner">{username}的申請列表</div>
       <div className="tabs">
