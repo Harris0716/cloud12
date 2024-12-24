@@ -9,7 +9,6 @@ function UserApplications() {
   const [applications, setApplications] = useState([]);
   const [landlordApplications, setLandlordApplications] = useState([]);
   const [error, setError] = useState(null);
-  const username = localStorage.getItem("username");
   const currentTime = new Date().getTime();
 
   const handleButtonClick = (application_id, status, end_date) => {
@@ -99,7 +98,7 @@ function UserApplications() {
     <div>
       <HomeButton />
       <div className="header"><Menu /></div>
-      <div className="top-banner">{username}的申請列表</div>
+      <div className="top-banner">我的申請與審核</div>
       <div className="tabs">
         <button className={activeTab === '已申請名單' ? 'active' : ''} onClick={() => setActiveTab('已申請名單')}>
           已申請名單
