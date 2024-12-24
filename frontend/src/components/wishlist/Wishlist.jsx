@@ -2,6 +2,8 @@
 import React,{useEffect, useState}from "react";
 import "./Wishlist.css";
 import { useNavigate } from 'react-router-dom';
+import Menu from "../Menu";
+import HomeButton from "../HomeButton";
 
 
 function Wishlist() {
@@ -46,6 +48,8 @@ function Wishlist() {
   
     return (
       <div className="container">
+        <div className="header"><Menu /></div>
+        <HomeButton /> <br/> <br/> <br/> <br/>
         <h1 className="title">我的心願清單</h1>
         <div className="listing-grid">
           {Array.isArray(listings) &&
