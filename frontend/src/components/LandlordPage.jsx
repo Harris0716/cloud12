@@ -136,11 +136,14 @@ const LandlordPage = () => {
             <div className="room-card__info">
               <div className="room-card__stat">
                 <p className="room-card__label">工作期間</p>
-                {/* format datae */}
                 <p className="card__value-content">
                   {new Date(job.start_date).toLocaleDateString("zh-TW")} ~{" "}
                   {new Date(job.end_date).toLocaleDateString("zh-TW")}
                 </p>
+              </div>
+              <div className="room-card__stat">
+                <p className="room-card__label">房型</p>
+                <p className="room-card__value">{job.roomType}</p>
               </div>
               <div className="room-card__stat">
                 <p className="room-card__label">工作內容</p>
@@ -178,6 +181,18 @@ const LandlordPage = () => {
               </button>
             </div>
 
+            <div className="form-field">
+                <label className="form-field__label">職位名稱</label>
+                <input
+                  type="text"
+                  value={newJob.positions}
+                  onChange={(e) =>
+                    setNewJob({ ...newJob, positions: e.target.value })
+                  }
+                  className="form-field__input"
+                />
+              </div>
+
             <div className="modal__content">
               <div className="form-field">
                 <label className="form-field__label">地址</label>
@@ -190,19 +205,6 @@ const LandlordPage = () => {
                   className="form-field__input"
                 />
               </div>
-
-              <div className="form-field">
-                <label className="form-field__label">房型</label>
-                <input
-                  type="text"
-                  value={newJob.roomType}
-                  onChange={(e) =>
-                    setNewJob({ ...newJob, roomType: e.target.value })
-                  }
-                  className="form-field__input"
-                />
-              </div>
-
               <div className="form-grid">
                 <div className="form-field">
                   <label className="form-field__label">開始日期</label>
@@ -242,12 +244,12 @@ const LandlordPage = () => {
               </div>
 
               <div className="form-field">
-                <label className="form-field__label">職位名稱</label>
+                <label className="form-field__label">房型</label>
                 <input
                   type="text"
-                  value={newJob.positions}
+                  value={newJob.roomType}
                   onChange={(e) =>
-                    setNewJob({ ...newJob, positions: e.target.value })
+                    setNewJob({ ...newJob, roomType: e.target.value })
                   }
                   className="form-field__input"
                 />
@@ -268,7 +270,7 @@ const LandlordPage = () => {
                 </div>
               </div>
             </div>
-
+            
             <div className="modal__footer">
               <button
                 onClick={handleAddJob}
