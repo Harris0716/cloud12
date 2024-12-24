@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ApplicationForm from "./Application/ApplicationForm";
 import "./jobDetail.css";
+import HomeButton from "./HomeButton";
+import Menu from "./Menu";
 
 function JobDetail() {
   const { jobInfo_id } = useParams();
@@ -53,72 +55,76 @@ function JobDetail() {
   }
 
   return (
-    <div className="job-detail">
-      <div className="job-images">
-        {Array.isArray(job.images) && job.images.length > 0 ? (
-          job.images.map((image, index) => (
-            <img
-              key={index}
-              src={image || "https://fakeimg.pl/800x600?text=No+Image"}
-              alt={`工作環境 ${index + 1}`}
-              onError={(e) => {
-                // console.log("圖片載入失敗:", image);
-                e.target.src = "https://fakeimg.pl/800x600?text=No+Image";
-                e.target.onerror = null;
-              }}
-            />
-          ))
-        ) : (
-          <div className="no-images">
-            <img
-              src="https://fakeimg.pl/800x600?text=No+Images+Available"
-              alt="無可用圖片"
-            />
-          </div>
-        )}
-      </div>
-      <div className="job-info-container">
-        <div className="job-info">
-          <h1 className="job-title">{job.positions}</h1>
-          <div className="job-location">
-            <i className="location-icon">📍</i> {job.address}
-          </div>
-          <div className="job-basics">
-            <div className="room-type">
-              住宿類型: {job.room_type}
+    <div>
+      <div className="header"><Menu /></div>
+      <HomeButton /> <br/><br/><br/><br/>
+      <div className="job-detail">
+        <div className="job-images">
+          {Array.isArray(job.images) && job.images.length > 0 ? (
+            job.images.map((image, index) => (
+              <img
+                key={index}
+                src={image || "https://fakeimg.pl/800x600?text=No+Image"}
+                alt={`工作環境 ${index + 1}`}
+                onError={(e) => {
+                  // console.log("圖片載入失敗:", image);
+                  e.target.src = "https://fakeimg.pl/800x600?text=No+Image";
+                  e.target.onerror = null;
+                }}
+              />
+            ))
+          ) : (
+            <div className="no-images">
+              <img
+                src="https://fakeimg.pl/800x600?text=No+Images+Available"
+                alt="無可用圖片"
+              />
             </div>
-            <div className="period">{new Date(job.start_date).toLocaleDateString()} ~ {new Date(job.end_date).toLocaleDateString()}</div>
-            <div className="positions">
-              需求人數: {job.people_needed}人
-            </div>
-          </div>
-
-          <div className="job-description">
-            <h3>工作內容</h3>
-            <pre className="description-text">
-              {job.job_description}
-            </pre>
-          </div>
-
-          <div className="host-info">
-            
-            <div className="host-details">
-              <h3>負責人: {job.host_name}</h3>
-            </div>
-          </div>
-
-          <div className="job-benefits">
-            <h3>提供福利</h3>
-            <ul>
-              {Array.isArray(job.benefits) &&
-                job.benefits.map((benefit, index) => (
-                  <li key={index}>{benefit}</li>
-                ))}
-            </ul>
-          </div>
+          )}
         </div>
+        <div className="job-info-container">
+          <div className="job-info">
+            <h1 className="job-title">{job.positions}</h1>
+            <div className="job-location">
+              <i className="location-icon">📍</i> {job.address}
+            </div>
+            <div className="job-basics">
+              <div className="room-type">
+                住宿類型: {job.room_type}
+              </div>
+              <div className="period">{new Date(job.start_date).toLocaleDateString()} ~ {new Date(job.end_date).toLocaleDateString()}</div>
+              <div className="positions">
+                需求人數: {job.people_needed}人
+              </div>
+            </div>
 
-        <ApplicationForm jobInfo_id={jobInfo_id} />
+            <div className="job-description">
+              <h3>工作內容</h3>
+              <pre className="description-text">
+                {job.job_description}
+              </pre>
+            </div>
+
+            <div className="host-info">
+              
+              <div className="host-details">
+                <h3>負責人: {job.host_name}</h3>
+              </div>
+            </div>
+
+            <div className="job-benefits">
+              <h3>提供福利</h3>
+              <ul>
+                {Array.isArray(job.benefits) &&
+                  job.benefits.map((benefit, index) => (
+                    <li key={index}>{benefit}</li>
+                  ))}
+              </ul>
+            </div>
+          </div>
+
+          <ApplicationForm jobInfo_id={jobInfo_id} />
+        </div>
       </div>
     </div>
   );

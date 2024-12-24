@@ -51,12 +51,16 @@
 }
 
 .application {
+  width: 300px;
+  margin: 20px;
+  padding: 15px;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   text-align: center;
   padding: 1rem;
+  transition: transform 0.2s ease-in-out;
 }
 
 .application img {
@@ -74,8 +78,9 @@
   color: inherit;
 }
 
-.application a:hover {
+.application:hover {
   color: inherit;
+  transform: scale(1.02);
 }
 
 .button-custom {

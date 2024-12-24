@@ -3,6 +3,8 @@ import "./Resume.css";
 import {DateTime } from "luxon";
 import PhotoGrid from "./photo";
 import { useNavigate } from 'react-router-dom';
+import Menu from "../Menu";
+import HomeButton from "../HomeButton";
 
 const Resume = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -99,40 +101,44 @@ const Resume = () => {
   }, []);
 
   return (
-    <div className="page-container">
-      {/* 使用者基本資訊 */}
-    <div className="profile-container">
-      <div className="user-info">
-        <h2>使用者資訊</h2>
-        {Object.entries(userInfo)
-          .filter(([key]) => !["user_id","birthdate"].includes(key)) // 過濾掉不顯示的屬性
-          .map(([key, value]) => (
-            <div className="info-group" key={key}>
-              <label>{key === "bio" ? "自我介紹" : key}:</label>
-              {isEditing ? (
-                <input
-                  type="text"
-                  name={key}
-                  value={value}
-                  onChange={handleInputChange}
-                />
-              ) : (
-                <p>{value}</p>
-              )}
-            </div>
-      ))}
+    <div>
+      <HomeButton />
+      <div className="header"><Menu /></div>
+      <div className="page-container">
+        {/* 使用者基本資訊 */}
+        <div className="profile-container">
+          <div className="user-info">
+            <h2>使用者資訊</h2>
+            {Object.entries(userInfo)
+              .filter(([key]) => !["user_id","birthdate"].includes(key)) // 過濾掉不顯示的屬性
+              .map(([key, value]) => (
+                <div className="info-group" key={key}>
+                  <label>{key === "bio" ? "自我介紹" : key}:</label>
+                  {isEditing ? (
+                    <input
+                      type="text"
+                      name={key}
+                      value={value}
+                      onChange={handleInputChange}
+                    />
+                  ) : (
+                    <p>{value}</p>
+                  )}
+                </div>
+            ))}
+          </div>
+          
+          {/* 生活圖片上傳區 */}
+        </div>
+        <div className="photo-upload">
+          <h2>生活圖片</h2>
+          <PhotoGrid isEditing={isEditing ? true : false} />
+        </div>
+        {/* 右下角編輯按鈕 */}
+        <button className="edit-button" onClick={() => { toggleEdit(); {isEditing ? handleSave() : ""} }}>
+          {isEditing ? "完成" : "編輯"}
+        </button>
       </div>
-      
-      {/* 生活圖片上傳區 */}
-      </div>
-      <div className="photo-upload">
-        <h2>生活圖片</h2>
-        <PhotoGrid isEditing={isEditing ? true : false} />
-      </div>
-      {/* 右下角編輯按鈕 */}
-      <button className="edit-button" onClick={() => { toggleEdit(); {isEditing ? handleSave() : ""} }}>
-        {isEditing ? "完成" : "編輯"}
-      </button>
     </div>
   );
 };

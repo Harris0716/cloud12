@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import "./UserApplications.css";
 import Menu from "../Menu";
+import HomeButton from "../HomeButton";
 
 function UserApplications() {
   const [activeTab, setActiveTab] = useState('已申請名單');
   const [applications, setApplications] = useState([]);
   const [landlordApplications, setLandlordApplications] = useState([]);
   const [error, setError] = useState(null);
-  const username = localStorage.getItem("username");
   const currentTime = new Date().getTime();
 
   const handleButtonClick = (application_id, status, end_date) => {
@@ -96,8 +96,9 @@ function UserApplications() {
 
   return (
     <div>
+      <HomeButton />
       <div className="header"><Menu /></div>
-      <div className="top-banner">{username}的申請列表</div>
+      <div className="top-banner">我的申請與審核</div>
       <div className="tabs">
         <button className={activeTab === '已申請名單' ? 'active' : ''} onClick={() => setActiveTab('已申請名單')}>
           已申請名單
@@ -115,6 +116,7 @@ function UserApplications() {
             <Link to={`/application/${application.application_id}`} >
               <img src={application.cover_image} alt="Cover" />
               <h2>{application.positions}</h2>
+              <p className="listing-content">{application.address}</p>
             </Link>
             <button className="button-custom" onClick={() => handleButtonClick(application.application_id, application.status, application.end_date)}>刪除</button>
           </div>
@@ -124,6 +126,7 @@ function UserApplications() {
             <Link to={`/review-application/${application.application_id}`} >
               <img src={application.cover_image} alt="Cover" />
               <h2>{application.positions}</h2>
+              <p className="listing-content">{application.address}</p>
             </Link>
           </div>
         ))}
@@ -132,6 +135,7 @@ function UserApplications() {
             <Link to={`/application/${application.application_id}`} >
               <img src={application.cover_image} alt="Cover" />
               <h2>{application.positions}</h2>
+              <p className="listing-content">{application.address}</p>
             </Link>
           </div>
         ))}
