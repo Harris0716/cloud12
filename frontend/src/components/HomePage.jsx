@@ -104,7 +104,7 @@ function HomePage() {
                   <div className="job-details">
                     <p className="listing-content"> {job.address}</p>
                     <p className="listing-content"> 房型: {job.room_type}</p>
-                    <p className="listing-content"> {new Date(job.start_date).toLocaleDateString()} ~ {new Date(job.end_date).toLocaleDateString()}</p>
+                    <p className="listing-content"> {new Date(job.start_date).toLocaleDateString('zh-TW')} ~ {new Date(job.end_date).toLocaleDateString('zh-TW')}</p>
                     <p className="listing-people"> 所需人數: {job.people_needed}</p>
                   </div>
                 </div>
