@@ -25,7 +25,8 @@ function add_info(req, res) {
 }
 
 function delete_info(req, res) {
-  const { user_id, jobinfo_id } = req.body;
+  const user_id = req.user.user_id;
+  const { jobinfo_id } = req.body;
   deleteWihslist(user_id, jobinfo_id)
     .then((result) => {
       res.json({ message: "Delete wishlist successfully!", data: result });

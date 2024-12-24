@@ -8,7 +8,8 @@ function getWihslist(user_id) {
             w.user_id,
             j.jobinfo_id,
             j.positions,
-            j.address
+            j.address,
+            j.cover_image
         FROM 
             Wishlist w
         INNER JOIN 
