@@ -42,6 +42,10 @@ function Menu () {
     navigate("/my-applications")
   }
 
+  const landlordPage = () => {
+    navigate("/landlordPage")
+  }
+
 
   return (
     <div className="menu">
@@ -62,7 +66,7 @@ function Menu () {
           <ul className="dropdown-menu">
             {/* 可以根據不同的功能再更改或新增 */}
             <li className="dropdown-item"onClick={resume}>個人履歷</li>
-            <li className="dropdown-item">管理房源</li>
+            <li className="dropdown-item"onClick={landlordPage}>管理房源</li>
             <li className="dropdown-item" onClick={application}>申請及審核</li> 
             <li className="dropdown-item"onClick={wishList}>心願清單</li>
             <li className="dropdown-item"onClick={logOut}>登出</li>
