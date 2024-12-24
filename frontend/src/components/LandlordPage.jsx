@@ -15,7 +15,6 @@ const LandlordPage = () => {
       jobDescription: "負責房間清潔、櫃台接待、簡單維護工作",
       positions: "民宿清潔人員",
       peopleNeeded: 2,
-      workHours: 20,
       benefits: ["免費住宿", "供餐", "網路"],
       coverImage: "",
       detailImages: [],
@@ -30,7 +29,6 @@ const LandlordPage = () => {
       jobDescription: "園藝維護、房務清潔",
       positions: "園藝人員",
       peopleNeeded: 1,
-      workHours: 25,
       benefits: ["免費住宿", "供早晚餐", "交通補助"],
       coverImage: "",
       detailImages: [],
@@ -74,8 +72,7 @@ const LandlordPage = () => {
       !newJob.end_date ||
       !newJob.jobDescription ||
       !newJob.positions ||
-      !newJob.peopleNeeded ||
-      !newJob.workHours
+      !newJob.peopleNeeded
     ) {
       alert("請填寫所有必填欄位");
       return false;
@@ -92,7 +89,6 @@ const LandlordPage = () => {
       jobDescription: "",
       positions: "",
       peopleNeeded: "",
-      workHours: "",
       benefits: ["免費住宿"],
       coverImage: "",
       detailImages: [],
@@ -153,10 +149,6 @@ const LandlordPage = () => {
               <div className="room-card__stat">
                 <p className="room-card__label">需求人數</p>
                 <p className="room-card__value">{job.peopleNeeded} 人</p>
-              </div>
-              <div className="room-card__stat">
-                <p className="room-card__label">每週工時</p>
-                <p className="room-card__value">{job.workHours} 小時</p>
               </div>
               <div className="room-card__stat">
                 <p className="room-card__label">福利</p>
@@ -269,19 +261,6 @@ const LandlordPage = () => {
                     value={newJob.peopleNeeded}
                     onChange={(e) =>
                       setNewJob({ ...newJob, peopleNeeded: e.target.value })
-                    }
-                    className="form-field__input"
-                    min="1"
-                  />
-                </div>
-
-                <div className="form-field">
-                  <label className="form-field__label">每週工時</label>
-                  <input
-                    type="number"
-                    value={newJob.workHours}
-                    onChange={(e) =>
-                      setNewJob({ ...newJob, workHours: e.target.value })
                     }
                     className="form-field__input"
                     min="1"
