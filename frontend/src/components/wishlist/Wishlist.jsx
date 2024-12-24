@@ -3,6 +3,7 @@ import React,{useEffect, useState} from "react";
 import { useNavigate, Link } from 'react-router-dom';
 import Menu from "../Menu";
 import "./Wishlist.css";
+import HomeButton from "../HomeButton";
 
 
 function Wishlist() {
@@ -54,7 +55,7 @@ function Wishlist() {
       .then(response => response.json())
       .then(data => {
         if(data.message === "Delete wishlist successfully!"){
-          alert("已成功從願望清單移除"); 
+          alert("已成功從心願清單移除"); 
           window.location.reload();
         }else{
           alert("移除失敗，請稍後再試");
@@ -70,7 +71,7 @@ function Wishlist() {
     return (
       <div className="container">
         <div className="header"><Menu /></div>
-        <br /><br /><br />
+        <HomeButton /> <br/> <br/> <br/> <br/>
         <h1 className="title">我的心願清單</h1>
         <div className="listing-grid">
           {Array.isArray(listings) &&

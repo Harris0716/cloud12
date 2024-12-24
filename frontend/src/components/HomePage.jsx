@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./HomePage.css";
 import Menu from "./Menu";
 import { Link } from "react-router-dom";
+import HomeButton from "./HomeButton";
 
 function HomePage() {
     const [searchQuery, setSearchQuery] = useState("");
@@ -36,9 +37,6 @@ function HomePage() {
       listing.address.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    if (error) {
-      return <div>Error: {error}</div>;
-    }
 
     const handleOnclick = (jobInfo_id) => {
       const token = localStorage.getItem("token");
@@ -71,6 +69,7 @@ function HomePage() {
     return (
       <div className="container">
         <div className="homepage">
+          <HomeButton />
           <div className="header">
             <Menu />
           </div>
