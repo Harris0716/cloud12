@@ -57,12 +57,12 @@ function HomePage() {
       .then(response => response.json())
       .then(data => {
         if (data.message === "Add wishlist successfully!") {
-          alert("成功加入願望清單");
+          alert("成功加入心願清單");
         }
       })
       .catch(err => {
         console.error(err);
-        alert("加入願望清單失敗");
+        alert("加入心願清單失敗");
       });
     }
 
