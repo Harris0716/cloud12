@@ -40,8 +40,9 @@ function createApplication(
 
 function getApplierApplications(applier_id) {
   const params = [applier_id];
-  const sql =
-    "SELECT a.status, a.job_id, a.end_date, j.cover_image, j.positions, a.application_id FROM Application as a, JobInfo as j WHERE a.applier_id = ? and j.jobInfo_id = a.job_id";
+  const sql = `
+    SELECT a.status, a.job_id, a.application_id, a.end_date, j.cover_image, j.positions, j.address
+    FROM Application as a, JobInfo as j WHERE a.applier_id = ? and j.jobInfo_id = a.job_id`;
   return new Promise((resolve, reject) => {
     db.getConnection((err, connection) => {
       if (err) {
@@ -63,7 +64,7 @@ function getApplierApplications(applier_id) {
 function getLandlordApplications(landlord_id) {
   const params = [landlord_id];
   const sql = `
-    SELECT a.application_id, a.message, a.status, j.cover_image, j.positions, u.username
+    SELECT a.application_id, a.message, a.status, j.cover_image, j.positions, j.address, u.username
     FROM Application as a, JobInfo as j, User as u 
     WHERE a.landlord_id = ? and j.jobInfo_id = a.job_id and u.user_id = a.applier_id`;
   return new Promise((resolve, reject) => {

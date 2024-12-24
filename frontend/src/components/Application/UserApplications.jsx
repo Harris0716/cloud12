@@ -116,6 +116,7 @@ function UserApplications() {
             <Link to={`/application/${application.application_id}`} >
               <img src={application.cover_image} alt="Cover" />
               <h2>{application.positions}</h2>
+              <p className="listing-content">{application.address}</p>
             </Link>
             <button className="button-custom" onClick={() => handleButtonClick(application.application_id, application.status, application.end_date)}>刪除</button>
           </div>
@@ -125,6 +126,7 @@ function UserApplications() {
             <Link to={`/review-application/${application.application_id}`} >
               <img src={application.cover_image} alt="Cover" />
               <h2>{application.positions}</h2>
+              <p className="listing-content">{application.address}</p>
             </Link>
           </div>
         ))}
@@ -133,6 +135,7 @@ function UserApplications() {
             <Link to={`/application/${application.application_id}`} >
               <img src={application.cover_image} alt="Cover" />
               <h2>{application.positions}</h2>
+              <p className="listing-content">{application.address}</p>
             </Link>
           </div>
         ))}
