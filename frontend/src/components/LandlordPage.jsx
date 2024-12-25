@@ -79,6 +79,10 @@ const LandlordPage = () => {
       alert("請填寫所有必填欄位");
       return false;
     }
+    else if(newJob.start_date > newJob.end_date){
+      alert("結束日期不得早於開始日期");
+      return false;
+    }
     return true;
   };
 
