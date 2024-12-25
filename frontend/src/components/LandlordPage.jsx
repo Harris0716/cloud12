@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./LandlordPage.css";
+import HomeButton from "./HomeButton";
+import Menu from "./Menu";
 
 const LandlordPage = () => {
   const [showAddModal, setShowAddModal] = useState(false);
@@ -97,6 +99,8 @@ const LandlordPage = () => {
 
   return (
     <div className="room-management">
+      <HomeButton />
+      <div className="header"><Menu /></div>
       <div className="room-management__header">
         <h1 className="room-management__title">打工換宿管理</h1>
         <button
