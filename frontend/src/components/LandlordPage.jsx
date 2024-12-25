@@ -45,7 +45,7 @@ const LandlordPage = () => {
     positions: "",
     peopleNeeded: "",
     workHours: "",
-    benefits: ["免費住宿"],
+    benefits: [""],
     coverImage: "",
     detailImages: [],
   });
@@ -180,8 +180,8 @@ const LandlordPage = () => {
                 ❌
               </button>
             </div>
-
-            <div className="form-field">
+            <div className="modal__content">
+              <div className="form-field">
                 <label className="form-field__label">職位名稱</label>
                 <input
                   type="text"
@@ -192,8 +192,6 @@ const LandlordPage = () => {
                   className="form-field__input"
                 />
               </div>
-
-            <div className="modal__content">
               <div className="form-field">
                 <label className="form-field__label">地址</label>
                 <input
@@ -269,8 +267,33 @@ const LandlordPage = () => {
                   />
                 </div>
               </div>
+              <div className="form-field">
+                <label className="form-field__label">
+                  福利項目（最多 5 項）
+                </label>
+                <div className="space-y-2">
+                  {[0, 1, 2, 3, 4].map((index) => (
+                    <input
+                      key={index}
+                      type="text"
+                      value={newJob.benefits[index] || ""}
+                      onChange={(e) => {
+                        const newBenefits = [...newJob.benefits];
+                        newBenefits[index] = e.target.value;
+                        setNewJob({
+                          ...newJob,
+                          benefits: newBenefits.filter(
+                            (benefit) => benefit !== ""
+                          ),
+                        });
+                      }}
+                      placeholder={`福利 ${index + 1}`}
+                      className="form-field__input"
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
-            
             <div className="modal__footer">
               <button
                 onClick={handleAddJob}
