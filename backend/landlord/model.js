@@ -1,4 +1,4 @@
-const db = require('./db'); // 假設已建立資料庫連線的模組
+const db = require("../db");
 
 const createJobInfo = async (jobInfoData) => {
     const query = `

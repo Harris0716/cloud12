@@ -1,4 +1,4 @@
-const { createJobInfo } = require('./model');
+const { createJobInfo } = require("./model");
 
 const post_jobinfo = async (req, res) => {
     try {
@@ -18,7 +18,7 @@ const post_jobinfo = async (req, res) => {
 
         // 驗證必填欄位
         if (!address || !room_type || !start_date || !end_date || !job_description || !positions || !people_needed || !cover_image) {
-            return res.status(400).json({ message: '缺少必要欄位' });
+            return res.status(400).json({ message: "缺少必要欄位" });
         }
 
         const jobInfoData = {
@@ -37,10 +37,10 @@ const post_jobinfo = async (req, res) => {
 
         // 呼叫資料層
         const result = await createJobInfo(jobInfoData);
-        res.status(201).json({ message: '新增 JobInfo 成功', jobInfo_id: result.insertId });
+        res.status(201).json({ message: "新增 JobInfo 成功", jobInfo_id: result.insertId });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: '新增 JobInfo 發生錯誤', error });
+        res.status(500).json({ message: "新增 JobInfo 發生錯誤", error });
     }
 };
 
