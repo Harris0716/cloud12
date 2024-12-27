@@ -48,9 +48,35 @@ const LandlordPage = () => {
     peopleNeeded: "",
     workHours: "",
     benefits: [""],
-    coverImage: "",
-    detailImages: [],
+    coverImageFile: null,
+    detailImageFiles: [],
   });
+
+  const handleCoverImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setNewJob({ ...newJob, coverImageFile: file });
+    }
+  };
+
+  const handleDetailImagesUpload = (e) => {
+    const files = Array.from(e.target.files);
+    if (files.length + newJob.detailImageFiles.length <= 5) {
+      setNewJob({ 
+        ...newJob, 
+        detailImageFiles: [...newJob.detailImageFiles, ...files]
+      });
+    } else {
+      alert('最多只能上傳5張照片');
+    }
+  };
+
+  const removeDetailImage = (index) => {
+    setNewJob({
+      ...newJob,
+      detailImageFiles: newJob.detailImageFiles.filter((_, i) => i !== index)
+    });
+  };
 
   const handleAddJob = () => {
     if (!validateForm()) return;
@@ -96,7 +122,7 @@ const LandlordPage = () => {
       positions: "",
       peopleNeeded: "",
       benefits: ["免費住宿"],
-      coverImage: "",
+      coverImage: null,
       detailImages: [],
     });
   };
@@ -299,6 +325,52 @@ const LandlordPage = () => {
                       className="form-field__input"
                     />
                   ))}
+                </div>
+              </div>
+              <div className="form-field">
+                <label className="form-field__label">封面照片</label>
+                <div className="image-upload">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleCoverImageUpload}
+                    className="image-upload__input"
+                  />
+                  {newJob.coverImageFile && (
+                    <p className="image-upload__filename">
+                      已選擇: {newJob.coverImageFile.name}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="form-field">
+                <label className="form-field__label">工作環境照片（最多 5 張）</label>
+                <div className="image-upload">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={handleDetailImagesUpload}
+                    className="image-upload__input"
+                    disabled={newJob.detailImageFiles.length >= 5}
+                  />
+                  {newJob.detailImageFiles.length > 0 && (
+                    <div className="image-upload__filelist">
+                      {newJob.detailImageFiles.map((file, index) => (
+                        <div key={index} className="image-upload__file">
+                          <span>{file.name}</span>
+                          <button
+                            onClick={() => removeDetailImage(index)}
+                            className="image-upload__remove"
+                            type="button"
+                          >
+                            ❌
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
