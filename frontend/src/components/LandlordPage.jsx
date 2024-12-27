@@ -5,7 +5,8 @@ import Menu from "./Menu";
 
 const LandlordPage = () => {
   const [showAddModal, setShowAddModal] = useState(false);
-  const [editingJob, setEditingJob] = useState(null);
+  const [editingId, setEditingId] = useState(null);
+  const [editJob, setEditJob] = useState({});
 
   const [jobs, setJobs] = useState([
     {
@@ -62,8 +63,8 @@ const LandlordPage = () => {
   const handleDetailImagesUpload = (e) => {
     const files = Array.from(e.target.files);
     if (files.length + newJob.detailImageFiles.length <= 5) {
-      setNewJob({ 
-        ...newJob, 
+      setNewJob({
+        ...newJob,
         detailImageFiles: [...newJob.detailImageFiles, ...files]
       });
     } else {
@@ -112,7 +113,7 @@ const LandlordPage = () => {
       alert("請填寫所有必填欄位");
       return false;
     }
-    else if(newJob.start_date > newJob.end_date){
+    else if (newJob.start_date > newJob.end_date) {
       alert("結束日期不得早於開始日期");
       return false;
     }
@@ -132,6 +133,23 @@ const LandlordPage = () => {
       coverImage: null,
       detailImages: [],
     });
+  };
+
+  const handleEdit = (jobId) => {
+    const job = jobs.find(j => j.id === jobId);
+    setEditJob({ ...job });
+    setEditingId(jobId);
+  };
+
+  const handleSave = (jobId) => {
+    setJobs(jobs.map(job =>
+      job.id === jobId ? editJob : job
+    ));
+    setEditingId(null);
+  };
+
+  const handleInputChange = (field, value) => {
+    setEditJob({ ...editJob, [field]: value });
   };
 
   return (
@@ -156,20 +174,51 @@ const LandlordPage = () => {
               <div>
                 <div className="room-card__title">
                   <span className="room-card__icon">🏠</span>
-                  <h2>{job.positions}</h2>
+                  {editingId === job.id ? (
+                    <input
+                      type="text"
+                      value={editJob.positions}
+                      onChange={(e) => handleInputChange('positions', e.target.value)}
+                      className="form-field__input"
+                    />
+                  ) : (
+                    <h2>{job.positions}</h2>
+                  )}
                 </div>
-                <p className="room-card__address">{job.address}</p>
+                {editingId === job.id ? (
+                  <input
+                    type="text"
+                    value={editJob.address}
+                    onChange={(e) => handleInputChange('address', e.target.value)}
+                    className="form-field__input mt-2"
+                  />
+                ) : (
+                  <p className="room-card__address">{job.address}</p>
+                )}
               </div>
               <div className="room-card__actions">
                 <button
-                  onClick={() => setEditingJob(job)}
+                  onClick={() => editingId === job.id ? handleSave(job.id) : handleEdit(job.id)}
                   className="room-card__action-btn"
-                  title="編輯"
+                  title={editingId === job.id ? "保存" : "編輯"}
                 >
-                  ✎
+                  {editingId === job.id ? "💾" : "✎"}
                 </button>
-                <button className="room-card__action-btn" title="刪除">
-                ❌
+                {editingId === job.id && (
+                  <button
+                    onClick={() => setEditingId(null)}
+                    className="room-card__action-btn"
+                    title="取消"
+                  >
+                    ↩️
+                  </button>
+                )}
+                <button
+                  onClick={() => setJobs(jobs.filter(j => j.id !== job.id))}
+                  className="room-card__action-btn"
+                  title="刪除"
+                >
+                  ❌
                 </button>
               </div>
             </div>
@@ -177,32 +226,96 @@ const LandlordPage = () => {
             <div className="room-card__info">
               <div className="room-card__stat">
                 <p className="room-card__label">工作期間</p>
-                <p className="card__value-content">
-                  {new Date(job.start_date).toLocaleDateString("zh-TW")} ~{" "}
-                  {new Date(job.end_date).toLocaleDateString("zh-TW")}
-                </p>
+                {editingId === job.id ? (
+                  <div className="form-grid">
+                    <input
+                      type="date"
+                      value={editJob.start_date}
+                      onChange={(e) => handleInputChange('start_date', e.target.value)}
+                      className="form-field__input"
+                    />
+                    <input
+                      type="date"
+                      value={editJob.end_date}
+                      onChange={(e) => handleInputChange('end_date', e.target.value)}
+                      className="form-field__input"
+                    />
+                  </div>
+                ) : (
+                  <p className="card__value-content">
+                    {new Date(job.start_date).toLocaleDateString("zh-TW")} ~{" "}
+                    {new Date(job.end_date).toLocaleDateString("zh-TW")}
+                  </p>
+                )}
               </div>
               <div className="room-card__stat">
                 <p className="room-card__label">房型</p>
-                <p className="room-card__value">{job.roomType}</p>
+                {editingId === job.id ? (
+                  <input
+                    type="text"
+                    value={editJob.roomType}
+                    onChange={(e) => handleInputChange('roomType', e.target.value)}
+                    className="form-field__input"
+                  />
+                ) : (
+                  <p className="room-card__value">{job.roomType}</p>
+                )}
               </div>
               <div className="room-card__stat">
                 <p className="room-card__label">工作內容</p>
-                <p className="room-card__value">{job.jobDescription}</p>
+                {editingId === job.id ? (
+                  <textarea
+                    value={editJob.jobDescription}
+                    onChange={(e) => handleInputChange('jobDescription', e.target.value)}
+                    className="form-field__input form-field__input--textarea"
+                    rows="3"
+                  />
+                ) : (
+                  <p className="room-card__value">{job.jobDescription}</p>
+                )}
               </div>
               <div className="room-card__stat">
                 <p className="room-card__label">需求人數</p>
-                <p className="room-card__value">{job.peopleNeeded} 人</p>
+                {editingId === job.id ? (
+                  <input
+                    type="number"
+                    value={editJob.peopleNeeded}
+                    onChange={(e) => handleInputChange('peopleNeeded', e.target.value)}
+                    className="form-field__input"
+                    min="1"
+                  />
+                ) : (
+                  <p className="room-card__value">{job.peopleNeeded} 人</p>
+                )}
               </div>
               <div className="room-card__stat">
                 <p className="room-card__label">福利</p>
-                <div className="room-card__tags">
-                  {job.benefits.map((benefit, index) => (
-                    <span key={index} className="room-card__tag">
-                      {benefit}
-                    </span>
-                  ))}
-                </div>
+                {editingId === job.id ? (
+                  <div className="space-y-2">
+                    {[0, 1, 2, 3, 4].map((index) => (
+                      <input
+                        key={index}
+                        type="text"
+                        value={editJob.benefits[index] || ""}
+                        onChange={(e) => {
+                          const newBenefits = [...editJob.benefits];
+                          newBenefits[index] = e.target.value;
+                          handleInputChange('benefits', newBenefits.filter(benefit => benefit !== ""));
+                        }}
+                        placeholder={`福利 ${index + 1}`}
+                        className="form-field__input"
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="room-card__tags">
+                    {job.benefits.map((benefit, index) => (
+                      <span key={index} className="room-card__tag">
+                        {benefit}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </div>
