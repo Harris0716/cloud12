@@ -71,6 +71,13 @@ const LandlordPage = () => {
     }
   };
 
+  const removeCoverImage = () => {
+    setNewJob({
+      ...newJob,
+      coverImageFile: null
+    });
+  };
+
   const removeDetailImage = (index) => {
     setNewJob({
       ...newJob,
@@ -337,9 +344,16 @@ const LandlordPage = () => {
                     className="image-upload__input"
                   />
                   {newJob.coverImageFile && (
-                    <p className="image-upload__filename">
-                      已選擇: {newJob.coverImageFile.name}
-                    </p>
+                    <div className="image-upload__file">
+                      <span>{newJob.coverImageFile.name}</span>
+                      <button
+                        onClick={removeCoverImage}
+                        className="image-upload__remove"
+                        type="button"
+                      >
+                        ❌
+                      </button>
+                    </div>
                   )}
                 </div>
               </div>
