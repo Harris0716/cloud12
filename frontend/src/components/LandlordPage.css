@@ -287,7 +287,7 @@ input[type="number"].form-field__input {
 
 .room-card__image img {
   width: 60%;
-  height: 200px;
+  height: 320px;
   object-fit: cover;
   border-radius: 8px;
 }
