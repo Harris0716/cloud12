@@ -198,7 +198,7 @@ const LandlordPage = () => {
                 <button
                   onClick={() => editingId === job.id ? handleSave(job.id) : handleEdit(job.id)}
                   className="room-card__action-btn"
-                  title={editingId === job.id ? "保存" : "編輯"}
+                  title={editingId === job.id ? "儲存" : "編輯"}
                 >
                   {editingId === job.id ? "💾" : "✎"}
                 </button>
@@ -206,7 +206,7 @@ const LandlordPage = () => {
                   <button
                     onClick={() => setEditingId(null)}
                     className="room-card__action-btn"
-                    title="取消"
+                    title="放棄編輯"
                   >
                     ↩️
                   </button>
