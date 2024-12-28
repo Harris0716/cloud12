@@ -82,9 +82,10 @@
 
 .room-card__action-btn {
   padding: 8px;
+  font-size: 1.2rem;
   background: none;
   border: none;
-  color: #6b7280;
+  color: #000ce9;
   cursor: pointer;
   transition: color 0.2s;
 }
@@ -98,7 +99,7 @@
   border-radius: 50%;
   background-color: #f3f4f6;
   transform: scale(1.1);
-}
+} 
 
 .room-card__info {
   margin-top: 16px;
@@ -172,6 +173,7 @@
 }
 
 .modal__close {
+  font-size: 1.2rem;
   background: none;
   border: none;
   padding: 8px;
