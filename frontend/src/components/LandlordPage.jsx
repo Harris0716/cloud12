@@ -84,6 +84,12 @@ const LandlordPage = () => {
     });
   };
 
+  const handleDelete = (jobId) => {
+    if (window.confirm('確定要刪除這個職缺嗎？')) {
+      setJobs(jobs.filter(j => j.id !== jobId));
+    }
+  };
+
   const handleAddJob = () => {
     if (!validateForm()) return;
 
@@ -208,11 +214,11 @@ const LandlordPage = () => {
                     className="room-card__action-btn"
                     title="放棄編輯"
                   >
-                    ↩️
+                    ↩
                   </button>
                 )}
                 <button
-                  onClick={() => setJobs(jobs.filter(j => j.id !== job.id))}
+                  onClick={() => handleDelete(job.id)}
                   className="room-card__action-btn"
                   title="刪除"
                 >
