@@ -284,13 +284,20 @@ const LandlordPage = () => {
                     className="form-field__input"
                   />
                   {editJob.coverImage && (
-                    <div className="room-card__image">
+                    <div className="room-card__image-container">
                       <img src={editJob.coverImage} alt="封面照片" />
+                      <button
+                        onClick={() => handleEditImageChange('coverImage', null)}
+                        className="room-card__image-remove"
+                        type="button"
+                      >
+                        ❌
+                      </button>
                     </div>
                   )}
                 </div>
               ) : (
-                <div className="room-card__image">
+                <div className="room-card__image-container">
                   <img src={job.coverImage} alt="封面照片" />
                 </div>
               )}
