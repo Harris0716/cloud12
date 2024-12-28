@@ -277,3 +277,52 @@ input[type="number"].form-field__input {
   padding: 7px 12px;
   cursor: pointer;
 }
+
+/* 新增照片相關的樣式 */
+.room-card__image {
+  margin-top: 10px;
+}
+
+.room-card__image img {
+  width: 60%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.room-card__images-grid {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  margin-top: 10px;
+  padding-bottom: 10px;
+}
+
+.room-card__images-grid img {
+  width: 250px;
+  height: 150px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* 美化滾動條 */
+.room-card__images-grid::-webkit-scrollbar {
+  height: 8px;
+}
+
+.room-card__images-grid::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.room-card__images-grid::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+/* 調整照片區塊在卡片中的佈局 */
+.room-card__stat:has(.room-card__image),
+.room-card__stat:has(.room-card__images-grid) {
+  grid-column: span 2;
+}

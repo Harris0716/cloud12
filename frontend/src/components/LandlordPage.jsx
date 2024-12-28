@@ -19,8 +19,10 @@ const LandlordPage = () => {
       positions: "民宿清潔人員",
       peopleNeeded: 2,
       benefits: ["免費住宿","提供早餐","免費網路","洗衣機","公共廚房"],
-      coverImage: "",
-      detailImages: []
+      coverImage: "https://plus.unsplash.com/premium_photo-1683769250375-1bdf0ec9d80f?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      detailImages: ["https://plus.unsplash.com/premium_photo-1733514691616-cecf39b1c970?q=80&w=2133&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1732752798217-3a7417457f93?q=80&w=2046&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1733473571606-399837d6f9a5?q=80&w=2514&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"]
     },
     {
       id: 2,
@@ -32,8 +34,10 @@ const LandlordPage = () => {
       positions: "溫泉旅館櫃檯人員",
       peopleNeeded: 1,
       benefits: ["免費住宿","三餐供應","免費泡湯","員工折扣","交通補助"],
-      coverImage: "",
-      detailImages: []
+      coverImage: "https://plus.unsplash.com/premium_photo-1664303807484-0bf382a0242b?q=80&w=2428&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      detailImages: ["https://images.unsplash.com/photo-1546017847-9e2177fe4958?q=80&w=1848&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1469998265221-245c7148df5d?q=80&w=2671&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://plus.unsplash.com/premium_photo-1682092523589-a67b28caa96f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzd8fGhvdCUyMHNwcmluZ3xlbnwwfHwwfHx8MA%3D%3D"]
     },
   ]);
 
@@ -228,6 +232,27 @@ const LandlordPage = () => {
             </div>
 
             <div className="room-card__info">
+              {/* 添加封面圖片 */}
+              <div className="room-card__stat">
+                <p className="room-card__label">封面照片</p>
+                <div className="room-card__image">
+                  <img src={job.coverImage} alt="封面照片" />
+                </div>
+              </div>
+
+              {/* 添加工作環境照片 */}
+              <div className="room-card__stat">
+                <p className="room-card__label">工作環境照片</p>
+                <div className="room-card__images-grid">
+                  {job.detailImages.map((image, index) => (
+                    <img 
+                      key={index} 
+                      src={image} 
+                      alt={`工作環境照片 ${index + 1}`} 
+                    />
+                  ))}
+                </div>
+              </div>
               <div className="room-card__stat">
                 <p className="room-card__label">工作期間</p>
                 {editingId === job.id ? (
