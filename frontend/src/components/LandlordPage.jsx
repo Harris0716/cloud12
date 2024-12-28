@@ -452,7 +452,7 @@ const LandlordPage = () => {
                 </div>
               </div>
               <div className="form-field">
-                <label className="form-field__label">封面照片</label>
+                <label className="form-field__label">封面照片 （最多 1 張）</label>
                 <div className="image-upload">
                   <input
                     type="file"
