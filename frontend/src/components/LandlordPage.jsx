@@ -88,6 +88,37 @@ const LandlordPage = () => {
     });
   };
 
+    // 更新編輯中職缺的圖片
+  const handleEditImageChange = (field, value) => {
+    setEditJob({ ...editJob, [field]: value });
+  };
+
+  // 處理封面照片上傳
+  const handleEditCoverImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const url = URL.createObjectURL(file);
+      handleEditImageChange('coverImage', url);
+    }
+  };
+
+  // 處理多張工作環境照片上傳
+  const handleEditDetailImagesUpload = (e) => {
+    const files = Array.from(e.target.files);
+    if (files.length + editJob.detailImages.length <= 5) {
+      const urls = files.map(file => URL.createObjectURL(file));
+      handleEditImageChange('detailImages', [...editJob.detailImages, ...urls]);
+    } else {
+      alert('最多只能上傳5張照片');
+    }
+  };
+
+  // 移除工作環境照片
+  const removeEditDetailImage = (index) => {
+    const newImages = editJob.detailImages.filter((_, i) => i !== index);
+    handleEditImageChange('detailImages', newImages);
+  };
+
   const handleDelete = (jobId) => {
     if (window.confirm('確定要刪除這個職缺嗎？')) {
       setJobs(jobs.filter(j => j.id !== jobId));
@@ -232,17 +263,59 @@ const LandlordPage = () => {
             </div>
 
             <div className="room-card__info">
-              {/* 添加封面圖片 */}
-              <div className="room-card__stat">
-                <p className="room-card__label">封面照片</p>
+              {/* 封面照片 */}
+            <div className="room-card__stat">
+              <p className="room-card__label">封面照片</p>
+              {editingId === job.id ? (
+                <div className="form-field">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleEditCoverImageUpload}
+                    className="form-field__input"
+                  />
+                  {editJob.coverImage && (
+                    <div className="room-card__image">
+                      <img src={editJob.coverImage} alt="封面照片" />
+                    </div>
+                  )}
+                </div>
+              ) : (
                 <div className="room-card__image">
                   <img src={job.coverImage} alt="封面照片" />
                 </div>
-              </div>
+              )}
+            </div>
 
-              {/* 添加工作環境照片 */}
-              <div className="room-card__stat">
-                <p className="room-card__label">工作環境照片</p>
+            {/* 工作環境照片 */}
+            <div className="room-card__stat">
+              <p className="room-card__label">工作環境照片</p>
+              {editingId === job.id ? (
+                <div className="form-field">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={handleEditDetailImagesUpload}
+                    className="form-field__input"
+                    disabled={editJob.detailImages.length >= 5}
+                  />
+                  <div className="room-card__images-grid">
+                    {editJob.detailImages.map((image, index) => (
+                      <div key={index} className="room-card__image-container">
+                        <img src={image} alt={`工作環境照片 ${index + 1}`} />
+                        <button
+                          onClick={() => removeEditDetailImage(index)}
+                          className="room-card__image-remove"
+                          type="button"
+                        >
+                          ❌
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : (
                 <div className="room-card__images-grid">
                   {job.detailImages.map((image, index) => (
                     <img 
@@ -252,7 +325,8 @@ const LandlordPage = () => {
                     />
                   ))}
                 </div>
-              </div>
+              )}
+            </div>
               <div className="room-card__stat">
                 <p className="room-card__label">工作期間</p>
                 {editingId === job.id ? (
