@@ -34,10 +34,10 @@ const LandlordPage = () => {
       positions: "溫泉旅館櫃檯人員",
       peopleNeeded: 1,
       benefits: ["免費住宿","三餐供應","免費泡湯","員工折扣","交通補助"],
-      coverImage: "https://plus.unsplash.com/premium_photo-1664303807484-0bf382a0242b?q=80&w=2428&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      detailImages: ["https://images.unsplash.com/photo-1546017847-9e2177fe4958?q=80&w=1848&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      coverImage: "https://plus.unsplash.com/premium_photo-1682092523589-a67b28caa96f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzd8fGhvdCUyMHNwcmluZ3xlbnwwfHwwfHx8MA%3D%3D",
+      detailImages: ["https://images.unsplash.com/photo-1614590370666-22e7beade570?q=80&w=2656&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "https://images.unsplash.com/photo-1469998265221-245c7148df5d?q=80&w=2671&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "https://plus.unsplash.com/premium_photo-1682092523589-a67b28caa96f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzd8fGhvdCUyMHNwcmluZ3xlbnwwfHwwfHx8MA%3D%3D"]
+      "https://images.unsplash.com/photo-1719755144073-6c0849fb14f2?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"]
     },
   ]);
 
