@@ -1,0 +1,397 @@
+.room-management {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.room-management__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.room-management__title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.room-management__add-btn {
+  display: flex;
+  align-items: center;
+  background-color: #ff5a5f;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.room-management__add-btn:hover {
+  background-color: #e14f50;
+}
+
+.room-management__add-btn span {
+  margin-right: 8px;
+}
+
+.room-management__list {
+  display: grid;
+  gap: 24px;
+}
+
+/* 工作卡片樣式 */
+.room-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+}
+
+.room-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.room-card__title {
+  display: flex;
+  align-items: center;
+}
+
+.room-card__icon {
+  margin-right: 8px;
+  color: #2563eb;
+}
+
+.room-card__title h2 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.room-card__address {
+  color: #6b7280;
+  margin-top: 8px;
+}
+
+.room-card__actions {
+  display: flex;
+  gap: 8px;
+}
+
+.room-card__action-btn {
+  padding: 8px;
+  font-size: 1.2rem;
+  background: none;
+  border: none;
+  color: #000ce9;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.room-card__action-btn:hover {
+  color: #2563eb;
+  transform: scale(1.3);
+}
+
+.room-card__action-btn[title="刪除"]:hover {
+  border-radius: 50%;
+  background-color: #f3f4f6;
+  transform: scale(1.1);
+} 
+
+.room-card__info {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.room-card__label {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.room-card__value {
+  margin-top: 4px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.room-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.room-card__tag {
+  background-color: #dbeafe;
+  color: #1e40af;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+/* Modal Style */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.modal {
+  background-color: white;
+  border-radius: 5px;
+  padding: 24px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  position: relative;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.modal__title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.modal__close {
+  font-size: 1.2rem;
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal__close:hover {
+  background-color: #f3f4f6;
+  transform: scale(1.1);
+}
+
+.modal__content {
+  padding: 0;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.form-field {
+  margin-bottom: 12px;
+}
+
+.form-field__label {
+  display: block;
+  font-size: 14px;
+font-weight: 600;
+  color: #374151;
+  margin-bottom: 4px;
+}
+
+.form-field__input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  background-color: #f9fafb;
+}
+
+.form-field__input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+  background-color: white;
+}
+
+.form-field__input--textarea {
+  min-height: 60px;
+  max-height: 80px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.modal__btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.modal__btn--confirm {
+  background-color: #e14f50;
+  border: none;
+  color: white;
+}
+
+.modal__btn--confirm:hover {
+  background-color: #e14f50;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.modal__btn--confirm:active {
+  transform: translateY(0);
+  background-color: #e14f50;
+  box-shadow: none;
+}
+
+input[type="date"].form-field__input,
+input[type="number"].form-field__input {
+  padding: 7px 12px;
+  cursor: pointer;
+}
+
+.room-card__image-container {
+  position: relative;
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.room-card__image-container img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.room-card__image-remove {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 50%;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  z-index: 10;
+}
+
+.room-card__image-remove:hover {
+  background: rgba(255, 255, 255, 1);
+}
+
+/* 修改預覽圖片樣式，保持一致性 */
+.image-upload__preview {
+  position: relative;
+  margin-top: 10px;
+}
+
+.image-upload__preview img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+
+.room-card__images-grid {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  margin-top: 10px;
+  padding-bottom: 10px;
+}
+
+.room-card__images-grid img {
+  width: 250px;
+  height: 150px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* 美化滾動條 */
+.room-card__images-grid::-webkit-scrollbar {
+  height: 8px;
+}
+
+.room-card__images-grid::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.room-card__images-grid::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+/* 調整照片區塊在卡片中的佈局 */
+.room-card__stat:has(.room-card__image),
+.room-card__stat:has(.room-card__images-grid) {
+  grid-column: span 2;
+}
+
+.image-upload__preview {
+  position: relative;
+  margin-top: 10px;
+  width: 200px;
+  height: 150px;
+}
+
+.image-upload__preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.image-upload__preview-grid {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.image-upload__remove {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 50%;
+  padding: 4px;
+  cursor: pointer;
+}
