@@ -276,31 +276,33 @@ const LandlordPage = () => {
             <div className="room-card__stat">
               <p className="room-card__label">封面照片</p>
               {editingId === job.id ? (
-                <div className="form-field">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleEditCoverImageUpload}
-                    className="form-field__input"
-                  />
-                  {editJob.coverImage && (
-                    <div className="room-card__image-container">
-                      <img src={editJob.coverImage} alt="封面照片" />
-                      <button
-                        onClick={() => handleEditImageChange('coverImage', null)}
-                        className="room-card__image-remove"
-                        type="button"
-                      >
-                        ❌
-                      </button>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <div className="room-card__image-container">
-                  <img src={job.coverImage} alt="封面照片" />
-                </div>
-              )}
+            <div className="form-field">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleEditCoverImageUpload}
+                className="form-field__input"
+              />
+              <div className="room-card__image-container">
+                {editJob.coverImage && (
+                  <>
+                    <img src={editJob.coverImage} alt="封面照片" />
+                    <button
+                      onClick={() => handleEditImageChange('coverImage', null)}
+                      className="room-card__image-remove"
+                      type="button"
+                    >
+                      ❌
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+          ) : (
+            <div className="room-card__image-container">
+              <img src={job.coverImage} alt="封面照片" />
+            </div>
+          )}
             </div>
 
             {/* 工作環境照片 */}
