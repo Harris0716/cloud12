@@ -28,7 +28,7 @@ function App() {
         <Route path="/application/:application_id" element={<ApplicationDetail />} />
         <Route path="/review-application/:application_id" element={<ReviewApplication />} />
         <Route path="/landlordPage" element={<LandlordPage />} />
-        <Route path="/resume/:resume_Id" element={<ViewResume />} />
+        <Route path="/resume/:resume_id" element={<ViewResume />} />
       </Routes>
     </Router>
   );
