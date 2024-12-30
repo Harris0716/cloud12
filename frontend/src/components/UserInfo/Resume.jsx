@@ -73,7 +73,6 @@ const Resume = () => {
           setUserInfo({
             user_id: localStorage.getItem("userid"),
             username: localStorage.getItem("username"),
-            birthdate: "未填寫",
             education: "未填寫",
             residence: "未填寫",
             license: "未填寫",
@@ -83,11 +82,9 @@ const Resume = () => {
         }
         else{
           const userInfo = data.data[0];
-          const localDate = DateTime.fromISO(userInfo.birthdate, { zone: 'utc' }).setZone('Asia/Taipei').toISODate();
           setUserInfo({
             user_id: userInfo.user_id,
             username: userInfo.name,
-            birthdate: localDate,
             education: userInfo.education,
             residence: userInfo.residence,
             license: userInfo.license,
@@ -110,7 +107,7 @@ const Resume = () => {
           <div className="user-info">
             <h2>使用者資訊</h2>
             {Object.entries(userInfo)
-              .filter(([key]) => !["user_id","birthdate"].includes(key)) // 過濾掉不顯示的屬性
+              .filter(([key]) => !["user_id"].includes(key)) // 過濾掉不顯示的屬性
               .map(([key, value]) => (
                 <div className="info-group" key={key}>
                   <label>{key === "bio" ? "自我介紹" : key}:</label>

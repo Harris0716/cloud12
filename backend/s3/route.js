@@ -15,24 +15,15 @@ const s3 = new S3Client({
 
 // 获取预签名 URL 的路由
 router.get("/generate-presigned-url",async (req, res) => {
-    console.log(req.query)
     const { filename, contentType} = req.query;
-    // 校验文件名和文件类型
-    console.log(filename)
     if (!filename || !contentType) {
         return res.status(400).json({ error: 'Missing fileName or contentType' });
     }
-
     const bucketName = 's3-client-access';
 
-    // 确保 fileName 包含扩展名
     if (!filename.includes('.')) {
         return res.status(400).json({ error: 'fileName must include file extension' });
     }
-
-    console.log(filename, contentType);
-
-
     const command = new PutObjectCommand({
         Bucket: bucketName,
         Key: `uploads/${filename}`,

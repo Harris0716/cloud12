@@ -25,16 +25,16 @@ const PhotoGrid = ({isEditing}) => {
         method: 'PUT',
         headers: { 'Content-Type': file.type },
         body: file,
+        mode:'cors',
       });
   
       if (uploadRes.ok) {
-        // 将成功上传的图片 URL 保存到状态
         setPhotos((prev) => [...prev, url.split("?")[0]]);
       } else {
-        console.log("上传失败");
+        console.log("上傳失敗");
       }
     } catch (error) {
-      console.error("上传发生错误", error);
+      console.error("上傳發生錯誤", error);
     }
   }
     
