@@ -88,9 +88,9 @@ function getLandlordApplications(landlord_id) {
 function getApplicationDetail(application_id) {
   const params = [application_id];
   const sql = `
-    SELECT a.*, j.positions, u.username
-    FROM Application as a, JobInfo as j, User as u 
-    WHERE a.application_id = ? and j.jobInfo_id = a.job_id and u.user_id = a.applier_id`;
+    SELECT a.*, j.positions, u.username, r.resume_id
+    FROM Application as a, JobInfo as j, User as u, Resume as r
+    WHERE a.application_id = ? and j.jobInfo_id = a.job_id and u.user_id = a.applier_id and r.user_id = a.applier_id`;
   return new Promise((resolve, reject) => {
     db.getConnection((err, connection) => {
       if (err) {
