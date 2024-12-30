@@ -44,7 +44,7 @@ function ApplicationDetail() {
         
         <div className="detail-row">
           <span className="detail-label">申請人名字:</span>
-          <span className="detail-value">{application.username}</span>
+          <a className="detail-value" href={`/resume/${application.resume_id}`}>{application.username}</a>
         </div>
   
         <div className="detail-row">

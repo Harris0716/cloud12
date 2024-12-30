@@ -10,6 +10,7 @@ import UserApplications from './components/Application/UserApplications';
 import ApplicationDetail from './components/Application/ApplicationDetail';
 import ReviewApplication from './components/Application/ReviewApplication';
 import LandlordPage from './components/LandlordPage'
+import ViewResume from './components/UserInfo/ViewResume';
 import "./App.css";
 
 
@@ -27,6 +28,7 @@ function App() {
         <Route path="/application/:application_id" element={<ApplicationDetail />} />
         <Route path="/review-application/:application_id" element={<ReviewApplication />} />
         <Route path="/landlordPage" element={<LandlordPage />} />
+        <Route path="/resume/:resume_Id" element={<ViewResume />} />
       </Routes>
     </Router>
   );
