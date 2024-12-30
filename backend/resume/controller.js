@@ -1,4 +1,8 @@
+
+
 const  {get_user_resume, add_user_resume, update_user_resume, delete_user_resume} = require("./model");
+
+
 
 function get_info(req, res){
     
