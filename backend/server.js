@@ -24,6 +24,9 @@ app.use(jobsRoutes);
 const applicationRoutes = require("./application/route");
 app.use(applicationRoutes);
 
+const landlordRoutes = require("./jobs/route");
+app.use(landlordRoutes);
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

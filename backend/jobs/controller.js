@@ -1,4 +1,5 @@
-const { listJobs, getJobById } = require("./model");
+const { listJobs, getJobById, getJobInfoById, createJobInfo, deleteJobInfoById } = require("./model");
+const { uploadImageToS3, deleteImageFromS3 } = require('../utils/s3Utils');
 
 function list(req, res) {
   listJobs()
@@ -27,4 +28,106 @@ const getJobDetail = async (req, res) => {
   }
 };
 
-module.exports = { list, getJobDetail };
+async function post_jobinfo(req, res) {
+  const landlord_id = req.user.user_id;
+  const {
+    address,
+    room_type,
+    start_date,
+    end_date,
+    job_description,
+    positions,
+    people_needed,
+    benefits,
+  } = req.body;
+
+  if (!address || !room_type || !start_date || !end_date || !job_description || !positions || !people_needed || !req.files.cover_image) {
+    res.status(400).json({ message: "缺少必要欄位或封面圖片" });
+    return;
+  }
+
+  try {
+    const coverImage = req.files.cover_image[0];
+    const coverImageUrl = await uploadImageToS3(
+      coverImage.buffer,
+      `cover/${Date.now()}-${coverImage.originalname}`,
+      coverImage.mimetype
+    );
+
+    const detailImages = req.files.detail_images || [];
+    const detailImageUrls = await Promise.all(
+      detailImages.map((file) =>
+        uploadImageToS3(file.buffer, `details/${Date.now()}-${file.originalname}`, file.mimetype)
+      )
+    );
+
+    const jobInfoData = {
+      landlord_id,
+      address,
+      room_type,
+      start_date,
+      end_date,
+      job_description,
+      positions,
+      people_needed,
+      cover_image: JSON.stringify([coverImageUrl]),  // JSON 格式儲存
+      detail_images: JSON.stringify(detailImageUrls),
+      benefits: JSON.stringify(benefits),
+    };
+
+    const result = await createJobInfo(jobInfoData);
+    res.status(201).json({ message: "新增 JobInfo 成功", jobInfo_id: result.insertId });
+  } catch (error) {
+    console.error("Error in post_jobinfo:", error);
+    res.status(500).json({ message: "新增 JobInfo 發生錯誤", error: error.message });
+  }
+}
+
+async function delete_jobinfo(req, res) {
+  const landlord_id = req.user.user_id; // 確保是房東本人
+  const jobInfo_id = req.params.id; // 從 URL 取得 JobInfo 的 ID
+
+  if (!jobInfo_id) {
+    res.status(400).json({ message: "缺少必要欄位：JobInfo ID" });
+    return;
+  }
+
+  try {
+    // 確認要刪除的資料是否存在，並確認房東擁有權
+    const jobInfo = await getJobInfoById(jobInfo_id);
+
+    if (!jobInfo) {
+      res.status(404).json({ message: "JobInfo 不存在" });
+      return;
+    }
+
+    if (jobInfo.landlord_id !== landlord_id) {
+      res.status(403).json({ message: "無權限刪除此 JobInfo" });
+      return;
+    }
+
+    // // 刪除 S3 上的封面圖片
+    // if (jobInfo.cover_image) {
+    //   await deleteImageFromS3(jobInfo.cover_image);
+    // }
+
+    
+    // // 刪除 S3 上的細節圖片
+    // if (jobInfo.detail_images) {
+    //   const detailImageUrls = JSON.parse(jobInfo.detail_images); // 確保轉換為陣列
+    //   for (const url of detailImageUrls) {
+    //     await deleteImageFromS3(url); // 傳遞每個檔案的路徑
+    //   }
+    // }
+
+    // 刪除資料庫中的記錄
+    await deleteJobInfoById(jobInfo_id);
+
+    res.status(200).json({ message: "刪除 JobInfo 成功" });
+  } catch (error) {
+    console.error("Error in delete_jobinfo:", error);
+    res.status(500).json({ message: "刪除 JobInfo 發生錯誤", error: error.message });
+  }
+}
+
+module.exports = { list, getJobDetail, post_jobinfo, delete_jobinfo };
