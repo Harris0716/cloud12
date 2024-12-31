@@ -65,7 +65,6 @@ async function post_jobinfo(req, res) {
     positions,
     people_needed,
     benefits,
-    detail_images, // 上傳多張細節圖片
   } = req.body;
 
   if (!address || !room_type || !start_date || !end_date || !job_description || !positions || !people_needed || !req.files.cover_image) {
@@ -83,8 +82,9 @@ async function post_jobinfo(req, res) {
     );
 
     // 處理多張細節圖片上傳
+    const detailImages = req.files.detail_images || [];
     const detailImageUrls = await Promise.all(
-      (detail_images || []).map((file) =>
+      detailImages.map((file) =>
         uploadImageToS3(file.buffer, `details/${Date.now()}-${file.originalname}`, file.mimetype)
       )
     );
