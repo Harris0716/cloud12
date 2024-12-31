@@ -1,5 +1,5 @@
 const { listJobs, getJobById, getJobInfoById, createJobInfo, deleteJobInfoById } = require("./model");
-const AWS = require("aws-sdk");
+const { uploadImageToS3, deleteImageFromS3 } = require('../utils/s3Utils');
 
 function list(req, res) {
   listJobs()
@@ -28,32 +28,6 @@ const getJobDetail = async (req, res) => {
   }
 };
 
-const s3 = new AWS.S3({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  region: process.env.AWS_REGION,
-});
-
-function uploadImageToS3(fileBuffer, fileName, contentType) {
-  const params = {
-    Bucket: process.env.S3_BUCKET_NAME,
-    Key: fileName,
-    Body: fileBuffer,
-    ContentType: contentType,
-    //ACL: "public-read",
-  };
-
-  return new Promise((resolve, reject) => {
-    s3.upload(params, (err, data) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(data.Location); // 返回圖片 URL
-      }
-    });
-  });
-}
-
 async function post_jobinfo(req, res) {
   const landlord_id = req.user.user_id;
   const {
@@ -73,7 +47,6 @@ async function post_jobinfo(req, res) {
   }
 
   try {
-    // 處理封面圖片上傳
     const coverImage = req.files.cover_image[0];
     const coverImageUrl = await uploadImageToS3(
       coverImage.buffer,
@@ -81,7 +54,6 @@ async function post_jobinfo(req, res) {
       coverImage.mimetype
     );
 
-    // 處理多張細節圖片上傳
     const detailImages = req.files.detail_images || [];
     const detailImageUrls = await Promise.all(
       detailImages.map((file) =>
@@ -109,16 +81,6 @@ async function post_jobinfo(req, res) {
     console.error("Error in post_jobinfo:", error);
     res.status(500).json({ message: "新增 JobInfo 發生錯誤", error: error.message });
   }
-}
-
-function deleteImageFromS3(imageUrl) {
-  const key = imageUrl.split(".amazonaws.com/")[1]; // 從 URL 提取文件 key
-  const params = {
-    Bucket: process.env.S3_BUCKET_NAME,
-    Key: key,
-  };
-
-  return s3.deleteObject(params).promise();
 }
 
 async function delete_jobinfo(req, res) {
