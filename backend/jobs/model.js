@@ -143,4 +143,30 @@ function createJobInfo(jobInfoData) {
   });
 }
 
-module.exports = { listJobs, getJobById, createJobInfo };
+function getJobInfoById(jobInfo_id) {
+  const query = "SELECT * FROM JobInfo WHERE jobInfo_id = ?";
+  return new Promise((resolve, reject) => {
+    db.query(query, [jobInfo_id], (err, results) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(results[0]); // 回傳第一筆資料
+      }
+    });
+  });
+}
+
+function deleteJobInfoById(jobInfo_id) {
+  const query = "DELETE FROM JobInfo WHERE jobInfo_id = ?";
+  return new Promise((resolve, reject) => {
+    db.query(query, [jobInfo_id], (err, results) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+}
+
+module.exports = { listJobs, getJobById, createJobInfo, getJobInfoById, deleteJobInfoById };

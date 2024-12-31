@@ -1,4 +1,4 @@
-const { listJobs, getJobById, createJobInfo } = require("./model");
+const { listJobs, getJobById, getJobInfoById, createJobInfo, deleteJobInfoById } = require("./model");
 const AWS = require("aws-sdk");
 
 function list(req, res) {
@@ -98,8 +98,8 @@ async function post_jobinfo(req, res) {
       job_description,
       positions,
       people_needed,
-      cover_image: coverImageUrl, // 使用上傳後的 URL
-      detail_images: JSON.stringify(detailImageUrls), // JSON 格式儲存
+      cover_image: JSON.stringify([coverImageUrl]),  // JSON 格式儲存
+      detail_images: JSON.stringify(detailImageUrls),
       benefits: JSON.stringify(benefits),
     };
 
@@ -111,5 +111,61 @@ async function post_jobinfo(req, res) {
   }
 }
 
+function deleteImageFromS3(imageUrl) {
+  const key = imageUrl.split(".amazonaws.com/")[1]; // 從 URL 提取文件 key
+  const params = {
+    Bucket: process.env.S3_BUCKET_NAME,
+    Key: key,
+  };
 
-module.exports = { list, getJobDetail, post_jobinfo };
+  return s3.deleteObject(params).promise();
+}
+
+async function delete_jobinfo(req, res) {
+  const landlord_id = req.user.user_id; // 確保是房東本人
+  const jobInfo_id = req.params.id; // 從 URL 取得 JobInfo 的 ID
+
+  if (!jobInfo_id) {
+    res.status(400).json({ message: "缺少必要欄位：JobInfo ID" });
+    return;
+  }
+
+  try {
+    // 確認要刪除的資料是否存在，並確認房東擁有權
+    const jobInfo = await getJobInfoById(jobInfo_id);
+
+    if (!jobInfo) {
+      res.status(404).json({ message: "JobInfo 不存在" });
+      return;
+    }
+
+    if (jobInfo.landlord_id !== landlord_id) {
+      res.status(403).json({ message: "無權限刪除此 JobInfo" });
+      return;
+    }
+
+    // // 刪除 S3 上的封面圖片
+    // if (jobInfo.cover_image) {
+    //   await deleteImageFromS3(jobInfo.cover_image);
+    // }
+
+    
+    // // 刪除 S3 上的細節圖片
+    // if (jobInfo.detail_images) {
+    //   const detailImageUrls = JSON.parse(jobInfo.detail_images); // 確保轉換為陣列
+    //   for (const url of detailImageUrls) {
+    //     await deleteImageFromS3(url); // 傳遞每個檔案的路徑
+    //   }
+    // }
+
+    // 刪除資料庫中的記錄
+    await deleteJobInfoById(jobInfo_id);
+
+    res.status(200).json({ message: "刪除 JobInfo 成功" });
+  } catch (error) {
+    console.error("Error in delete_jobinfo:", error);
+    res.status(500).json({ message: "刪除 JobInfo 發生錯誤", error: error.message });
+  }
+}
+
+module.exports = { list, getJobDetail, post_jobinfo, delete_jobinfo };
