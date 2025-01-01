@@ -43,13 +43,12 @@ const LandlordPage = () => {
 
   const [newJob, setNewJob] = useState({
     address: "",
-    roomType: "",
+    room_type: "",
     start_date: "",
     end_date: "",
-    jobDescription: "",
+    job_description: "",
     positions: "",
-    peopleNeeded: "",
-    workHours: "",
+    people_needed: "",
     benefits: [""],
     coverImageFile: null,
     detailImageFiles: [],
@@ -107,16 +106,16 @@ const LandlordPage = () => {
     const file = e.target.files[0];
     if (file) {
       const url = URL.createObjectURL(file);
-      handleEditImageChange('coverImage', url);
+      handleEditImageChange('cover_image', url);
     }
   };
 
   // 處理多張工作環境照片上傳
   const handleEditDetailImagesUpload = (e) => {
     const files = Array.from(e.target.files);
-    if (files.length + editJob.detailImages.length <= 5) {
+    if (files.length + editJob.detail_images.length <= 5) {
       const urls = files.map(file => URL.createObjectURL(file));
-      handleEditImageChange('detailImages', [...editJob.detailImages, ...urls]);
+      handleEditImageChange('detail_images', [...editJob.detail_images, ...urls]);
     } else {
       alert('最多只能上傳5張照片');
     }
@@ -124,8 +123,8 @@ const LandlordPage = () => {
 
   // 移除工作環境照片
   const removeEditDetailImage = (index) => {
-    const newImages = editJob.detailImages.filter((_, i) => i !== index);
-    handleEditImageChange('detailImages', newImages);
+    const newImages = editJob.detail_images.filter((_, i) => i !== index);
+    handleEditImageChange('detail_images', newImages);
   };
 
   const handleDelete = (jobId) => {
@@ -151,12 +150,12 @@ const LandlordPage = () => {
   const validateForm = () => {
     if (
       !newJob.address ||
-      !newJob.roomType ||
+      !newJob.room_type ||
       !newJob.start_date ||
       !newJob.end_date ||
-      !newJob.jobDescription ||
+      !newJob.job_description ||
       !newJob.positions ||
-      !newJob.peopleNeeded
+      !newJob.people_needed
     ) {
       alert("請填寫所有必填欄位");
       return false;
@@ -178,8 +177,8 @@ const LandlordPage = () => {
       positions: "",
       people_needed: "",
       benefits: ["免費住宿"],
-      coverImage: null,
-      detailImages: [],
+      cover_image: null,
+      detail_images: [],
     });
   };
 
@@ -284,11 +283,11 @@ const LandlordPage = () => {
                 className="form-field__input"
               />
               <div className="room-card__image-container">
-                {editJob.coverImage && (
+                {editJob.cover_image && (
                   <>
-                    <img src={editJob.coverImage} alt="封面照片" />
+                    <img src={editJob.cover_image} alt="封面照片" />
                     <button
-                      onClick={() => handleEditImageChange('coverImage', null)}
+                      onClick={() => handleEditImageChange('cover_image', null)}
                       className="room-card__image-remove"
                       type="button"
                     >
@@ -316,10 +315,10 @@ const LandlordPage = () => {
                     multiple
                     onChange={handleEditDetailImagesUpload}
                     className="form-field__input"
-                    disabled={editJob.detailImages.length >= 5}
+                    disabled={editJob.detail_images.length >= 5}
                   />
                   <div className="room-card__images-grid">
-                    {editJob.detailImages.map((image, index) => (
+                    {editJob.detail_images.map((image, index) => (
                       <div key={index} className="room-card__image-container">
                         <img src={image} alt={`工作環境照片 ${index + 1}`} />
                         <button
@@ -374,8 +373,8 @@ const LandlordPage = () => {
                 {editingId === job.jobInfo_id ? (
                   <input
                     type="text"
-                    value={editJob.roomType}
-                    onChange={(e) => handleInputChange('roomType', e.target.value)}
+                    value={editJob.room_type}
+                    onChange={(e) => handleInputChange('room_type', e.target.value)}
                     className="form-field__input"
                   />
                 ) : (
@@ -386,8 +385,8 @@ const LandlordPage = () => {
                 <p className="room-card__label">工作內容</p>
                 {editingId === job.jobInfo_id ? (
                   <textarea
-                    value={editJob.jobDescription}
-                    onChange={(e) => handleInputChange('jobDescription', e.target.value)}
+                    value={editJob.job_description}
+                    onChange={(e) => handleInputChange('job_description', e.target.value)}
                     className="form-field__input form-field__input--textarea"
                     rows="3"
                   />
@@ -400,8 +399,8 @@ const LandlordPage = () => {
                 {editingId === job.jobInfo_id ? (
                   <input
                     type="number"
-                    value={editJob.peopleNeeded}
-                    onChange={(e) => handleInputChange('peopleNeeded', e.target.value)}
+                    value={editJob.people_needed}
+                    onChange={(e) => handleInputChange('people_needed', e.target.value)}
                     className="form-field__input"
                     min="1"
                   />
@@ -507,7 +506,7 @@ const LandlordPage = () => {
               <div className="form-field">
                 <label className="form-field__label">工作內容</label>
                 <textarea
-                  value={newJob.jobDescription}
+                  value={newJob.job_description}
                   onChange={(e) =>
                     setNewJob({ ...newJob, job_description: e.target.value })
                   }
@@ -520,7 +519,7 @@ const LandlordPage = () => {
                 <label className="form-field__label">房型</label>
                 <input
                   type="text"
-                  value={newJob.roomType}
+                  value={newJob.room_type}
                   onChange={(e) =>
                     setNewJob({ ...newJob, room_type: e.target.value })
                   }
@@ -533,7 +532,7 @@ const LandlordPage = () => {
                   <label className="form-field__label">需求人數</label>
                   <input
                     type="number"
-                    value={newJob.peopleNeeded}
+                    value={newJob.people_needed}
                     onChange={(e) =>
                       setNewJob({ ...newJob, people_needed: e.target.value })
                     }
@@ -577,9 +576,9 @@ const LandlordPage = () => {
                   onChange={handleCoverImageUpload}
                   className="image-upload__input"
                 />
-                {newJob.coverImagePreview && (
+                {newJob.cover_imagePreview && (
                   <div className="image-upload__preview">
-                    <img src={newJob.coverImagePreview} alt="封面預覽" />
+                    <img src={newJob.cover_imagePreview} alt="封面預覽" />
                     <button
                       onClick={removeCoverImage}
                       className="image-upload__remove"
