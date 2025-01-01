@@ -53,7 +53,7 @@ function put_info(req, res) {
     license,
     introduction,
   } = req.body;
-  console.log(req.body);
+
   update_user_resume(
     user_id,
     username,

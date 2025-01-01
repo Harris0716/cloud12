@@ -55,7 +55,6 @@ async function upload_photo(req, res) {
 
 function get_photo(req, res) {
     const userId = req.query.userId; 
-    console.log(userId)
     get_user_photo(userId)
       .then((results) => {
         res.json({ message: "Get photo successfully!", data: results });

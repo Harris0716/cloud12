@@ -34,7 +34,7 @@ const Resume = () => {
         },
         body: JSON.stringify(userInfo), // 傳送 userInfo
       });
-  
+      window.location.reload();
       if (!response.ok) {
         throw new Error("更新失敗");
       }
@@ -94,7 +94,7 @@ const Resume = () => {
       .catch((error) => {
         console.error("獲取數據失敗:", error);
       });
-  }, []);
+  }, [isEditing]);
 
   return (
     <div>
@@ -104,7 +104,7 @@ const Resume = () => {
         {/* 使用者基本資訊 */}
         <div className="profile-container">
           <div className="user-info">
-            <h2>使用者資訊</h2>
+            <h2>我的履歷</h2>
             {Object.entries(userInfo)
               .filter(([key]) => !["user_id"].includes(key)) // 過濾掉不顯示的屬性
               .map(([key, value]) => (
@@ -127,7 +127,7 @@ const Resume = () => {
           {/* 生活圖片上傳區 */}
         </div>
         <div className="photo-upload">
-          <h2>生活圖片</h2>
+          <h2>生活照</h2>
           <PhotoGrid isEditing={isEditing ? true : false} />
         </div>
         {/* 右下角編輯按鈕 */}
