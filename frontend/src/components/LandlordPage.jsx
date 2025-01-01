@@ -75,7 +75,7 @@ const LandlordPage = () => {
     const file = e.target.files[0];
     if (file) {
       const url = URL.createObjectURL(file);
-      handleEditImageChange('coverImage', url);
+      handleEditImageChange('cover_image', url);
     }
   };
 
@@ -173,11 +173,11 @@ const LandlordPage = () => {
                 className="form-field__input"
               />
               <div className="room-card__image-container">
-                {editJob.coverImage && (
+                {editJob.cover_image && (
                   <>
-                    <img src={editJob.coverImage} alt="封面照片" />
+                    <img src={editJob.cover_image} alt="封面照片" />
                     <button
-                      onClick={() => handleEditImageChange('coverImage', null)}
+                      onClick={() => handleEditImageChange('cover_image', null)}
                       className="room-card__image-remove"
                       type="button"
                     >
