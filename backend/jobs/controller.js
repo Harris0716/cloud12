@@ -90,7 +90,7 @@ async function post_jobinfo(req, res) {
       job_description,
       positions,
       people_needed,
-      cover_image: JSON.stringify([coverImageUrl]), // JSON 格式儲存
+      cover_image: coverImageUrl,
       detail_images: JSON.stringify(detailImageUrls),
       benefits: JSON.stringify(benefits),
     };
