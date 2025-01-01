@@ -16,7 +16,7 @@ function Register() {
     }
     
     try {
-      const response = await fetch("http://localhost:8000/api/resume", {
+      const response = await fetch("/api/resume", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -40,7 +40,7 @@ function Register() {
     const user_id = formData.get('user_id');
     const email = formData.get('email');
     const password = formData.get('password');
-    fetch("http://localhost:8000/api/register", {
+    fetch("/api/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
