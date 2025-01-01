@@ -12,15 +12,15 @@ const LandlordPage = () => {
     {
       jobInfo_id: 1,
       address: "台北市大安區溫州街",
-      roomType: "單人套房",
+      room_type: "單人套房",
       start_date: "2024-04-01",
       end_date: "2024-09-30",
-      jobDescription: "1. 每週工作5天，每天4小時\n2. 協助打掃環境及整理房間\n3. 接待客人入住與退房手續\n4. 提供旅遊諮詢服務",
+      job_description: "1. 每週工作5天，每天4小時\n2. 協助打掃環境及整理房間\n3. 接待客人入住與退房手續\n4. 提供旅遊諮詢服務",
       positions: "民宿清潔人員",
-      peopleNeeded: 2,
+      people_needed: 2,
       benefits: ["免費住宿","提供早餐","免費網路","洗衣機","公共廚房"],
-      coverImage: "https://plus.unsplash.com/premium_photo-1683769250375-1bdf0ec9d80f?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      detailImages: ["https://plus.unsplash.com/premium_photo-1733514691616-cecf39b1c970?q=80&w=2133&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      cover_image: "https://plus.unsplash.com/premium_photo-1683769250375-1bdf0ec9d80f?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      detail_images: ["https://plus.unsplash.com/premium_photo-1733514691616-cecf39b1c970?q=80&w=2133&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "https://images.unsplash.com/photo-1732752798217-3a7417457f93?q=80&w=2046&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "https://images.unsplash.com/photo-1733473571606-399837d6f9a5?q=80&w=2514&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"]
     },
@@ -171,12 +171,12 @@ const LandlordPage = () => {
   const resetForm = () => {
     setNewJob({
       address: "",
-      roomType: "",
+      room_type: "",
       start_date: "",
       end_date: "",
-      jobDescription: "",
+      job_description: "",
       positions: "",
-      peopleNeeded: "",
+      people_needed: "",
       benefits: ["免費住宿"],
       coverImage: null,
       detailImages: [],
@@ -300,7 +300,7 @@ const LandlordPage = () => {
             </div>
           ) : (
             <div className="room-card__image-container">
-              <img src={job.coverImage} alt="封面照片" />
+              <img src={job.cover_image} alt="封面照片" />
             </div>
           )}
             </div>
@@ -335,7 +335,7 @@ const LandlordPage = () => {
                 </div>
               ) : (
                 <div className="room-card__images-grid">
-                  {job.detailImages.map((image, index) => (
+                  {job.detail_images.map((image, index) => (
                     <img 
                       key={index} 
                       src={image} 
@@ -379,7 +379,7 @@ const LandlordPage = () => {
                     className="form-field__input"
                   />
                 ) : (
-                  <p className="room-card__value">{job.roomType}</p>
+                  <p className="room-card__value">{job.room_type}</p>
                 )}
               </div>
               <div className="room-card__stat">
@@ -392,7 +392,7 @@ const LandlordPage = () => {
                     rows="3"
                   />
                 ) : (
-                  <p className="room-card__value">{job.jobDescription}</p>
+                  <p className="room-card__value">{job.job_description}</p>
                 )}
               </div>
               <div className="room-card__stat">
@@ -406,7 +406,7 @@ const LandlordPage = () => {
                     min="1"
                   />
                 ) : (
-                  <p className="room-card__value">{job.peopleNeeded} 人</p>
+                  <p className="room-card__value">{job.people_needed} 人</p>
                 )}
               </div>
               <div className="room-card__stat">
@@ -509,7 +509,7 @@ const LandlordPage = () => {
                 <textarea
                   value={newJob.jobDescription}
                   onChange={(e) =>
-                    setNewJob({ ...newJob, jobDescription: e.target.value })
+                    setNewJob({ ...newJob, job_description: e.target.value })
                   }
                   className="form-field__input form-field__input--textarea"
                   rows="3"
@@ -522,7 +522,7 @@ const LandlordPage = () => {
                   type="text"
                   value={newJob.roomType}
                   onChange={(e) =>
-                    setNewJob({ ...newJob, roomType: e.target.value })
+                    setNewJob({ ...newJob, room_type: e.target.value })
                   }
                   className="form-field__input"
                 />
@@ -535,7 +535,7 @@ const LandlordPage = () => {
                     type="number"
                     value={newJob.peopleNeeded}
                     onChange={(e) =>
-                      setNewJob({ ...newJob, peopleNeeded: e.target.value })
+                      setNewJob({ ...newJob, people_needed: e.target.value })
                     }
                     className="form-field__input"
                     min="1"
