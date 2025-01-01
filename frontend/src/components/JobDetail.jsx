@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ApplicationForm from "./Application/ApplicationForm";
-import "./jobDetail.css";
+import "./JobDetail.css";
 import HomeButton from "./HomeButton";
 import Menu from "./Menu";
 
