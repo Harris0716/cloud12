@@ -11,6 +11,7 @@ function UserApplications() {
   const [error, setError] = useState(null);
   const currentTime = new Date().getTime();
 
+
   const handleButtonClick = (application_id, status, end_date) => {
     if (status !== "同意" || currentTime > end_date) {
       fetch(`http://localhost:8000/api/delete-application/${application_id}`, {
@@ -39,7 +40,7 @@ function UserApplications() {
   useEffect(() => {
     const fetchApplications = () => {
       const JwtToken = localStorage.getItem("token");
-
+      
       fetch("http://localhost:8000/api/my-applications", {
         method: "GET",
         headers: {
