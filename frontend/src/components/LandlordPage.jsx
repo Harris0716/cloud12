@@ -576,7 +576,7 @@ const LandlordPage = () => {
                   onChange={handleCoverImageUpload}
                   className="image-upload__input"
                 />
-                {newJob.cover_imagePreview && (
+                {newJob.coverImagePreview && (
                   <div className="image-upload__preview">
                     <img src={newJob.coverImagePreview} alt="封面預覽" />
                     <button
