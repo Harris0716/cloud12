@@ -578,7 +578,7 @@ const LandlordPage = () => {
                 />
                 {newJob.cover_imagePreview && (
                   <div className="image-upload__preview">
-                    <img src={newJob.cover_imagePreview} alt="封面預覽" />
+                    <img src={newJob.coverImagePreview} alt="封面預覽" />
                     <button
                       onClick={removeCoverImage}
                       className="image-upload__remove"
