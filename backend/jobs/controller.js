@@ -4,6 +4,7 @@ const {
   getJobInfoById,
   createJobInfo,
   deleteJobInfoById,
+  listLandlordJob,
 } = require("./model");
 const { uploadImageToS3, deleteImageFromS3 } = require("../utils/s3Utils");
 
@@ -154,4 +155,22 @@ async function delete_jobinfo(req, res) {
   }
 }
 
-module.exports = { list, getJobDetail, post_jobinfo, delete_jobinfo };
+function list_landlord_job(req, res) {
+  const landlord_id = req.user.user_id;
+
+  listLandlordJob(landlord_id)
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((error) => {
+      res.status(500).json({ message: "Error listing landlord's jobs", error });
+    });
+}
+
+module.exports = {
+  list,
+  getJobDetail,
+  post_jobinfo,
+  delete_jobinfo,
+  list_landlord_job,
+};
