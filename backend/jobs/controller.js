@@ -92,7 +92,7 @@ async function post_jobinfo(req, res) {
       people_needed,
       cover_image: coverImageUrl,
       detail_images: JSON.stringify(detailImageUrls),
-      benefits: JSON.stringify(benefits),
+      benefits: benefits,
     };
 
     const result = await createJobInfo(jobInfoData);

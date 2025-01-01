@@ -29,7 +29,7 @@ const LandlordPage = () => {
     })
     .then(data => {
       setJobs(data);
-      console.log(data);
+      //console.log(data);
     })
     .catch(err => {
       setError(err.message);
