@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 8000;
 
 app.use(express.json());
 app.use(cors({
-  origin: 'http://100.24.41.116:5173'
+  origin: ''
 }));
 
 app.get("/", (req, res) => {

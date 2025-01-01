@@ -14,7 +14,7 @@ const LandlordPage = () => {
   useEffect(() => {
     const JwtToken = localStorage.getItem("token");
     
-    fetch("http://localhost:8000/api/landlord/jobs", {
+    fetch("/api/landlord/jobs", {
       method: "GET",
       headers: {
         "Authorization": `Bearer ${JwtToken}`,
@@ -41,7 +41,7 @@ const LandlordPage = () => {
     if (window.confirm('確定要刪除這個職缺嗎？')) {
       const token = localStorage.getItem('token');
       
-      fetch(`http://localhost:8000/api/jobinfo/${jobId}`, {
+      fetch(`/api/jobinfo/${jobId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,

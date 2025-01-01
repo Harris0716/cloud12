@@ -18,7 +18,7 @@ function ApplicationDetail() {
   useEffect(() => {
     const fetchApplicationDetail = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/application-detail/${application_id}`);
+        const response = await fetch(`/api/application-detail/${application_id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch application details');
         }

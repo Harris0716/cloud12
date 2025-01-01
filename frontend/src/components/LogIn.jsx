@@ -9,7 +9,7 @@ function LogIn() {
     const formData = new FormData(event.target);
     const user_id = formData.get("user_id");
     const password = formData.get("password");
-    fetch("http://localhost:8000/api/login", {
+    fetch("/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

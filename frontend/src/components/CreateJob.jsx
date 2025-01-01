@@ -78,7 +78,7 @@ const CreateJob = ({onClose}) => {
 
     
         // Make API request
-        fetch('http://localhost:8000/api/jobinfo', {
+        fetch('/api/jobinfo', {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`

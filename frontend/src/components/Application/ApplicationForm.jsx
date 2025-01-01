@@ -37,7 +37,7 @@ function ApplicationForm({ jobInfo_id }) {
                 jobId: jobInfo_id,
             };
             try {
-                const response = await fetch("http://localhost:8000/api/applications", {
+                const response = await fetch("/api/applications", {
                     method: "POST",
                     headers: {
                     "Authorization": `Bearer ${JwtToken}`,

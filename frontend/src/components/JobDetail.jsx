@@ -16,7 +16,7 @@ function JobDetail() {
       try {
         setLoading(true);
         const response = await fetch(
-          `http://localhost:8000/api/job/${jobInfo_id}`
+          `/api/job/${jobInfo_id}`
         );
 
         if (!response.ok) {
