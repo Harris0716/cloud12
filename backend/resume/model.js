@@ -24,7 +24,6 @@ function get_user_resume(user_id) {
 function add_user_resume(
   user_id,
   username,
-  birthdate,
   education,
   residence,
   license,
@@ -33,14 +32,13 @@ function add_user_resume(
   const params = [
     user_id,
     username,
-    birthdate,
     education,
     residence,
     license,
     introduction,
   ];
   const sql =
-    "INSERT INTO Resume (user_id,name,birthdate,education,residence,license,introduction) VALUES (?,?,?,?,?,?,?)";
+    "INSERT INTO Resume (user_id,name,education,residence,license,introduction) VALUES (?,?,?,?,?,?)";
   return new Promise((resolve, reject) => {
     db.getConnection((err, connection) => {
       if (err) {
@@ -62,7 +60,6 @@ function add_user_resume(
 function update_user_resume(
   user_id,
   username,
-  birthdate,
   education,
   residence,
   license,
@@ -70,7 +67,6 @@ function update_user_resume(
 ) {
   const params = [
     username,
-    birthdate,
     education,
     residence,
     license,
@@ -78,7 +74,7 @@ function update_user_resume(
     user_id,
   ];
   const sql =
-    "UPDATE Resume SET name = ?,birthdate = ?, education = ?,residence = ?,license = ?,introduction = ? WHERE user_id = ?";
+    "UPDATE Resume SET name = ?, education = ?,residence = ?,license = ?,introduction = ? WHERE user_id = ?";
   return new Promise((resolve, reject) => {
     db.getConnection((err, connection) => {
       if (err) {

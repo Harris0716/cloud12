@@ -9,7 +9,6 @@ function Register() {
     const userInfo = {
       user_id: user_id,
       username: username,
-      birthdate:  null,
       education: "未填寫",
       residence: "未填寫",
       license: "未填寫",

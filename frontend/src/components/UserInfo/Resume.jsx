@@ -1,6 +1,5 @@
 import { useState ,useEffect} from "react";
 import "./Resume.css";
-import {DateTime } from "luxon";
 import PhotoGrid from "./photo";
 import { useNavigate } from 'react-router-dom';
 import Menu from "../Menu";
@@ -35,7 +34,7 @@ const Resume = () => {
         },
         body: JSON.stringify(userInfo), // 傳送 userInfo
       });
-  
+      window.location.reload();
       if (!response.ok) {
         throw new Error("更新失敗");
       }
@@ -73,7 +72,6 @@ const Resume = () => {
           setUserInfo({
             user_id: localStorage.getItem("userid"),
             username: localStorage.getItem("username"),
-            birthdate: "未填寫",
             education: "未填寫",
             residence: "未填寫",
             license: "未填寫",
@@ -83,11 +81,9 @@ const Resume = () => {
         }
         else{
           const userInfo = data.data[0];
-          const localDate = DateTime.fromISO(userInfo.birthdate, { zone: 'utc' }).setZone('Asia/Taipei').toISODate();
           setUserInfo({
             user_id: userInfo.user_id,
             username: userInfo.name,
-            birthdate: localDate,
             education: userInfo.education,
             residence: userInfo.residence,
             license: userInfo.license,
@@ -98,7 +94,7 @@ const Resume = () => {
       .catch((error) => {
         console.error("獲取數據失敗:", error);
       });
-  }, []);
+  }, [isEditing]);
 
   return (
     <div>
@@ -108,9 +104,9 @@ const Resume = () => {
         {/* 使用者基本資訊 */}
         <div className="profile-container">
           <div className="user-info">
-            <h2>使用者資訊</h2>
+            <h2>我的履歷</h2>
             {Object.entries(userInfo)
-              .filter(([key]) => !["user_id","birthdate"].includes(key)) // 過濾掉不顯示的屬性
+              .filter(([key]) => !["user_id"].includes(key)) // 過濾掉不顯示的屬性
               .map(([key, value]) => (
                 <div className="info-group" key={key}>
                   <label>{key === "bio" ? "自我介紹" : key}:</label>
@@ -131,7 +127,7 @@ const Resume = () => {
           {/* 生活圖片上傳區 */}
         </div>
         <div className="photo-upload">
-          <h2>生活圖片</h2>
+          <h2>生活照</h2>
           <PhotoGrid isEditing={isEditing ? true : false} />
         </div>
         {/* 右下角編輯按鈕 */}
