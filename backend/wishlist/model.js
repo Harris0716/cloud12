@@ -13,7 +13,7 @@ function getWihslist(user_id) {
         FROM 
             Wishlist w
         INNER JOIN 
-            Jobinfo j
+            JobInfo j
         ON 
             w.jobinfo_id = j.jobinfo_id
         WHERE 
@@ -40,7 +40,7 @@ function getWihslist(user_id) {
 
 function addWihslist(user_id, jobinfo_id) {
   const params = [user_id, jobinfo_id];
-  const sql = "INSERT INTO wishlist (user_id, jobinfo_id) VALUES (?,?)";
+  const sql = "INSERT INTO Wishlist (user_id, jobinfo_id) VALUES (?,?)";
   return new Promise((resolve, reject) => {
     db.getConnection((err, connection) => {
       if (err) {
@@ -62,7 +62,7 @@ function addWihslist(user_id, jobinfo_id) {
 
 function deleteWihslist(user_id, jobinfo_id) {
   const params = [user_id, jobinfo_id];
-  const sql = "DELETE FROM wishlist WHERE user_id = ? AND jobinfo_id = ?";
+  const sql = "DELETE FROM Wishlist WHERE user_id = ? AND jobinfo_id = ?";
   return new Promise((resolve, reject) => {
     db.getConnection((err, connection) => {
       if (err) {
