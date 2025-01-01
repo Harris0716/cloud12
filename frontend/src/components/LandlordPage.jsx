@@ -245,7 +245,7 @@ const LandlordPage = () => {
 
       <div className="room-management__list">
         {jobs.map((job) => (
-          <div key={job.jobInfo_id} className="room-card">
+          <div key={job.id} className="room-card">
             <div className="room-card__header">
               <div>
                 <div className="room-card__title">
