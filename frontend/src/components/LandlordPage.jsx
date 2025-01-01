@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./LandlordPage.css";
 import HomeButton from "./HomeButton";
 import Menu from "./Menu";
@@ -7,6 +7,34 @@ const LandlordPage = () => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [editJob, setEditJob] = useState({});
+  const [landlordjobs, setlandlordJobs] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const JwtToken = localStorage.getItem("token");
+    
+    fetch("http://localhost:8000/api/landlord/jobs", {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${JwtToken}`,
+        "Content-Type": "application/json"
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Failed to fetch landlord jobs");
+      }
+      return response.json();
+    })
+    .then(data => {
+      setlandlordJobs(data);
+      console.log(data);
+    })
+    .catch(err => {
+      setError(err.message);
+      console.error("Error fetching landlord jobs:", err);
+    });
+  }, []);
 
   const [jobs, setJobs] = useState([
     {
@@ -217,7 +245,7 @@ const LandlordPage = () => {
 
       <div className="room-management__list">
         {jobs.map((job) => (
-          <div key={job.id} className="room-card">
+          <div key={job.jobInfo_id} className="room-card">
             <div className="room-card__header">
               <div>
                 <div className="room-card__title">

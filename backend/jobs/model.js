@@ -169,4 +169,24 @@ function deleteJobInfoById(jobInfo_id) {
   });
 }
 
-module.exports = { listJobs, getJobById, createJobInfo, getJobInfoById, deleteJobInfoById };
+function listLandlordJob(landlord_id) {
+  const query = "select * from JobInfo where landlord_id = ?";
+  return new Promise((resolve, reject) => {
+    db.query(query, [landlord_id], (err, results) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+}
+
+module.exports = {
+  listJobs,
+  getJobById,
+  createJobInfo,
+  getJobInfoById,
+  deleteJobInfoById,
+  listLandlordJob,
+};
