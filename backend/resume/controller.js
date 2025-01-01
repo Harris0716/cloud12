@@ -20,7 +20,6 @@ function get_info(req, res) {
 }
 
 function post_info(req, res) {
-  console.log("req.body:", req.body);
   const {
     user_id,
     username,
@@ -71,16 +70,7 @@ function put_info(req, res) {
     });
 }
 
-function del_info(req, res) {
-  const user_id = req.user.user_id;
-  delete_user_resume(user_id)
-    .then((results) => {
-      res.json({ message: "DELETE resume successfully!", data: results });
-    })
-    .catch((error) => {
-      console.log(user_id);
-      res.json({ message: "Error: DELETE resume", error });
-    });
+
 function del_info(req, res) {
   const user_id = req.user.user_id;
   delete_user_resume(user_id)

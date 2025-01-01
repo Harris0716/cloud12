@@ -1,6 +1,5 @@
 import { useState ,useEffect} from "react";
 import "./Resume.css";
-import {DateTime } from "luxon";
 import PhotoGrid from "./photo";
 import { useNavigate } from 'react-router-dom';
 import Menu from "../Menu";
