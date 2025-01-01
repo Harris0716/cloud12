@@ -36,41 +36,7 @@ const LandlordPage = () => {
       console.error("Error fetching landlord jobs:", err);
     });
   }, []);
-
-  let [jobs, setJobs] = useState([
-    {
-      id: 1,
-      address: "台北市大安區溫州街",
-      roomType: "單人套房",
-      start_date: "2024-04-01",
-      end_date: "2024-09-30",
-      jobDescription: "1. 每週工作5天，每天4小時\n2. 協助打掃環境及整理房間\n3. 接待客人入住與退房手續\n4. 提供旅遊諮詢服務",
-      positions: "民宿清潔人員",
-      peopleNeeded: 2,
-      benefits: ["免費住宿","提供早餐","免費網路","洗衣機","公共廚房"],
-      coverImage: "https://plus.unsplash.com/premium_photo-1683769250375-1bdf0ec9d80f?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      detailImages: ["https://plus.unsplash.com/premium_photo-1733514691616-cecf39b1c970?q=80&w=2133&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "https://images.unsplash.com/photo-1732752798217-3a7417457f93?q=80&w=2046&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "https://images.unsplash.com/photo-1733473571606-399837d6f9a5?q=80&w=2514&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"]
-    },
-    {
-      id: 2,
-      address: "宜蘭縣礁溪鄉溫泉路",
-      roomType: "雙人和室",
-      start_date: "2024-05-01",
-      end_date: "2024-08-31",
-      jobDescription: "1. 每週工作5天，每天6小時\n2. 協助溫泉旅館前台接待服務\n3. 處理訂房事宜及回覆客人訊息\n4. 環境清潔維護",
-      positions: "溫泉旅館櫃檯人員",
-      peopleNeeded: 1,
-      benefits: ["免費住宿","三餐供應","免費泡湯","員工折扣","交通補助"],
-      coverImage: "https://plus.unsplash.com/premium_photo-1682092523589-a67b28caa96f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzd8fGhvdCUyMHNwcmluZ3xlbnwwfHwwfHx8MA%3D%3D",
-      detailImages: ["https://images.unsplash.com/photo-1614590370666-22e7beade570?q=80&w=2656&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "https://images.unsplash.com/photo-1469998265221-245c7148df5d?q=80&w=2671&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "https://images.unsplash.com/photo-1719755144073-6c0849fb14f2?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"]
-    },
-  ]);
   
-
   // 更新編輯中職缺的圖片
   const handleEditImageChange = (field, value) => {
     setEditJob({ ...editJob, [field]: value });
@@ -88,9 +54,9 @@ const LandlordPage = () => {
   // 處理多張工作環境照片上傳
   const handleEditDetailImagesUpload = (e) => {
     const files = Array.from(e.target.files);
-    if (files.length + editJob.detailImages.length <= 5) {
+    if (files.length + editJob.detail_images.length <= 5) {
       const urls = files.map(file => URL.createObjectURL(file));
-      handleEditImageChange('detailImages', [...editJob.detailImages, ...urls]);
+      handleEditImageChange('detailImages', [...editJob.detail_images, ...urls]);
     } else {
       alert('最多只能上傳5張照片');
     }
@@ -98,7 +64,7 @@ const LandlordPage = () => {
 
   // 移除工作環境照片
   const removeEditDetailImage = (index) => {
-    const newImages = editJob.detailImages.filter((_, i) => i !== index);
+    const newImages = editJob.detail_images.filter((_, i) => i !== index);
     handleEditImageChange('detailImages', newImages);
   };
 
@@ -116,7 +82,7 @@ const LandlordPage = () => {
 
   const handleSave = (jobId) => {
     setJobs(jobs.map(job =>
-      job.id === jobId ? editJob : job
+      job.jobInfo_id === jobId ? editJob : job
     ));
     setEditingId(null);
   };
@@ -141,13 +107,13 @@ const LandlordPage = () => {
       </div>
 
       <div className="room-management__list">
-        {jobs.map((job) => (
-          <div key={job.id} className="room-card">
+        {landlordjobs.map((job) => (
+          <div key={job.jobInfo_id} className="room-card">
             <div className="room-card__header">
               <div>
                 <div className="room-card__title">
                   <span className="room-card__icon">🏠</span>
-                  {editingId === job.id ? (
+                  {editingId === job.jobInfo_id ? (
                     <input
                       type="text"
                       value={editJob.positions}
@@ -158,7 +124,7 @@ const LandlordPage = () => {
                     <h2>{job.positions}</h2>
                   )}
                 </div>
-                {editingId === job.id ? (
+                {editingId === job.jobInfo_id ? (
                   <input
                     type="text"
                     value={editJob.address}
@@ -171,13 +137,13 @@ const LandlordPage = () => {
               </div>
               <div className="room-card__actions">
                 <button
-                  onClick={() => editingId === job.id ? handleSave(job.id) : handleEdit(job.id)}
+                  onClick={() => editingId === job.jobInfo_id ? handleSave(job.jobInfo_id) : handleEdit(job.jobInfo_id)}
                   className="room-card__action-btn"
-                  title={editingId === job.id ? "儲存" : "編輯"}
+                  title={editingId === job.jobInfo_id ? "儲存" : "編輯"}
                 >
-                  {editingId === job.id ? "💾" : "✎"}
+                  {editingId === job.jobInfo_id ? "💾" : "✎"}
                 </button>
-                {editingId === job.id && (
+                {editingId === job.jobInfo_id && (
                   <button
                     onClick={() => setEditingId(null)}
                     className="room-card__action-btn"
@@ -187,7 +153,7 @@ const LandlordPage = () => {
                   </button>
                 )}
                 <button
-                  onClick={() => handleDelete(job.id)}
+                  onClick={() => handleDelete(job.jobInfo_id)}
                   className="room-card__action-btn"
                   title="刪除"
                 >
@@ -200,7 +166,7 @@ const LandlordPage = () => {
               {/* 封面照片 */}
             <div className="room-card__stat">
               <p className="room-card__label">封面照片</p>
-              {editingId === job.id ? (
+              {editingId === job.jobInfo_id ? (
             <div className="form-field">
               <input
                 type="file"
@@ -225,7 +191,7 @@ const LandlordPage = () => {
             </div>
           ) : (
             <div className="room-card__image-container">
-              <img src={job.coverImage} alt="封面照片" />
+              <img src={job.cover_image} alt="封面照片" />
             </div>
           )}
             </div>
@@ -233,7 +199,7 @@ const LandlordPage = () => {
             {/* 工作環境照片 */}
             <div className="room-card__stat">
               <p className="room-card__label">工作環境照片</p>
-              {editingId === job.id ? (
+              {editingId === job.jobInfo_id ? (
                 <div className="form-field">
                   <input
                     type="file"
@@ -241,10 +207,10 @@ const LandlordPage = () => {
                     multiple
                     onChange={handleEditDetailImagesUpload}
                     className="form-field__input"
-                    disabled={editJob.detailImages.length >= 5}
+                    disabled={editJob?.detail_images?.length >= 5}
                   />
                   <div className="room-card__images-grid">
-                    {editJob.detailImages.map((image, index) => (
+                    {editJob.detail_images.map((image, index) => (
                       <div key={index} className="room-card__image-container">
                         <img src={image} alt={`工作環境照片 ${index + 1}`} />
                         <button
@@ -260,7 +226,7 @@ const LandlordPage = () => {
                 </div>
               ) : (
                 <div className="room-card__images-grid">
-                  {job.detailImages.map((image, index) => (
+                  {job.detail_images.map((image, index) => (
                     <img 
                       key={index} 
                       src={image} 
@@ -272,7 +238,7 @@ const LandlordPage = () => {
             </div>
               <div className="room-card__stat">
                 <p className="room-card__label">工作期間</p>
-                {editingId === job.id ? (
+                {editingId === job.jobInfo_id ? (
                   <div className="form-grid">
                     <input
                       type="date"
@@ -296,47 +262,47 @@ const LandlordPage = () => {
               </div>
               <div className="room-card__stat">
                 <p className="room-card__label">房型</p>
-                {editingId === job.id ? (
+                {editingId === job.jobInfo_id ? (
                   <input
                     type="text"
-                    value={editJob.roomType}
-                    onChange={(e) => handleInputChange('roomType', e.target.value)}
+                    value={editJob.room_type}
+                    onChange={(e) => handleInputChange('room_type', e.target.value)}
                     className="form-field__input"
                   />
                 ) : (
-                  <p className="room-card__value">{job.roomType}</p>
+                  <p className="room-card__value">{job.room_type}</p>
                 )}
               </div>
               <div className="room-card__stat">
                 <p className="room-card__label">工作內容</p>
-                {editingId === job.id ? (
+                {editingId === job.jobInfo_id ? (
                   <textarea
-                    value={editJob.jobDescription}
-                    onChange={(e) => handleInputChange('jobDescription', e.target.value)}
+                    value={editJob.job_description}
+                    onChange={(e) => handleInputChange('job_description', e.target.value)}
                     className="form-field__input form-field__input--textarea"
                     rows="3"
                   />
                 ) : (
-                  <p className="room-card__value">{job.jobDescription}</p>
+                  <p className="room-card__value">{job.job_description}</p>
                 )}
               </div>
               <div className="room-card__stat">
                 <p className="room-card__label">需求人數</p>
-                {editingId === job.id ? (
+                {editingId === job.jobInfo_id ? (
                   <input
                     type="number"
-                    value={editJob.peopleNeeded}
-                    onChange={(e) => handleInputChange('peopleNeeded', e.target.value)}
+                    value={editJob.people_needed}
+                    onChange={(e) => handleInputChange('people_needed', e.target.value)}
                     className="form-field__input"
                     min="1"
                   />
                 ) : (
-                  <p className="room-card__value">{job.peopleNeeded} 人</p>
+                  <p className="room-card__value">{job.people_needed} 人</p>
                 )}
               </div>
               <div className="room-card__stat">
                 <p className="room-card__label">福利</p>
-                {editingId === job.id ? (
+                {editingId === job.jobInfo_id ? (
                   <div className="space-y-2">
                     {[0, 1, 2, 3, 4].map((index) => (
                       <input
