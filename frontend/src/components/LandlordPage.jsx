@@ -75,7 +75,7 @@ const LandlordPage = () => {
   };
 
   const handleEdit = (jobId) => {
-    const job = jobs.find(j => j.id === jobId);
+    const job = jobs.find(j => j.jobInfo_id === jobId);
     setEditJob({ ...job });
     setEditingId(jobId);
   };
