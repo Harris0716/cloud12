@@ -10,7 +10,7 @@ const LandlordPage = () => {
 
   const [jobs, setJobs] = useState([
     {
-      id: 1,
+      jobInfo_id: 1,
       address: "台北市大安區溫州街",
       roomType: "單人套房",
       start_date: "2024-04-01",
@@ -25,7 +25,7 @@ const LandlordPage = () => {
       "https://images.unsplash.com/photo-1733473571606-399837d6f9a5?q=80&w=2514&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"]
     },
     {
-      id: 2,
+      jobInfo_id: 2,
       address: "宜蘭縣礁溪鄉溫泉路",
       roomType: "雙人和室",
       start_date: "2024-05-01",
@@ -130,7 +130,7 @@ const LandlordPage = () => {
 
   const handleDelete = (jobId) => {
     if (window.confirm('確定要刪除這個職缺嗎？')) {
-      setJobs(jobs.filter(j => j.id !== jobId));
+      setJobs(jobs.filter(j => j.jobInfo_id !== jobId));
     }
   };
 
@@ -184,14 +184,14 @@ const LandlordPage = () => {
   };
 
   const handleEdit = (jobId) => {
-    const job = jobs.find(j => j.id === jobId);
+    const job = jobs.find(j => j.jobInfo_id === jobId);
     setEditJob({ ...job });
     setEditingId(jobId);
   };
 
   const handleSave = (jobId) => {
     setJobs(jobs.map(job =>
-      job.id === jobId ? editJob : job
+      job.jobInfo_id === jobId ? editJob : job
     ));
     setEditingId(null);
   };
@@ -217,12 +217,12 @@ const LandlordPage = () => {
 
       <div className="room-management__list">
         {jobs.map((job) => (
-          <div key={job.id} className="room-card">
+          <div key={job.jobInfo_id} className="room-card">
             <div className="room-card__header">
               <div>
                 <div className="room-card__title">
                   <span className="room-card__icon">🏠</span>
-                  {editingId === job.id ? (
+                  {editingId === job.jobInfo_id ? (
                     <input
                       type="text"
                       value={editJob.positions}
@@ -233,7 +233,7 @@ const LandlordPage = () => {
                     <h2>{job.positions}</h2>
                   )}
                 </div>
-                {editingId === job.id ? (
+                {editingId === job.jobInfo_id ? (
                   <input
                     type="text"
                     value={editJob.address}
@@ -246,13 +246,13 @@ const LandlordPage = () => {
               </div>
               <div className="room-card__actions">
                 <button
-                  onClick={() => editingId === job.id ? handleSave(job.id) : handleEdit(job.id)}
+                  onClick={() => editingId === job.jobInfo_id ? handleSave(job.jobInfo_id) : handleEdit(job.jobInfo_id)}
                   className="room-card__action-btn"
-                  title={editingId === job.id ? "儲存" : "編輯"}
+                  title={editingId === job.jobInfo_id ? "儲存" : "編輯"}
                 >
-                  {editingId === job.id ? "💾" : "✎"}
+                  {editingId === job.jobInfo_id ? "💾" : "✎"}
                 </button>
-                {editingId === job.id && (
+                {editingId === job.jobInfo_id && (
                   <button
                     onClick={() => setEditingId(null)}
                     className="room-card__action-btn"
@@ -262,7 +262,7 @@ const LandlordPage = () => {
                   </button>
                 )}
                 <button
-                  onClick={() => handleDelete(job.id)}
+                  onClick={() => handleDelete(job.jobInfo_id)}
                   className="room-card__action-btn"
                   title="刪除"
                 >
@@ -275,7 +275,7 @@ const LandlordPage = () => {
               {/* 封面照片 */}
             <div className="room-card__stat">
               <p className="room-card__label">封面照片</p>
-              {editingId === job.id ? (
+              {editingId === job.jobInfo_id ? (
             <div className="form-field">
               <input
                 type="file"
@@ -308,7 +308,7 @@ const LandlordPage = () => {
             {/* 工作環境照片 */}
             <div className="room-card__stat">
               <p className="room-card__label">工作環境照片</p>
-              {editingId === job.id ? (
+              {editingId === job.jobInfo_id ? (
                 <div className="form-field">
                   <input
                     type="file"
@@ -347,7 +347,7 @@ const LandlordPage = () => {
             </div>
               <div className="room-card__stat">
                 <p className="room-card__label">工作期間</p>
-                {editingId === job.id ? (
+                {editingId === job.jobInfo_id ? (
                   <div className="form-grid">
                     <input
                       type="date"
@@ -371,7 +371,7 @@ const LandlordPage = () => {
               </div>
               <div className="room-card__stat">
                 <p className="room-card__label">房型</p>
-                {editingId === job.id ? (
+                {editingId === job.jobInfo_id ? (
                   <input
                     type="text"
                     value={editJob.roomType}
@@ -384,7 +384,7 @@ const LandlordPage = () => {
               </div>
               <div className="room-card__stat">
                 <p className="room-card__label">工作內容</p>
-                {editingId === job.id ? (
+                {editingId === job.jobInfo_id ? (
                   <textarea
                     value={editJob.jobDescription}
                     onChange={(e) => handleInputChange('jobDescription', e.target.value)}
@@ -397,7 +397,7 @@ const LandlordPage = () => {
               </div>
               <div className="room-card__stat">
                 <p className="room-card__label">需求人數</p>
-                {editingId === job.id ? (
+                {editingId === job.jobInfo_id ? (
                   <input
                     type="number"
                     value={editJob.peopleNeeded}
@@ -411,7 +411,7 @@ const LandlordPage = () => {
               </div>
               <div className="room-card__stat">
                 <p className="room-card__label">福利</p>
-                {editingId === job.id ? (
+                {editingId === job.jobInfo_id ? (
                   <div className="space-y-2">
                     {[0, 1, 2, 3, 4].map((index) => (
                       <input
