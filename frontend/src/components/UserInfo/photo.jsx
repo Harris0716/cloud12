@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import "./Photo.css"; // 可用來定義樣式
+import "./photo.css"; // 可用來定義樣式
 import PropTypes from 'prop-types';
 
 const PhotoGrid = ({isEditing}) => {
