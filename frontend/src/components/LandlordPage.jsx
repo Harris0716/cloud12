@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import "./LandlordPage.css";
 import HomeButton from "./HomeButton";
 import Menu from "./Menu";
+import CreateJob from "./CreateJob";
 
 const LandlordPage = () => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [editJob, setEditJob] = useState({});
 
-  const [jobs, setJobs] = useState([
+  let [jobs, setJobs] = useState([
     {
       id: 1,
       address: "台北市大安區溫州街",
@@ -443,196 +444,7 @@ const LandlordPage = () => {
         ))}
       </div>
 
-      {showAddModal && (
-        <div className="modal-overlay">
-          <div className="modal">
-            <div className="modal__header">
-              <h2 className="modal__title">新增職缺</h2>
-              <button
-                onClick={() => setShowAddModal(false)}
-                className="modal__close" title="刪除"
-              >
-                ❌
-              </button>
-            </div>
-            <div className="modal__content">
-              <div className="form-field">
-                <label className="form-field__label">職位名稱</label>
-                <input
-                  type="text"
-                  value={newJob.positions}
-                  onChange={(e) =>
-                    setNewJob({ ...newJob, positions: e.target.value })
-                  }
-                  className="form-field__input"
-                />
-              </div>
-              <div className="form-field">
-                <label className="form-field__label">地址</label>
-                <input
-                  type="text"
-                  value={newJob.address}
-                  onChange={(e) =>
-                    setNewJob({ ...newJob, address: e.target.value })
-                  }
-                  className="form-field__input"
-                />
-              </div>
-              <div className="form-grid">
-                <div className="form-field">
-                  <label className="form-field__label">開始日期</label>
-                  <input
-                    type="date"
-                    value={newJob.start_date}
-                    onChange={(e) =>
-                      setNewJob({ ...newJob, start_date: e.target.value })
-                    }
-                    className="form-field__input"
-                  />
-                </div>
-
-                <div className="form-field">
-                  <label className="form-field__label">結束日期</label>
-                  <input
-                    type="date"
-                    value={newJob.end_date}
-                    onChange={(e) =>
-                      setNewJob({ ...newJob, end_date: e.target.value })
-                    }
-                    className="form-field__input"
-                  />
-                </div>
-              </div>
-
-              <div className="form-field">
-                <label className="form-field__label">工作內容</label>
-                <textarea
-                  value={newJob.jobDescription}
-                  onChange={(e) =>
-                    setNewJob({ ...newJob, jobDescription: e.target.value })
-                  }
-                  className="form-field__input form-field__input--textarea"
-                  rows="3"
-                />
-              </div>
-
-              <div className="form-field">
-                <label className="form-field__label">房型</label>
-                <input
-                  type="text"
-                  value={newJob.roomType}
-                  onChange={(e) =>
-                    setNewJob({ ...newJob, roomType: e.target.value })
-                  }
-                  className="form-field__input"
-                />
-              </div>
-
-              <div className="form-grid">
-                <div className="form-field">
-                  <label className="form-field__label">需求人數</label>
-                  <input
-                    type="number"
-                    value={newJob.peopleNeeded}
-                    onChange={(e) =>
-                      setNewJob({ ...newJob, peopleNeeded: e.target.value })
-                    }
-                    className="form-field__input"
-                    min="1"
-                  />
-                </div>
-              </div>
-              <div className="form-field">
-                <label className="form-field__label">
-                  福利項目（最多 5 項）
-                </label>
-                <div className="space-y-2">
-                  {[0, 1, 2, 3, 4].map((index) => (
-                    <input
-                      key={index}
-                      type="text"
-                      value={newJob.benefits[index] || ""}
-                      onChange={(e) => {
-                        const newBenefits = [...newJob.benefits];
-                        newBenefits[index] = e.target.value;
-                        setNewJob({
-                          ...newJob,
-                          benefits: newBenefits.filter(
-                            (benefit) => benefit !== ""
-                          ),
-                        });
-                      }}
-                      placeholder={`福利 ${index + 1}`}
-                      className="form-field__input"
-                    />
-                  ))}
-                </div>
-              </div>
-              <div className="form-field">
-              <label className="form-field__label">封面照片 （最多 1 張）</label>
-              <div className="image-upload">
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleCoverImageUpload}
-                  className="image-upload__input"
-                />
-                {newJob.coverImagePreview && (
-                  <div className="image-upload__preview">
-                    <img src={newJob.coverImagePreview} alt="封面預覽" />
-                    <button
-                      onClick={removeCoverImage}
-                      className="image-upload__remove"
-                      type="button"
-                    >
-                      ❌
-                    </button>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            <div className="form-field">
-              <label className="form-field__label">工作環境照片（最多 5 張）</label>
-              <div className="image-upload">
-                <input
-                  type="file"
-                  accept="image/*"
-                  multiple
-                  onChange={handleDetailImagesUpload}
-                  className="image-upload__input"
-                  disabled={newJob.detailImageFiles.length >= 5}
-                />
-                {newJob.detailImageFiles.length > 0 && (
-                  <div className="image-upload__preview-grid">
-                    {newJob.detailImageFiles.map((file, index) => (
-                      <div key={index} className="image-upload__preview">
-                        <img src={file.preview} alt={`預覽 ${index + 1}`} />
-                        <button
-                          onClick={() => removeDetailImage(index)}
-                          className="image-upload__remove"
-                          type="button"
-                        >
-                          ❌
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-            </div>
-            <div className="modal__footer">
-              <button
-                onClick={handleAddJob}
-                className="modal__btn modal__btn--confirm"
-              >
-                新增
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {showAddModal && (<CreateJob onClose={() => setShowAddModal(false)}/>)}
     </div>
   );
 };
