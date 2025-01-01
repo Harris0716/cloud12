@@ -8,7 +8,7 @@ const LandlordPage = () => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [editJob, setEditJob] = useState({});
-  const [landlordjobs, setlandlordJobs] = useState([]);
+  const [jobs, setJobs] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const LandlordPage = () => {
       return response.json();
     })
     .then(data => {
-      setlandlordJobs(data);
+      setJobs(data);
       console.log(data);
     })
     .catch(err => {
@@ -107,33 +107,16 @@ const LandlordPage = () => {
       </div>
 
       <div className="room-management__list">
-        {landlordjobs.map((job) => (
+        {jobs.map((job) => (
           <div key={job.jobInfo_id} className="room-card">
             <div className="room-card__header">
               <div>
                 <div className="room-card__title">
                   <span className="room-card__icon">🏠</span>
-                  {editingId === job.jobInfo_id ? (
-                    <input
-                      type="text"
-                      value={editJob.positions}
-                      onChange={(e) => handleInputChange('positions', e.target.value)}
-                      className="form-field__input"
-                    />
-                  ) : (
                     <h2>{job.positions}</h2>
-                  )}
                 </div>
-                {editingId === job.jobInfo_id ? (
-                  <input
-                    type="text"
-                    value={editJob.address}
-                    onChange={(e) => handleInputChange('address', e.target.value)}
-                    className="form-field__input mt-2"
-                  />
-                ) : (
                   <p className="room-card__address">{job.address}</p>
-                )}
+              
               </div>
               <div className="room-card__actions">
                 <button
@@ -143,15 +126,7 @@ const LandlordPage = () => {
                 >
                   {editingId === job.jobInfo_id ? "💾" : "✎"}
                 </button>
-                {editingId === job.jobInfo_id && (
-                  <button
-                    onClick={() => setEditingId(null)}
-                    className="room-card__action-btn"
-                    title="放棄編輯"
-                  >
-                    ↩
-                  </button>
-                )}
+                
                 <button
                   onClick={() => handleDelete(job.jobInfo_id)}
                   className="room-card__action-btn"
@@ -207,7 +182,7 @@ const LandlordPage = () => {
                     multiple
                     onChange={handleEditDetailImagesUpload}
                     className="form-field__input"
-                    disabled={editJob?.detail_images?.length >= 5}
+                    disabled={editJob.detail_images.length >= 5}
                   />
                   <div className="room-card__images-grid">
                     {editJob.detail_images.map((image, index) => (
