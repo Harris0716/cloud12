@@ -36,6 +36,34 @@ const LandlordPage = () => {
       console.error("Error fetching landlord jobs:", err);
     });
   }, []);
+
+  const handleDelete = (jobId) => {
+    if (window.confirm('確定要刪除這個職缺嗎？')) {
+      const token = localStorage.getItem('token');
+      
+      fetch(`http://localhost:8000/api/jobinfo/${jobId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.message === "刪除 JobInfo 成功") {
+          // Remove the job from local state after successful deletion
+          setJobs(jobs.filter(job => job.jobInfo_id !== jobId));
+          alert('職缺已成功刪除');
+        } else {
+          alert(data.message || '刪除失敗');
+        }
+      })
+      .catch(error => {
+        console.error('Error deleting job:', error);
+        alert('刪除失敗，請稍後再試');
+      });
+    }
+  };
   
   // 更新編輯中職缺的圖片
   const handleEditImageChange = (field, value) => {
@@ -68,11 +96,6 @@ const LandlordPage = () => {
     handleEditImageChange('detailImages', newImages);
   };
 
-  const handleDelete = (jobId) => {
-    if (window.confirm('確定要刪除這個職缺嗎？')) {
-      setJobs(jobs.filter(j => j.id !== jobId));
-    }
-  };
 
   const handleEdit = (jobId) => {
     const job = jobs.find(j => j.jobInfo_id === jobId);
