@@ -41,64 +41,9 @@ const LandlordPage = () => {
       "https://images.unsplash.com/photo-1719755144073-6c0849fb14f2?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"]
     },
   ]);
+  
 
-  const [newJob, setNewJob] = useState({
-    address: "",
-    roomType: "",
-    start_date: "",
-    end_date: "",
-    jobDescription: "",
-    positions: "",
-    peopleNeeded: "",
-    workHours: "",
-    benefits: [""],
-    coverImageFile: null,
-    detailImageFiles: [],
-  });
-
-  const handleCoverImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setNewJob({ 
-        ...newJob, 
-        coverImageFile: file,
-        coverImagePreview: url  // 新增預覽 URL
-      });
-    }
-  };
-
-  const handleDetailImagesUpload = (e) => {
-    const files = Array.from(e.target.files);
-    if (files.length + newJob.detailImageFiles.length <= 5) {
-      const newFiles = files.map(file => ({
-        file,
-        preview: URL.createObjectURL(file)  // 為每個檔案創建預覽 URL
-      }));
-      setNewJob({
-        ...newJob,
-        detailImageFiles: [...newJob.detailImageFiles, ...newFiles]
-      });
-    } else {
-      alert('最多只能上傳5張照片');
-    }
-  };
-
-  const removeCoverImage = () => {
-    setNewJob({
-      ...newJob,
-      coverImageFile: null
-    });
-  };
-
-  const removeDetailImage = (index) => {
-    setNewJob({
-      ...newJob,
-      detailImageFiles: newJob.detailImageFiles.filter((_, i) => i !== index)
-    });
-  };
-
-    // 更新編輯中職缺的圖片
+  // 更新編輯中職缺的圖片
   const handleEditImageChange = (field, value) => {
     setEditJob({ ...editJob, [field]: value });
   };
@@ -133,55 +78,6 @@ const LandlordPage = () => {
     if (window.confirm('確定要刪除這個職缺嗎？')) {
       setJobs(jobs.filter(j => j.id !== jobId));
     }
-  };
-
-  const handleAddJob = () => {
-    if (!validateForm()) return;
-
-    const jobToAdd = {
-      ...newJob,
-      id: Date.now(),
-      status: "active",
-    };
-
-    setJobs([...jobs, jobToAdd]);
-    setShowAddModal(false);
-    resetForm();
-  };
-
-  const validateForm = () => {
-    if (
-      !newJob.address ||
-      !newJob.roomType ||
-      !newJob.start_date ||
-      !newJob.end_date ||
-      !newJob.jobDescription ||
-      !newJob.positions ||
-      !newJob.peopleNeeded
-    ) {
-      alert("請填寫所有必填欄位");
-      return false;
-    }
-    else if (newJob.start_date > newJob.end_date) {
-      alert("結束日期不得早於開始日期");
-      return false;
-    }
-    return true;
-  };
-
-  const resetForm = () => {
-    setNewJob({
-      address: "",
-      roomType: "",
-      start_date: "",
-      end_date: "",
-      jobDescription: "",
-      positions: "",
-      peopleNeeded: "",
-      benefits: ["免費住宿"],
-      coverImage: null,
-      detailImages: [],
-    });
   };
 
   const handleEdit = (jobId) => {
