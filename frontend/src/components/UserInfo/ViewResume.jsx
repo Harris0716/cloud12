@@ -13,7 +13,7 @@ function ViewResume({ resume_id, onClose }) {
       const userId = localStorage.getItem("userid")
   
       try {
-        const response = await fetch(`http://localhost:8000/getphoto?userId=${encodeURIComponent(userId)}`, {
+        const response = await fetch(`http://54.238.10.84:8000/getphoto?userId=${encodeURIComponent(userId)}`, {
           method: 'GET',
         });
     
@@ -38,7 +38,7 @@ function ViewResume({ resume_id, onClose }) {
   useEffect(() => {
     const fetchResumeDetail = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/resume/${resume_id}`);
+        const response = await fetch(`http://54.238.10.84:8000/api/resume/${resume_id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch resume details');
         }
@@ -89,9 +89,9 @@ function ViewResume({ resume_id, onClose }) {
             <p>{resume.introduction}</p>
           </div>
         </div>
-        <div className="photo-grid">
+        <div className="photo-grid-view">
           {savedPhoto.map((photo, index) => (
-            <div className="photo-item" key={index}>
+            <div className="photo-item-view" key={index}>
               <img src={photo} alt={`圖片${index + 1}`} className="photo-preview" />
             </div>
           ))}
