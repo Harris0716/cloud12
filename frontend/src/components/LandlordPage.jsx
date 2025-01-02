@@ -84,7 +84,7 @@ const LandlordPage = () => {
     const files = Array.from(e.target.files);
     if (files.length + editJob.detail_images.length <= 5) {
       const urls = files.map(file => URL.createObjectURL(file));
-      handleEditImageChange('detailImages', [...editJob.detail_images, ...urls]);
+      handleEditImageChange('detail_images', [...editJob.detail_images, ...urls]);
     } else {
       alert('最多只能上傳5張照片');
     }
@@ -93,7 +93,7 @@ const LandlordPage = () => {
   // 移除工作環境照片
   const removeEditDetailImage = (index) => {
     const newImages = editJob.detail_images.filter((_, i) => i !== index);
-    handleEditImageChange('detailImages', newImages);
+    handleEditImageChange('detail_images', newImages);
   };
 
 
