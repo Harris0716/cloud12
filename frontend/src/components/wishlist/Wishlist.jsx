@@ -20,7 +20,7 @@ function Wishlist() {
         return;
       }
 
-      fetch("http://localhost:8000/api/wishlist", {
+      fetch("http://54.238.10.84:8000/api/wishlist", {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${JwtToken}`, // 確保這裡有正確的 JWT Token
