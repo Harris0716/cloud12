@@ -14,7 +14,7 @@ function ReviewApplication() {
   useEffect(() => {
     const fetchApplicationDetail = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/application-detail/${application_id}`);
+        const response = await fetch(`http://54.238.10.84:8000/api/application-detail/${application_id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch application details');
         }

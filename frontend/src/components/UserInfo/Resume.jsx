@@ -26,7 +26,7 @@ const Resume = () => {
   const handleSave = async () => {
     const JwtToken = localStorage.getItem("token"); 
     try {
-      const response = await fetch("http://localhost:8000/api/resume", {
+      const response = await fetch("http://54.238.10.84:8000/api/resume", {
         method: "PUT",
         headers: {
           "Authorization": `Bearer ${JwtToken}`, // 確保這裡有正確的 JWT Token

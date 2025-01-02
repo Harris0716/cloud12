@@ -14,7 +14,7 @@ function UserApplications() {
 
   const handleButtonClick = (application_id, status, end_date) => {
     if (status !== "同意" || currentTime > end_date) {
-      fetch(`http://localhost:8000/api/delete-application/${application_id}`, {
+      fetch(`http://54.238.10.84:8000/api/delete-application/${application_id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
