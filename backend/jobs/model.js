@@ -157,7 +157,7 @@ function updateJobInfo(jobInfoId, jobInfoData) {
       cover_image = ?, 
       detail_images = ?, 
       benefits = ?
-    WHERE id = ?
+    WHERE jobInfo_id = ?
   `;
 
   const values = [
@@ -191,7 +191,6 @@ function updateJobInfo(jobInfoId, jobInfoData) {
     });
   });
 }
-
 
 function getJobInfoById(jobInfo_id) {
   const query = "SELECT * FROM JobInfo WHERE jobInfo_id = ?";

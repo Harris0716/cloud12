@@ -5,6 +5,7 @@ const {
   createJobInfo,
   deleteJobInfoById,
   listLandlordJob,
+  updateJobInfo,
 } = require("./model");
 const { uploadImageToS3, deleteImageFromS3 } = require("../utils/s3Utils");
 
@@ -137,8 +138,13 @@ async function update_jobinfo(req, res) {
       );
     }
 
-    let detailImageUrls = JSON.parse(existingJobInfo.detail_images || "[]");
-    if (req.files.detail_images) {
+    console.log(typeof existingJobInfo.detail_images);
+    let detailImageUrls = existingJobInfo.detail_images || [];
+    if (!Array.isArray(detailImageUrls)) {
+      detailImageUrls = Object.values(detailImageUrls);
+    }
+
+    if (req.files?.detail_images) {
       const newDetailImages = await Promise.all(
         req.files.detail_images.map((file) =>
           uploadImageToS3(
@@ -161,14 +167,16 @@ async function update_jobinfo(req, res) {
       people_needed,
       cover_image: coverImageUrl,
       detail_images: JSON.stringify(detailImageUrls),
-      benefits: JSON.stringify(benefits),
+      benefits: benefits,
     };
 
     await updateJobInfo(jobInfoId, jobInfoData);
     res.status(200).json({ message: "修改 JobInfo 成功" });
   } catch (error) {
     console.error("Error in update_jobinfo:", error);
-    res.status(500).json({ message: "修改 JobInfo 發生錯誤", error: error.message });
+    res
+      .status(500)
+      .json({ message: "修改 JobInfo 發生錯誤", error: error.message });
   }
 }
 
