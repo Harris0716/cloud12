@@ -14,7 +14,7 @@ const LandlordPage = () => {
   useEffect(() => {
     const JwtToken = localStorage.getItem("token");
     
-    fetch("http://localhost:8000/api/landlord/jobs", {
+    fetch("http://54.238.10.84:8000/api/landlord/jobs", {
       method: "GET",
       headers: {
         "Authorization": `Bearer ${JwtToken}`,

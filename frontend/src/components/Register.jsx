@@ -16,7 +16,7 @@ function Register() {
     }
     
     try {
-      const response = await fetch("http://localhost:8000/api/resume", {
+      const response = await fetch("http://54.238.10.84:8000/api/resume", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

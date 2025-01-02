@@ -10,7 +10,7 @@ function HomePage() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-      fetch("http://localhost:8000/api/jobs", {
+      fetch("http://54.238.10.84:8000/api/jobs", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
