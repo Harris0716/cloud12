@@ -54,7 +54,7 @@ const Resume = () => {
       return;
     }
 
-    fetch("http://localhost:8000/api/resume",{
+    fetch("http://54.238.10.84:8000/api/resume",{
       method: "GET",
       headers: {
         "Authorization": `Bearer ${JwtToken}`, // 確保這裡有正確的 JWT Token

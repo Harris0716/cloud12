@@ -33,7 +33,7 @@ function ReviewApplication() {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/api/application-status/${application_id}`, {
+      const response = await fetch(`http://54.238.10.84:8000/api/application-status/${application_id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

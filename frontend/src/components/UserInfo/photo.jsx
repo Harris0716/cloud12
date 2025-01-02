@@ -44,7 +44,7 @@ const PhotoGrid = ({isEditing}) => {
     const userId = localStorage.getItem("userid")
 
     try {
-      const response = await fetch(`http://localhost:8000/getphoto?userId=${encodeURIComponent(userId)}`, {
+      const response = await fetch(`http://54.238.10.84:8000/getphoto?userId=${encodeURIComponent(userId)}`, {
         method: 'GET',
       });
   

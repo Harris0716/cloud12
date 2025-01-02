@@ -41,7 +41,7 @@ function UserApplications() {
     const fetchApplications = () => {
       const JwtToken = localStorage.getItem("token");
       
-      fetch("http://localhost:8000/api/my-applications", {
+      fetch("http://54.238.10.84:8000/api/my-applications", {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${JwtToken}`,
@@ -70,7 +70,7 @@ function UserApplications() {
       const fetchLandlordApplications = () => {
         const JwtToken = localStorage.getItem("token");
 
-        fetch("http://localhost:8000/api/landlord-applications", {
+        fetch("http://54.238.10.84:8000/api/landlord-applications", {
           method: "GET",
           headers: {
             "Authorization": `Bearer ${JwtToken}`,

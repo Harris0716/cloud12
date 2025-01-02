@@ -38,7 +38,7 @@ function ViewResume({ resume_id, onClose }) {
   useEffect(() => {
     const fetchResumeDetail = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/resume/${resume_id}`);
+        const response = await fetch(`http://54.238.10.84:8000/api/resume/${resume_id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch resume details');
         }
