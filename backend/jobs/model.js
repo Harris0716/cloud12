@@ -143,6 +143,55 @@ function createJobInfo(jobInfoData) {
   });
 }
 
+function updateJobInfo(jobInfoId, jobInfoData) {
+  const query = `
+    UPDATE JobInfo 
+    SET 
+      address = ?, 
+      room_type = ?, 
+      start_date = ?, 
+      end_date = ?, 
+      job_description = ?, 
+      positions = ?, 
+      people_needed = ?, 
+      cover_image = ?, 
+      detail_images = ?, 
+      benefits = ?
+    WHERE jobInfo_id = ?
+  `;
+
+  const values = [
+    jobInfoData.address,
+    jobInfoData.room_type,
+    jobInfoData.start_date,
+    jobInfoData.end_date,
+    jobInfoData.job_description,
+    jobInfoData.positions,
+    jobInfoData.people_needed,
+    jobInfoData.cover_image,
+    jobInfoData.detail_images,
+    jobInfoData.benefits,
+    jobInfoId,
+  ];
+
+  return new Promise((resolve, reject) => {
+    db.getConnection((err, connection) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      connection.query(query, values, (err, results) => {
+        connection.release();
+        if (err) {
+          reject(err);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+  });
+}
+
 function getJobInfoById(jobInfo_id) {
   const query = "SELECT * FROM JobInfo WHERE jobInfo_id = ?";
   return new Promise((resolve, reject) => {
@@ -189,4 +238,5 @@ module.exports = {
   getJobInfoById,
   deleteJobInfoById,
   listLandlordJob,
+  updateJobInfo,
 };

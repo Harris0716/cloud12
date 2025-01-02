@@ -104,10 +104,45 @@ const LandlordPage = () => {
   };
 
   const handleSave = (jobId) => {
-    setJobs(jobs.map(job =>
-      job.jobInfo_id === jobId ? editJob : job
-    ));
-    setEditingId(null);
+    const token = localStorage.getItem('token');
+    
+    // Create FormData object for file upload
+    const formData = new FormData();
+    
+    // Add all job info fields
+    formData.append('address', editJob.address);
+    formData.append('room_type', editJob.room_type);
+    formData.append('start_date', editJob.start_date);
+    formData.append('end_date', editJob.end_date);
+    formData.append('job_description', editJob.job_description);
+    formData.append('positions', editJob.positions);
+    formData.append('people_needed', editJob.people_needed);
+    formData.append('benefits', JSON.stringify(editJob.benefits));
+  
+    fetch(`http://localhost:8000/api/jobinfo/${jobId}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      },
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.message === "修改 JobInfo 成功") {
+        // Update local state with edited job
+        setJobs(jobs.map(job => 
+          job.jobInfo_id === jobId ? editJob : job
+        ));
+        setEditingId(null);
+        alert('職缺已成功更新');
+      } else {
+        throw new Error(data.message || '更新失敗');
+      }
+    })
+    .catch(error => {
+      console.error('Error updating job:', error);
+      alert('更新職缺時發生錯誤');
+    });
   };
 
   const handleInputChange = (field, value) => {
