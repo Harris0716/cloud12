@@ -40,7 +40,7 @@ function Register() {
     const user_id = formData.get('user_id');
     const email = formData.get('email');
     const password = formData.get('password');
-    fetch("http://localhost:8000/api/register", {
+    fetch("http://54.238.10.84:8000/api/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
