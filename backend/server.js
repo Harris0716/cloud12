@@ -42,7 +42,6 @@ const corsOptions = {
   allowedHeaders: ["Content-Type", "Authorization"], // 限制允許的 Headers
 };
 
-app.use(cors(corsOptions));
+//app.use(cors(corsOptions));
 
-// 也可以允許所有來源（開發時使用，不建議在生產環境）
-// app.use(cors());
+app.use(cors());
