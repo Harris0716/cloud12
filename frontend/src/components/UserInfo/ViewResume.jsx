@@ -89,9 +89,9 @@ function ViewResume({ resume_id, onClose }) {
             <p>{resume.introduction}</p>
           </div>
         </div>
-        <div className="photo-grid">
+        <div className="photo-grid-view">
           {savedPhoto.map((photo, index) => (
-            <div className="photo-item" key={index}>
+            <div className="photo-item-view" key={index}>
               <img src={photo} alt={`圖片${index + 1}`} className="photo-preview" />
             </div>
           ))}
