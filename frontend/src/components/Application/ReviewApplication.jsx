@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import "./ApplicationDetail.css";
+const api_base_url = import.meta.env.VITE_API_URL;
 
 function ReviewApplication() {
   const { application_id } = useParams();
@@ -14,7 +15,7 @@ function ReviewApplication() {
   useEffect(() => {
     const fetchApplicationDetail = async () => {
       try {
-        const response = await fetch(`http://54.238.10.84:8000/api/application-detail/${application_id}`);
+        const response = await fetch(`${api_base_url}/api/application-detail/${application_id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch application details');
         }
@@ -33,7 +34,7 @@ function ReviewApplication() {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch(`http://54.238.10.84:8000/api/application-status/${application_id}`, {
+      const response = await fetch(`${api_base_url}/api/application-status/${application_id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

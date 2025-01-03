@@ -3,6 +3,8 @@ import "./LandlordPage.css";
 import HomeButton from "./HomeButton";
 import Menu from "./Menu";
 import CreateJob from "./CreateJob";
+const api_base_url = import.meta.env.VITE_API_URL;
+console.log(api_base_url);
 
 const LandlordPage = () => {
   const [showAddModal, setShowAddModal] = useState(false);
@@ -14,7 +16,7 @@ const LandlordPage = () => {
   useEffect(() => {
     const JwtToken = localStorage.getItem("token");
     
-    fetch("http://54.238.10.84:8000/api/landlord/jobs", {
+    fetch(`${api_base_url}/api/landlord/jobs`, {
       method: "GET",
       headers: {
         "Authorization": `Bearer ${JwtToken}`,
@@ -41,7 +43,7 @@ const LandlordPage = () => {
     if (window.confirm('確定要刪除這個職缺嗎？')) {
       const token = localStorage.getItem('token');
       
-      fetch(`http://54.238.10.84:8000/api/jobinfo/${jobId}`, {
+      fetch(`${api_base_url}/api/jobinfo/${jobId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -119,7 +121,7 @@ const LandlordPage = () => {
     formData.append('people_needed', editJob.people_needed);
     formData.append('benefits', JSON.stringify(editJob.benefits));
   
-    fetch(`http://54.238.10.84:8000/api/jobinfo/${jobId}`, {
+    fetch(`${api_base_url}/api/jobinfo/${jobId}`, {
       method: 'PUT',
       headers: {
         'Authorization': `Bearer ${token}`

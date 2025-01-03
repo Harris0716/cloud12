@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ViewResume from '../UserInfo/ViewResume';
 import "./ApplicationDetail.css";
+const api_base_url = import.meta.env.VITE_API_URL;
 
 
 function ApplicationDetail() {
@@ -18,7 +19,7 @@ function ApplicationDetail() {
   useEffect(() => {
     const fetchApplicationDetail = async () => {
       try {
-        const response = await fetch(`http://54.238.10.84:8000/api/application-detail/${application_id}`);
+        const response = await fetch(`${api_base_url}/api/application-detail/${application_id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch application details');
         }

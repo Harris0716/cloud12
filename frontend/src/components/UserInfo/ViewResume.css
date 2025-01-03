@@ -88,7 +88,7 @@
 .resume-detail {
   animation: fadeIn 0.3s ease-in;
 }
-.photo-item {
+.photo-item-view {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -100,7 +100,7 @@
   transition: background-color 0.3s;
 }
 
-.photo-grid {
+.photo-grid-view {
   margin-top: 20px;
   display: flex;
   flex-wrap: wrap;

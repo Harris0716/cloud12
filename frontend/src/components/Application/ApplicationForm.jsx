@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./ApplicationForm.css";
+const api_base_url = import.meta.env.VITE_API_BASE_URL;
 
 function ApplicationForm({ jobInfo_id }) {
     const [dateError, setDateError] = useState("");
@@ -37,7 +38,7 @@ function ApplicationForm({ jobInfo_id }) {
                 jobId: jobInfo_id,
             };
             try {
-                const response = await fetch("http://54.238.10.84:8000/api/applications", {
+                const response = await fetch(`${api_base_url}/api/applications`, {
                     method: "POST",
                     headers: {
                     "Authorization": `Bearer ${JwtToken}`,

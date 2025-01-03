@@ -5,7 +5,7 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 5173, // 將端口號設置為 5173
-    host: true, // 允許外部訪問
-  },
+    port: 5173,
+    host: true,
+  }
 });

@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 8000;
+const url = process.env.URL;
 
 app.use(express.json());
 app.use(cors());
@@ -37,7 +38,7 @@ app.listen(PORT, () => {
 
 // CORS 設定
 const corsOptions = {
-  origin: ["http://54.238.10.84:5173"], // 替換為前端的域名
+  origin: [`${url}`], // 替換為前端的域名
   methods: ["GET", "POST", "PUT", "DELETE"], // 限制允許的 HTTP 方法
   allowedHeaders: ["Content-Type", "Authorization"], // 限制允許的 Headers
 };

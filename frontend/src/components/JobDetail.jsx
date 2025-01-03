@@ -4,6 +4,7 @@ import ApplicationForm from "./Application/ApplicationForm";
 import "./JobDetail.css";
 import HomeButton from "./HomeButton";
 import Menu from "./Menu";
+const api_base_url = import.meta.env.VITE_API_URL;
 
 function JobDetail() {
   const { jobInfo_id } = useParams();
@@ -16,7 +17,7 @@ function JobDetail() {
       try {
         setLoading(true);
         const response = await fetch(
-          `http://54.238.10.84:8000/api/job/${jobInfo_id}`
+          `${api_base_url}/api/job/${jobInfo_id}`
         );
 
         if (!response.ok) {

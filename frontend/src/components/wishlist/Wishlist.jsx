@@ -4,6 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import Menu from "../Menu";
 import "./Wishlist.css";
 import HomeButton from "../HomeButton";
+const api_base_url = import.meta.env.VITE_API_URL;
 
 
 function Wishlist() {
@@ -20,7 +21,7 @@ function Wishlist() {
         return;
       }
 
-      fetch("http://54.238.10.84:8000/api/wishlist", {
+      fetch(`${api_base_url}/api/wishlist`, {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${JwtToken}`, // 確保這裡有正確的 JWT Token
@@ -42,7 +43,7 @@ function Wishlist() {
 
     const deleteClick = (jobId) => {
       const JwtToken = localStorage.getItem("token");
-      fetch("http://54.238.10.84:8000/api/wishlist", {
+      fetch(`${api_base_url}/api/wishlist`, {
         method: "DELETE", 
         headers: {
           "Authorization": `Bearer ${JwtToken}`,
