@@ -14,7 +14,7 @@ const LandlordPage = () => {
   useEffect(() => {
     const JwtToken = localStorage.getItem("token");
     
-    fetch("/api/landlord/jobs", {
+    fetch("http://54.238.10.84:8000/api/landlord/jobs", {
       method: "GET",
       headers: {
         "Authorization": `Bearer ${JwtToken}`,
@@ -41,7 +41,7 @@ const LandlordPage = () => {
     if (window.confirm('確定要刪除這個職缺嗎？')) {
       const token = localStorage.getItem('token');
       
-      fetch(`/api/jobinfo/${jobId}`, {
+      fetch(`http://54.238.10.84:8000/api/jobinfo/${jobId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -84,7 +84,7 @@ const LandlordPage = () => {
     const files = Array.from(e.target.files);
     if (files.length + editJob.detail_images.length <= 5) {
       const urls = files.map(file => URL.createObjectURL(file));
-      handleEditImageChange('detailImages', [...editJob.detail_images, ...urls]);
+      handleEditImageChange('detail_images', [...editJob.detail_images, ...urls]);
     } else {
       alert('最多只能上傳5張照片');
     }
@@ -93,7 +93,7 @@ const LandlordPage = () => {
   // 移除工作環境照片
   const removeEditDetailImage = (index) => {
     const newImages = editJob.detail_images.filter((_, i) => i !== index);
-    handleEditImageChange('detailImages', newImages);
+    handleEditImageChange('detail_images', newImages);
   };
 
 
@@ -104,10 +104,45 @@ const LandlordPage = () => {
   };
 
   const handleSave = (jobId) => {
-    setJobs(jobs.map(job =>
-      job.jobInfo_id === jobId ? editJob : job
-    ));
-    setEditingId(null);
+    const token = localStorage.getItem('token');
+    
+    // Create FormData object for file upload
+    const formData = new FormData();
+    
+    // Add all job info fields
+    formData.append('address', editJob.address);
+    formData.append('room_type', editJob.room_type);
+    formData.append('start_date', editJob.start_date);
+    formData.append('end_date', editJob.end_date);
+    formData.append('job_description', editJob.job_description);
+    formData.append('positions', editJob.positions);
+    formData.append('people_needed', editJob.people_needed);
+    formData.append('benefits', JSON.stringify(editJob.benefits));
+  
+    fetch(`http://54.238.10.84:8000/api/jobinfo/${jobId}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      },
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.message === "修改 JobInfo 成功") {
+        // Update local state with edited job
+        setJobs(jobs.map(job => 
+          job.jobInfo_id === jobId ? editJob : job
+        ));
+        setEditingId(null);
+        alert('職缺已成功更新');
+      } else {
+        throw new Error(data.message || '更新失敗');
+      }
+    })
+    .catch(error => {
+      console.error('Error updating job:', error);
+      alert('更新職缺時發生錯誤');
+    });
   };
 
   const handleInputChange = (field, value) => {

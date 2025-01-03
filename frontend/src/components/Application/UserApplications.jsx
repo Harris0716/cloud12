@@ -11,9 +11,10 @@ function UserApplications() {
   const [error, setError] = useState(null);
   const currentTime = new Date().getTime();
 
+
   const handleButtonClick = (application_id, status, end_date) => {
     if (status !== "同意" || currentTime > end_date) {
-      fetch(`/api/delete-application/${application_id}`, {
+      fetch(`http://54.238.10.84:8000/api/delete-application/${application_id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -39,8 +40,8 @@ function UserApplications() {
   useEffect(() => {
     const fetchApplications = () => {
       const JwtToken = localStorage.getItem("token");
-
-      fetch("/api/my-applications", {
+      
+      fetch("http://54.238.10.84:8000/api/my-applications", {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${JwtToken}`,
@@ -69,7 +70,7 @@ function UserApplications() {
       const fetchLandlordApplications = () => {
         const JwtToken = localStorage.getItem("token");
 
-        fetch("/api/landlord-applications", {
+        fetch("http://54.238.10.84:8000/api/landlord-applications", {
           method: "GET",
           headers: {
             "Authorization": `Bearer ${JwtToken}`,

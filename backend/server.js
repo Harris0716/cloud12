@@ -4,9 +4,7 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 
 app.use(express.json());
-app.use(cors({
-  origin: 'http://100.24.41.116/'
-}));
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -37,3 +35,11 @@ app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
 
+// CORS 設定
+const corsOptions = {
+  origin: ["http://54.238.10.84:5173"], // 替換為前端的域名
+  methods: ["GET", "POST", "PUT", "DELETE"], // 限制允許的 HTTP 方法
+  allowedHeaders: ["Content-Type", "Authorization"], // 限制允許的 Headers
+};
+
+app.use(cors(corsOptions));
