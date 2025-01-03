@@ -4,7 +4,7 @@ import Menu from "./Menu";
 import { Link } from "react-router-dom";
 import HomeButton from "./HomeButton";
 const api_base_url = import.meta.env.VITE_API_URL;
-console.log('API URL:', import.meta.env.VITE_API_URL);
+
 function HomePage() {
     const [searchQuery, setSearchQuery] = useState("");
     const [jobListings, setJobListings] = useState([]);
