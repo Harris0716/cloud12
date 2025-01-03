@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 import "./LogIn.css";
+const api_base_url = import.meta.env.VITE_API_URL;
 
 function LogIn() {
   const navigate = useNavigate();
@@ -9,7 +10,7 @@ function LogIn() {
     const formData = new FormData(event.target);
     const user_id = formData.get("user_id");
     const password = formData.get("password");
-    fetch("http://54.238.10.84:8000/api/login", {
+    fetch(`${api_base_url}/api/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

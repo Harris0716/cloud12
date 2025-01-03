@@ -3,14 +3,15 @@ import "./HomePage.css";
 import Menu from "./Menu";
 import { Link } from "react-router-dom";
 import HomeButton from "./HomeButton";
-
+const api_base_url = import.meta.env.VITE_API_URL;
+console.log('API URL:', import.meta.env.VITE_API_URL);
 function HomePage() {
     const [searchQuery, setSearchQuery] = useState("");
     const [jobListings, setJobListings] = useState([]);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-      fetch("http://54.238.10.84:8000/api/jobs", {
+      fetch(`${api_base_url}/api/jobs`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -44,7 +45,7 @@ function HomePage() {
         alert("請先登入");
         return;
       }
-      fetch("http://54.238.10.84:8000/api/wishlist", {
+      fetch(`${api_base_url}/api/wishlist`, {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${token}`,

@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import "./LandlordPage.css";
+const api_base_url = import.meta.env.VITE_API_URL;
 
 const CreateJob = ({onClose}) => {
 
@@ -78,7 +79,7 @@ const CreateJob = ({onClose}) => {
 
     
         // Make API request
-        fetch('http://54.238.10.84:8000/api/jobinfo', {
+        fetch(`${api_base_url}/api/jobinfo`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import "./UserApplications.css";
 import Menu from "../Menu";
 import HomeButton from "../HomeButton";
+const api_base_url = import.meta.env.VITE_API_URL;
 
 function UserApplications() {
   const [activeTab, setActiveTab] = useState('已申請名單');
@@ -14,7 +15,7 @@ function UserApplications() {
 
   const handleButtonClick = (application_id, status, end_date) => {
     if (status !== "同意" || currentTime > end_date) {
-      fetch(`http://54.238.10.84:8000/api/delete-application/${application_id}`, {
+      fetch(`${api_base_url}/api/delete-application/${application_id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -41,7 +42,7 @@ function UserApplications() {
     const fetchApplications = () => {
       const JwtToken = localStorage.getItem("token");
       
-      fetch("http://54.238.10.84:8000/api/my-applications", {
+      fetch(`${api_base_url}/api/my-applications`, {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${JwtToken}`,
@@ -70,7 +71,7 @@ function UserApplications() {
       const fetchLandlordApplications = () => {
         const JwtToken = localStorage.getItem("token");
 
-        fetch("http://54.238.10.84:8000/api/landlord-applications", {
+        fetch(`${api_base_url}/api/landlord-applications`, {
           method: "GET",
           headers: {
             "Authorization": `Bearer ${JwtToken}`,

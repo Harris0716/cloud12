@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import './ViewResume.css';
+const api_base_url = import.meta.env.VITE_API_URL;
 
 
 
@@ -13,7 +14,7 @@ function ViewResume({ resume_id, onClose }) {
       const userId = localStorage.getItem("userid")
   
       try {
-        const response = await fetch(`http://54.238.10.84:8000/getphoto?userId=${encodeURIComponent(userId)}`, {
+        const response = await fetch(`${api_base_url}/getphoto?userId=${encodeURIComponent(userId)}`, {
           method: 'GET',
         });
     
@@ -38,7 +39,7 @@ function ViewResume({ resume_id, onClose }) {
   useEffect(() => {
     const fetchResumeDetail = async () => {
       try {
-        const response = await fetch(`http://54.238.10.84:8000/api/resume/${resume_id}`);
+        const response = await fetch(`${api_base_url}/api/resume/${resume_id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch resume details');
         }

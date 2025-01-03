@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./LogIn.css";
+const api_base_url = import.meta.env.VITE_API_URL;
 
 function Register() {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ function Register() {
     }
     
     try {
-      const response = await fetch("http://54.238.10.84:8000/api/resume", {
+      const response = await fetch(`${api_base_url}/api/resume`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -40,7 +41,7 @@ function Register() {
     const user_id = formData.get('user_id');
     const email = formData.get('email');
     const password = formData.get('password');
-    fetch("http://54.238.10.84:8000/api/register", {
+    fetch(`${api_base_url}/api/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

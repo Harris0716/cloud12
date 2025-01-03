@@ -4,6 +4,7 @@ import PhotoGrid from "./photo";
 import { useNavigate } from 'react-router-dom';
 import Menu from "../Menu";
 import HomeButton from "../HomeButton";
+const api_base_url = import.meta.env.VITE_API_URL;
 
 const Resume = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -26,7 +27,7 @@ const Resume = () => {
   const handleSave = async () => {
     const JwtToken = localStorage.getItem("token"); 
     try {
-      const response = await fetch("http://54.238.10.84:8000/api/resume", {
+      const response = await fetch(`${api_base_url}/api/resume`, {
         method: "PUT",
         headers: {
           "Authorization": `Bearer ${JwtToken}`, // 確保這裡有正確的 JWT Token
@@ -54,7 +55,7 @@ const Resume = () => {
       return;
     }
 
-    fetch("http://54.238.10.84:8000/api/resume",{
+    fetch(`${api_base_url}/api/resume`,{
       method: "GET",
       headers: {
         "Authorization": `Bearer ${JwtToken}`, // 確保這裡有正確的 JWT Token

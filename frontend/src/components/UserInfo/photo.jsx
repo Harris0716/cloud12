@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from "react";
 import "./photo.css"; // 可用來定義樣式
 import PropTypes from 'prop-types';
+const api_base_url = import.meta.env.VITE_API_URL;
 
 const PhotoGrid = ({isEditing}) => {
 
@@ -22,7 +23,7 @@ const PhotoGrid = ({isEditing}) => {
       const formData = new FormData();
       formData.append('file', file); // 將檔案加入 FormData，'file' 是後端接收檔案的欄位名稱
       // 使用 Fetch API 送出 POST 請求，上傳檔案
-      const response = await fetch(`http://54.238.10.84:8000/upload?userId=${encodeURIComponent(userId)}`, {
+      const response = await fetch(`${api_base_url}/upload?userId=${encodeURIComponent(userId)}`, {
         method: 'POST',
         body: formData, // 設定 body 為 FormData 物件
       });
@@ -44,7 +45,7 @@ const PhotoGrid = ({isEditing}) => {
     const userId = localStorage.getItem("userid")
 
     try {
-      const response = await fetch(`http://54.238.10.84:8000/getphoto?userId=${encodeURIComponent(userId)}`, {
+      const response = await fetch(`${api_base_url}/getphoto?userId=${encodeURIComponent(userId)}`, {
         method: 'GET',
       });
   
