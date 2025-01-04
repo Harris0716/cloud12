@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./ApplicationForm.css";
-const api_base_url = import.meta.env.VITE_API_BASE_URL;
+const api_base_url = import.meta.env.VITE_API_URL;
 
 function ApplicationForm({ jobInfo_id }) {
     const [dateError, setDateError] = useState("");
