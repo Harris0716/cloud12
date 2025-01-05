@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import "./ApplicationDetail.css";
+import ViewResume from '../UserInfo/ViewResume';
 const api_base_url = import.meta.env.VITE_API_URL;
 
 function ReviewApplication() {
   const { application_id } = useParams();
   const [application, setApplication] = useState(null);
   const [error, setError] = useState(null);
+  const [showResume, setShowResume] = useState(false);
   const statusOptions = ['同意', '拒絕'];
   const [status, setStatus] = useState('同意');
   const navigate = useNavigate();
@@ -61,8 +63,17 @@ function ReviewApplication() {
         
         <div className="detail-row">
           <span className="detail-label">申請人名字:</span>
-          <span className="detail-value">{application.username}</span>
+          <button className="username-link" onClick={() => setShowResume(!showResume)}>{application.username}</button>
         </div>
+
+        {showResume && (
+          <div className="resume-overlay-backdrop" onClick={() => setShowResume(false)}>
+            <div className="resume-overlay" onClick={e => e.stopPropagation()}>
+              <button className="close-button" onClick={() => setShowResume(false)}>×</button>
+              <ViewResume resume_id={application.resume_id} onClose={() => setShowResume(false)} />
+            </div>
+          </div>
+        )}
   
         <div className="detail-row">
           <span className="detail-label">申請職位:</span>
