@@ -7,7 +7,49 @@ const CreateJob = ({onClose}) => {
     const [workImages, setWorkImages] = useState([]);
     const [coverImage, setCoverImage] = useState([]);
 
-    const handleWorkImagesChange = (e) => {
+    // 加入 resize 函數
+    const resizeImage = (file) => {
+        return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            
+            reader.onload = (event) => {
+                const img = new Image();
+                img.src = event.target.result;
+                
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const maxWidth = 800;
+                    const maxHeight = 600;
+                    let width = img.width;
+                    let height = img.height;
+                    
+                    if (width > maxWidth) {
+                        height = height * (maxWidth / width);
+                        width = maxWidth;
+                    }
+                    if (height > maxHeight) {
+                        width = width * (maxHeight / height);
+                        height = maxHeight;
+                    }
+                    
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+                    
+                    canvas.toBlob((blob) => {
+                        resolve(new File([blob], file.name, {
+                            type: file.type,
+                            lastModified: Date.now()
+                        }));
+                    }, file.type, 0.7);
+                };
+            };
+        });
+    };
+
+    const handleWorkImagesChange = async (e) => {
         const newFiles = Array.from(e.target.files);
         
         // Check if total files would exceed 5
@@ -16,15 +58,17 @@ const CreateJob = ({onClose}) => {
             return;
         }
     
-        // Combine existing and new files
-        setWorkImages(prevImages => [...prevImages, ...newFiles]);
-    };
-
-    function removeDetailImage(index) {
+        // Resize and combine files
+        const resizedFiles = await Promise.all(newFiles.map(file => resizeImage(file)));
+        setWorkImages(prevImages => [...prevImages, ...resizedFiles]);
+    };   
+        function removeDetailImage(index) {
         setWorkImages(prevImages => prevImages.filter((image, i) => i !== index));
     }
 
-    const handleCoverImageChange = (e) => {
+
+
+    const handleCoverImageChange = async (e) => {
         const newFiles = Array.from(e.target.files);
         
         if (newFiles.length > 1) {
@@ -32,8 +76,11 @@ const CreateJob = ({onClose}) => {
             return;
         }
     
-        setCoverImage(newFiles);
-    }
+        if (newFiles.length > 0) {
+            const resizedFile = await resizeImage(newFiles[0]);
+            setCoverImage([resizedFile]);
+        }
+        };
 
     function removeCoverImage() {
         setCoverImage([]);
