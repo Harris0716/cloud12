@@ -47,6 +47,9 @@ const PhotoGrid = ({isEditing}) => {
     try {
       const response = await fetch(`${api_base_url}/getphoto?userId=${encodeURIComponent(userId)}`, {
         method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+        }
       });
   
       // 處理伺服器回應
