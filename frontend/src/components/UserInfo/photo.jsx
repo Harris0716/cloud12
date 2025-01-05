@@ -27,6 +27,7 @@ const PhotoGrid = ({isEditing}) => {
         method: 'POST',
         body: formData, // 設定 body 為 FormData 物件
       });
+      // console.log(response);
       
       // 處理伺服器回應
       if (response.ok) {
